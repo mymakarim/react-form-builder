@@ -20,7 +20,7 @@ const PageFields = ({ changeContent }) => {
       <h3 className='text-xl font-bold mb-3 border-b'>Add new Page</h3>
       <button
         onClick={() => addItem()}
-        className='uppercase font-semibold text-white cursor-pointer bg-red-600 ring-2 ring-indigo-500 px-4 py-2 rounded-sm'
+        className='uppercase font-semibold text-white cursor-pointer bg-red-600 ring-2 ring-cyan-500 px-4 py-2 rounded-sm'
       >
         Submit
       </button>

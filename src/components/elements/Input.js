@@ -1,19 +1,44 @@
 import React, { useContext } from 'react'
-import { FormContext } from '../../FormContext';
+import { FormContext } from '../../FormContext'
 
-const Input = ({ field_id, field_label, field_placeholder, field_value }) => {
-    const { handleChange } = useContext(FormContext)
-    return (
-        <div className="mb-3">
-            <label htmlFor="exampleInputEmail1" className="form-label">{field_label}</label>
-            <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                placeholder={field_placeholder ? field_placeholder : ''}
-                value={field_value}
-                onChange={event => handleChange(field_id, event)}
-            />
-            <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
-        </div>
-    )
+const Input = ({
+  id,
+  type,
+  label,
+  placeholder,
+  numbermin,
+  numbermax,
+  readonly,
+  step,
+  maxlength,
+  pattern,
+  footnote,
+  required
+}) => {
+  const { handleChange } = useContext(FormContext)
+  return (
+    <div className='mb-3'>
+      <label htmlFor={label} className='form-label'>
+        {label}
+      </label>
+      <input
+        title={label}
+        type={type}
+        className='form-control'
+        id={id}
+        placeholder={placeholder ? placeholder : ''}
+        onChange={(event) => handleChange(id, event)}
+        min={numbermin}
+        max={numbermax}
+        maxlength={maxlength}
+        readonly={readonly && 'readonly'}
+        step={step}
+        pattern={pattern}
+        required={required}
+      />
+      <small className='text-gray-500 text-xs mt-1'>{footnote}</small>
+    </div>
+  )
 }
 
 export default Input

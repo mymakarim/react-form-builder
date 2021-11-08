@@ -9,8 +9,16 @@ function App() {
   const [elements, setElements] = useState(formJSON)
   const [pagei, setPagei] = useState(0)
 
+  const saveJSON = async (content) => {
+    // save json into the file here
+  }
+
   useEffect(() => {
-    console.log('ELEMENTS: ', elements)
+    console.log('JSON TO BE SAVED: ', elements)
+    // save the json file
+    saveJSON(elements).then((e) => {
+      console.log('E: ', e)
+    })
   }, [elements])
 
   const handleSubmit = (event) => {
@@ -81,8 +89,8 @@ function App() {
             >
               <div
                 className={`h-12 w-12 ${
-                  element.id - 1 === pagei ? 'bg-indigo-600 text-white' : 'bg-indigo-300'
-                } group-hover:bg-indigo-600 group-hover:text-white transition duration-200 ease-in-out flex-none rounded-lg flex items-center justify-center font-bold`}
+                  element.id - 1 === pagei ? 'bg-cyan-500 text-white' : 'bg-cyan-200 text-cyan-600'
+                } group-hover:bg-cyan-500 group-hover:text-white transition duration-200 ease-in-out flex-none rounded-xl flex items-center justify-center font-bold`}
               >
                 {element.id}
               </div>
@@ -117,7 +125,7 @@ function App() {
       <div className='grid grid-cols-12'>
         <div className='hidden md:inline-block md:col-span-3 bg-gray-100 min-h-screen border-r-4 p-16'>
           <h2 className='font-black text-2xl mb-12' alt='logo'>
-            Componentity
+            Form Builder
           </h2>
           {elements && <PagesList elements={elements} />}
         </div>

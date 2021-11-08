@@ -6,13 +6,5 @@
             "desc": "Form Builder descripton"
         },
         "fields": []
-    },
-    {
-        "id": 2,
-        "page": {
-            "label": "page 2",
-            "desc": "Form Builder descripton"
-        },
-        "fields": []
     }
 ]

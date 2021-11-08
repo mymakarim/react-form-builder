@@ -35,7 +35,7 @@ export default function AddSection({ className }) {
     >
       <button
         onClick={toggle}
-        className='uppercase font-semibold text-white cursor-pointer bg-indigo-600 ring-2 ring-indigo-500 px-4 py-2 rounded-sm'
+        className='uppercase font-semibold text-white cursor-pointer bg-cyan-500 ring-2 ring-cyan-500 px-4 py-2 rounded-sm'
       >
         Add Form Fields
       </button>
@@ -46,7 +46,7 @@ export default function AddSection({ className }) {
             <button
               onClick={toggle}
               type='button'
-              className='rounded-md text-gray-300 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-white'
+              className='rounded-md text-gray-300 hover:text-cyan-500 focus:outline-none focus:ring-2 focus:ring-white'
             >
               <span className='sr-only'>Close panel</span>
               <svg
@@ -57,9 +57,9 @@ export default function AddSection({ className }) {
                 aria-hidden='true'
               >
                 <path
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
-                  stroke-width='2'
+                  StrokeLinecap='round'
+                  StrokeLinejoin='round'
+                  StrokeWidth='2'
                   d='M6 18L18 6M6 6l12 12'
                 ></path>
               </svg>
