@@ -26,8 +26,6 @@ const RenderSwitch = ({ isContent, changeContent }) => {
 export default function AddSection({ className }) {
   const { isShowing, toggle, isContent, changeContent } = useModal()
 
-  console.log('ADDSECTION CONTENT: ', isContent)
-
   return (
     <div
       className={`border-4 border-dashed border-gray-300 rounded-lg h-56 flex items-center justify-center ${className}`}
@@ -36,7 +34,7 @@ export default function AddSection({ className }) {
         onClick={toggle}
         className='uppercase font-semibold text-white cursor-pointer bg-indigo-600 ring-2 ring-indigo-500 px-4 py-2 rounded-sm'
       >
-        Add Sections or Pages
+        Add Form Fields
       </button>
       <Modal isShowing={isShowing} hide={toggle}>
         <main className='max-w-screen-lg bg-white mx-auto'>

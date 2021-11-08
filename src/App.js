@@ -73,7 +73,7 @@ function App() {
               <div
                 className={`h-12 w-12 ${
                   element.id - 1 === pagei ? 'bg-indigo-600 text-white' : 'bg-indigo-300'
-                } group-hover:bg-indigo-600 group-hover:text-white flex-none rounded-lg flex items-center justify-center font-bold`}
+                } group-hover:bg-indigo-600 group-hover:text-white transition duration-200 ease-in-out flex-none rounded-lg flex items-center justify-center font-bold`}
               >
                 {element.id}
               </div>
@@ -95,8 +95,10 @@ function App() {
   return (
     <FormContext.Provider value={{ handleChange, addNewfield }}>
       <div className='grid grid-cols-12'>
-        <div className='hidden md:inline-block md:col-span-3 bg-gray-100 min-h-screen border-r-4 p-12'>
-          <img src='./logo512.png' className='w-16 mb-6' alt='logo' />
+        <div className='hidden md:inline-block md:col-span-3 bg-gray-100 min-h-screen border-r-4 p-16'>
+          <h2 className='font-black text-2xl mb-12' alt='logo'>
+            Componentity
+          </h2>
           {elements && <PagesList elements={elements} />}
         </div>
         <div className='col-span-12 md:col-span-9 p-5 sm:p-8 md:p-16'>
