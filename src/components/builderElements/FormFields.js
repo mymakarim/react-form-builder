@@ -34,6 +34,15 @@ export default function FormFields({ toggle, changeContent }) {
             <span>Text Email Tel Date Number File URL Range ...</span>
           </div>
           <div
+            onClick={() => changeContent('textarea')}
+            className='col-span-1 cursor-pointer ring-2 ring-transparent focus:ring-cyan-500 hover:bg-cyan-200 p-2.5 rounded-sm border border-gray-500 hover:border-transparent flex items-center gap-2'
+          >
+            <span className='bg-cyan-500 w-12 h-8 rounded-md font-bold text-white flex items-center justify-center pb-0.5'>
+              ooo
+            </span>
+            <span>Long Text</span>
+          </div>
+          <div
             onClick={() => changeContent('Checkbox')}
             className='col-span-1 cursor-pointer ring-2 ring-transparent focus:ring-cyan-500 hover:bg-cyan-200 p-2.5 rounded-sm border border-gray-500 hover:border-transparent flex items-center gap-2'
           >

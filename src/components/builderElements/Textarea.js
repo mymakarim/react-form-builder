@@ -2,15 +2,16 @@ import React, { useState, useContext } from 'react'
 import { FormContext } from '../../FormContext'
 import slugify from './../helper/slugify'
 
-const Select = ({ changeContent }) => {
+const Textarea = ({ changeContent }) => {
   const { addNewfield } = useContext(FormContext)
-  const [label, setLabel] = useState(null)
-  const [placeholder, setPlaceholder] = useState(null)
+
+  const [label, setLabel] = useState('')
+  const [placeholder, setPlaceholder] = useState('')
   const [required, setRequired] = useState(false)
-  const [readOnly, setreadOnly] = useState(false)
-  const [options, setOptions] = useState(null)
-  const [multiple, setMultiple] = useState(false)
+  const [readonly, setReadonly] = useState(false)
+  const [maxlength, setMaxlength] = useState(null)
   const [footnote, setFootnote] = useState(null)
+  const [rows, setRows] = useState(5)
 
   const addItem = (evt) => {
     evt.preventDefault()
@@ -19,12 +20,12 @@ const Select = ({ changeContent }) => {
       id: slugify(label),
       label: label,
       required: required,
-      readOnly: readOnly,
-      options: options,
       placeholder: placeholder,
-      multiple: multiple,
+      maxlength: maxlength,
       footnote: footnote,
-      type: 'select'
+      readonly: readonly,
+      rows: rows,
+      type: 'textarea'
     })
     changeContent(null)
   }
@@ -34,16 +35,16 @@ const Select = ({ changeContent }) => {
         <div className='grid grid-cols-12 gap-6 p-4 sm:p-6 md:p-12'>
           <div className='col-span-12 sm:col-span-6'>
             <label htmlFor='label' className='block text-sm font-medium text-gray-700'>
-              Label
+              Label & Title
             </label>
             <input
               type='text'
               name='label'
-              required
               onChange={(e) => setLabel(e.target.value)}
               className='p-2.5 mt-2 block w-full rounded-md border'
             />
           </div>
+
           <div className='col-span-12 sm:col-span-6'>
             <label htmlFor='placeholder' className='block text-sm font-medium text-gray-700'>
               Placeholder
@@ -51,35 +52,43 @@ const Select = ({ changeContent }) => {
             <input
               type='text'
               name='placeholder'
-              required
               onChange={(e) => setPlaceholder(e.target.value)}
               className='p-2.5 mt-2 block w-full rounded-md border'
             />
           </div>
-          <div className='col-span-12'>
+          <div className='col-span-12 sm:col-span-6'>
             <label htmlFor='footnote' className='block text-sm font-medium text-gray-700'>
               Footnote
             </label>
             <input
               type='text'
               name='footnote'
-              required
               onChange={(e) => setFootnote(e.target.value)}
               className='p-2.5 mt-2 block w-full rounded-md border'
             />
           </div>
-          <div className='col-span-12'>
-            <label htmlFor='options' className='block text-sm font-medium text-gray-700'>
-              Options
+
+          <div className='col-span-3'>
+            <label htmlFor='maxlength' className='block text-sm font-medium text-gray-700'>
+              Maxlength
             </label>
             <input
-              type='text'
-              name='options'
-              required
-              onChange={(e) => setOptions(e.target.value)}
+              type='number'
+              name='maxlength'
+              onChange={(e) => setMaxlength(e.target.value)}
               className='p-2.5 mt-2 block w-full rounded-md border'
             />
-            <small className='text-xs text-gray-500'>Comma separted list</small>
+          </div>
+          <div className='col-span-3'>
+            <label htmlFor='rows' className='block text-sm font-medium text-gray-700'>
+              No. of rows
+            </label>
+            <input
+              type='number'
+              name='rows'
+              onChange={(e) => setRows(e.target.value)}
+              className='p-2.5 mt-2 block w-full rounded-md border'
+            />
           </div>
         </div>
         <div className='grid grid-cols-12 gap-6 mb-12 px-4 sm:px-6 md:px-12'>
@@ -102,32 +111,16 @@ const Select = ({ changeContent }) => {
           <div className='col-span-2 flex items-end'>
             <div>
               <label
-                htmlFor='readOnly'
+                htmlFor='readonly'
                 className='font-medium text-gray-700 flex gap-2 items-center'
               >
                 <input
-                  name='readOnly'
+                  name='readonly'
                   type='checkbox'
-                  onChange={(e) => setreadOnly(e.target.checked)}
+                  onChange={(e) => setReadonly(e.target.checked)}
                   className='focus:ring-cyan-500 h-4 w-4 text-cyan-500 border-gray-300 rounded'
                 />
-                {` `}readOnly
-              </label>
-            </div>
-          </div>
-          <div className='col-span-2 flex items-end'>
-            <div>
-              <label
-                htmlFor='multiple'
-                className='font-medium text-gray-700 flex gap-2 items-center'
-              >
-                <input
-                  name='multiple'
-                  type='checkbox'
-                  onChange={(e) => setMultiple(e.target.checked)}
-                  className='focus:ring-cyan-500 h-4 w-4 text-cyan-500 border-gray-300 rounded'
-                />
-                {` `}Multiple
+                {` `}readonly
               </label>
             </div>
           </div>
@@ -152,4 +145,4 @@ const Select = ({ changeContent }) => {
   )
 }
 
-export default Select
+export default Textarea

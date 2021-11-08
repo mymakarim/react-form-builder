@@ -4,6 +4,7 @@ import Input from './elements/Input'
 import Select from './elements/Select'
 import Description from './elements/Description'
 import Heading from './elements/Heading'
+import Textarea from './elements/Textarea'
 const Element = ({
   field: {
     id,
@@ -18,7 +19,10 @@ const Element = ({
     pattern,
     footnote,
     required,
-    options
+    options,
+    rows,
+    multiple,
+    accept
   }
 }) => {
   switch (type) {
@@ -31,6 +35,8 @@ const Element = ({
           label={label}
           readonly={readonly}
           options={options}
+          multiple={multiple}
+          footnote={footnote}
         />
       )
     case 'checkbox':
@@ -65,6 +71,20 @@ const Element = ({
         />
       )
 
+    case 'textarea':
+      return (
+        <Textarea
+          id={id}
+          placeholder={placeholder}
+          required={required}
+          label={label}
+          readonly={readonly}
+          rows={rows}
+          maxlength={maxlength}
+          footnote={footnote}
+        />
+      )
+
     default:
       return (
         <Input
@@ -80,6 +100,8 @@ const Element = ({
           pattern={pattern}
           footnote={footnote}
           required={required}
+          multiple={multiple}
+          accept={accept}
         />
       )
   }

@@ -8,6 +8,7 @@ import Select from './builderElements/Select.js'
 import PageFields from './builderElements/PageFields.js'
 import Description from './builderElements/Description.js'
 import Heading from './builderElements/Heading.js'
+import Textarea from './builderElements/Textarea.js'
 
 const RenderSwitch = ({ isContent, toggle, changeContent }) => {
   console.log('RENDER SWTITCH IS CONTNET: ', isContent)
@@ -21,6 +22,8 @@ const RenderSwitch = ({ isContent, toggle, changeContent }) => {
       return <Heading changeContent={changeContent} />
     case 'description':
       return <Description changeContent={changeContent} />
+    case 'textarea':
+      return <Textarea changeContent={changeContent} />
     case 'inputText':
       return <InputText changeContent={changeContent} />
     case 'Checkbox':

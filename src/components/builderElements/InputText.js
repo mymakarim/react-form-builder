@@ -10,11 +10,13 @@ const InputText = ({ changeContent }) => {
   const [type, setType] = useState('text')
   const [numbermin, setNumbermin] = useState(null)
   const [numbermax, setNumbermax] = useState(null)
-  const [readOnly, setreadOnly] = useState(false)
+  const [readOnly, setReadonly] = useState(false)
+  const [multiple, setMultiple] = useState(false)
   const [step, setStep] = useState(null)
   const [maxlength, setMaxlength] = useState(null)
   const [pattern, setPattern] = useState(null)
   const [footnote, setFootnote] = useState(null)
+  const [accept, setAccept] = useState(null)
 
   const addItem = (evt) => {
     evt.preventDefault()
@@ -31,7 +33,9 @@ const InputText = ({ changeContent }) => {
       step: step,
       maxlength: maxlength,
       pattern: pattern,
-      footnote: footnote
+      footnote: footnote,
+      multiple: multiple,
+      accept: accept
     })
     changeContent(null)
   }
@@ -170,6 +174,21 @@ const InputText = ({ changeContent }) => {
               />
             </div>
           )}
+          {type === 'file' && (
+            <div className='col-span-12 sm:col-span-6'>
+              <label htmlFor='accept' className='block text-sm font-medium text-gray-700'>
+                accept
+              </label>
+              <input
+                type='text'
+                name='accept'
+                required
+                onChange={(e) => setAccept(e.target.value)}
+                className='p-2.5 mt-2 block w-full rounded-md border'
+              />
+              <small className='text-xs text-gray-500'>Comma separted list</small>
+            </div>
+          )}
         </div>
         <div className='grid grid-cols-12 gap-6 mb-12 px-4 sm:px-6 md:px-12'>
           <div className='col-span-2 flex items-end'>
@@ -191,19 +210,37 @@ const InputText = ({ changeContent }) => {
           <div className='col-span-2 flex items-end'>
             <div>
               <label
-                htmlFor='readOnly'
+                htmlFor='readonly'
                 className='font-medium text-gray-700 flex gap-2 items-center'
               >
                 <input
-                  name='readOnly'
+                  name='readonly'
                   type='checkbox'
-                  onChange={(e) => setreadOnly(e.target.checked)}
+                  onChange={(e) => setReadonly(e.target.checked)}
                   className='focus:ring-cyan-500 h-4 w-4 text-cyan-500 border-gray-300 rounded'
                 />
-                {` `}readOnly
+                {` `}readonly
               </label>
             </div>
           </div>
+          {(type === 'file' || type === 'email') && (
+            <div className='col-span-2 flex items-end'>
+              <div>
+                <label
+                  htmlFor='multiple'
+                  className='font-medium text-gray-700 flex gap-2 items-center'
+                >
+                  <input
+                    name='multiple'
+                    type='checkbox'
+                    onChange={(e) => setMultiple(e.target.checked)}
+                    className='focus:ring-cyan-500 h-4 w-4 text-cyan-500 border-gray-300 rounded'
+                  />
+                  {` `}Multiple
+                </label>
+              </div>
+            </div>
+          )}
         </div>
         <div className='px-6 py-3 bg-gray-50 flex items-center justify-between sm:px-6'>
           <button

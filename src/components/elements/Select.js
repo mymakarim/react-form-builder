@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { FormContext } from '../../FormContext'
 import slugify from './../helper/slugify'
 
-const Select = ({ id, label, options, placeholder, required, readonly }) => {
+const Select = ({ id, label, options, placeholder, required, readonly, footnote, multiple }) => {
   const { handleChange } = useContext(FormContext)
   const newOptions = options.split(',')
   return (
@@ -26,6 +26,7 @@ const Select = ({ id, label, options, placeholder, required, readonly }) => {
               )
           )}
       </select>
+      <small className='text-xs text-gray-500'>{footnote}</small>
     </div>
   )
 }
