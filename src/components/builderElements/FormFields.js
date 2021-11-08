@@ -58,7 +58,16 @@ export default function FormFields({ toggle, changeContent }) {
             <span className='bg-red-600 w-12 h-8 rounded-md font-bold text-white flex items-center justify-center pb-0.5'>
               =
             </span>
-            <span>Dropdown (Select One)</span>
+            <span>Dropdown (Select One or Multiple)</span>
+          </div>
+          <div
+            onClick={() => changeContent('radiobutton')}
+            className='col-span-1 cursor-pointer ring-2 ring-transparent focus:ring-cyan-500 hover:bg-cyan-200 p-2.5 rounded-sm border border-gray-500 hover:border-transparent flex items-center gap-2'
+          >
+            <span className='bg-red-600 w-12 h-8 rounded-md font-bold text-white flex items-center justify-center pb-0.5'>
+              O-
+            </span>
+            <span>Radiobutton (Select One)</span>
           </div>
         </div>
       </div>

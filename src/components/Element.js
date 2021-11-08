@@ -2,6 +2,7 @@ import React from 'react'
 import Checkbox from './elements/Checkbox'
 import Input from './elements/Input'
 import Select from './elements/Select'
+import Radiobutton from './elements/Radiobutton'
 import Description from './elements/Description'
 import Heading from './elements/Heading'
 import Textarea from './elements/Textarea'
@@ -42,6 +43,17 @@ const Element = ({
     case 'checkbox':
       return (
         <Checkbox
+          id={id}
+          placeholder={placeholder}
+          required={required}
+          label={label}
+          readonly={readonly}
+          options={options}
+        />
+      )
+    case 'radiobutton':
+      return (
+        <Radiobutton
           id={id}
           placeholder={placeholder}
           required={required}

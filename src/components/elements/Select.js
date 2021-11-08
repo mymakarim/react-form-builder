@@ -13,6 +13,7 @@ const Select = ({ id, label, options, placeholder, required, readonly, footnote,
         required={required}
         readOnly={readonly && 'readonly'}
         className='form-select'
+        multiple={multiple}
         onChange={(event) => handleChange(id, event)}
       >
         <option>{placeholder}</option>

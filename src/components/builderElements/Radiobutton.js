@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import { FormContext } from '../../FormContext'
 import slugify from './../helper/slugify'
 
-const Checkbox = ({ changeContent }) => {
+const Radiobutton = ({ changeContent }) => {
   const { addNewfield } = useContext(FormContext)
   const [label, setLabel] = useState(null)
   const [placeholder, setPlaceholder] = useState(null)
@@ -20,7 +20,7 @@ const Checkbox = ({ changeContent }) => {
       readonly: readonly,
       options: options,
       placeholder: placeholder,
-      type: 'checkbox'
+      type: 'radiobutton'
     })
     changeContent(null)
   }
@@ -120,4 +120,4 @@ const Checkbox = ({ changeContent }) => {
   )
 }
 
-export default Checkbox
+export default Radiobutton

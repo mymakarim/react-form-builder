@@ -4,6 +4,7 @@ import React from 'react'
 import FormFields from './builderElements/FormFields.js'
 import InputText from './builderElements/InputText.js'
 import Checkbox from './builderElements/Checkbox.js'
+import Radiobutton from './builderElements/Radiobutton.js'
 import Select from './builderElements/Select.js'
 import PageFields from './builderElements/PageFields.js'
 import Description from './builderElements/Description.js'
@@ -26,6 +27,8 @@ const RenderSwitch = ({ isContent, toggle, changeContent }) => {
       return <Textarea changeContent={changeContent} />
     case 'inputText':
       return <InputText changeContent={changeContent} />
+    case 'radiobutton':
+      return <Radiobutton changeContent={changeContent} />
     case 'Checkbox':
       return <Checkbox changeContent={changeContent} />
     case 'Select':
