@@ -42,7 +42,27 @@ export default function AddSection({ className }) {
         <main className='max-w-screen-lg bg-white mx-auto'>
           <div className='bg-gray-50 px-8 py-6 flex items-center justify-between'>
             <h4 className='font-semibold text-md'>Add Item</h4>
-            <span onClick={toggle}>x</span>
+            <button
+              onClick={toggle}
+              type='button'
+              className='rounded-md text-gray-300 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-white'
+            >
+              <span className='sr-only'>Close panel</span>
+              <svg
+                className='h-6 w-6'
+                fill='none'
+                viewBox='0 0 24 24'
+                stroke='currentColor'
+                aria-hidden='true'
+              >
+                <path
+                  stroke-linecap='round'
+                  stroke-linejoin='round'
+                  stroke-width='2'
+                  d='M6 18L18 6M6 6l12 12'
+                ></path>
+              </svg>
+            </button>
           </div>
 
           <RenderSwitch isContent={isContent} changeContent={changeContent} />

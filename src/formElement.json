@@ -1,6 +1,18 @@
 [
     {
-        "page_label": "Job Application Form",
+        "id": 1,
+        "page": {
+            "label": "Page 1",
+            "desc": "Form Builder descripton"
+        },
+        "fields": []
+    },
+    {
+        "id": 2,
+        "page": {
+            "label": "page 2",
+            "desc": "Form Builder descripton"
+        },
         "fields": []
     }
 ]
