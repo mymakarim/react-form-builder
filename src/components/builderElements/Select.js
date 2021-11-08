@@ -7,7 +7,7 @@ const Select = ({ changeContent }) => {
   const [label, setLabel] = useState(null)
   const [placeholder, setPlaceholder] = useState(null)
   const [required, setRequired] = useState(false)
-  const [readonly, setReadonly] = useState(false)
+  const [readOnly, setreadOnly] = useState(false)
   const [options, setOptions] = useState(null)
 
   const addItem = (evt) => {
@@ -17,7 +17,7 @@ const Select = ({ changeContent }) => {
       id: slugify(label),
       label: label,
       required: required,
-      readonly: readonly,
+      readOnly: readOnly,
       options: options,
       placeholder: placeholder,
       type: 'select'
@@ -29,7 +29,7 @@ const Select = ({ changeContent }) => {
       <form onSubmit={addItem} className='text-sm'>
         <div className='grid grid-cols-12 gap-6 p-4 sm:p-6 md:p-12'>
           <div className='col-span-12 sm:col-span-6'>
-            <label for='label' className='block text-sm font-medium text-gray-700'>
+            <label htmlFor='label' className='block text-sm font-medium text-gray-700'>
               Label
             </label>
             <input
@@ -41,7 +41,7 @@ const Select = ({ changeContent }) => {
             />
           </div>
           <div className='col-span-12 sm:col-span-6'>
-            <label for='placeholder' className='block text-sm font-medium text-gray-700'>
+            <label htmlFor='placeholder' className='block text-sm font-medium text-gray-700'>
               Placeholder
             </label>
             <input
@@ -53,7 +53,7 @@ const Select = ({ changeContent }) => {
             />
           </div>
           <div className='col-span-12'>
-            <label for='options' className='block text-sm font-medium text-gray-700'>
+            <label htmlFor='options' className='block text-sm font-medium text-gray-700'>
               Options
             </label>
             <input
@@ -69,12 +69,15 @@ const Select = ({ changeContent }) => {
         <div className='grid grid-cols-12 gap-6 mb-12 px-4 sm:px-6 md:px-12'>
           <div className='col-span-2 flex items-end'>
             <div>
-              <label for='comments' class='font-medium text-gray-700 flex gap-2 items-center'>
+              <label
+                htmlFor='comments'
+                className='font-medium text-gray-700 flex gap-2 items-center'
+              >
                 <input
                   name='required'
                   type='checkbox'
                   onChange={(e) => setRequired(e.target.checked)}
-                  class='focus:ring-cyan-500 h-4 w-4 text-cyan-500 border-gray-300 rounded'
+                  className='focus:ring-cyan-500 h-4 w-4 text-cyan-500 border-gray-300 rounded'
                 />
                 {` `}Required
               </label>
@@ -82,29 +85,32 @@ const Select = ({ changeContent }) => {
           </div>
           <div className='col-span-2 flex items-end'>
             <div>
-              <label for='readonly' class='font-medium text-gray-700 flex gap-2 items-center'>
+              <label
+                htmlFor='readOnly'
+                className='font-medium text-gray-700 flex gap-2 items-center'
+              >
                 <input
-                  name='readonly'
+                  name='readOnly'
                   type='checkbox'
-                  onChange={(e) => setReadonly(e.target.checked)}
-                  class='focus:ring-cyan-500 h-4 w-4 text-cyan-500 border-gray-300 rounded'
+                  onChange={(e) => setreadOnly(e.target.checked)}
+                  className='focus:ring-cyan-500 h-4 w-4 text-cyan-500 border-gray-300 rounded'
                 />
-                {` `}Readonly
+                {` `}readOnly
               </label>
             </div>
           </div>
         </div>
-        <div class='px-6 py-3 bg-gray-50 flex items-center justify-between sm:px-6'>
+        <div className='px-6 py-3 bg-gray-50 flex items-center justify-between sm:px-6'>
           <button
             type='button'
             onClick={() => changeContent(null)}
-            class='py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-500 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+            className='py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-500 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
           >
             Back
           </button>
           <button
             type='submit'
-            class='py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-500 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+            className='py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-500 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
           >
             Save
           </button>

@@ -8,7 +8,7 @@ const Input = ({
   placeholder,
   numbermin,
   numbermax,
-  readonly,
+  readOnly,
   step,
   maxlength,
   pattern,
@@ -18,7 +18,7 @@ const Input = ({
   const { handleChange } = useContext(FormContext)
   return (
     <div className='my-3'>
-      <label htmlFor={label} className='form-label'>
+      <label htmlhtmlFor={label} className='form-label'>
         {label}
       </label>
       <input
@@ -31,7 +31,7 @@ const Input = ({
         min={numbermin}
         max={numbermax}
         maxlength={maxlength}
-        readonly={readonly && 'readonly'}
+        readOnly={readOnly && 'readOnly'}
         step={step}
         pattern={pattern}
         required={required}

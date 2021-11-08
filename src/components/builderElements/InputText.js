@@ -10,7 +10,7 @@ const InputText = ({ changeContent }) => {
   const [type, setType] = useState('text')
   const [numbermin, setNumbermin] = useState(null)
   const [numbermax, setNumbermax] = useState(null)
-  const [readonly, setReadonly] = useState(false)
+  const [readOnly, setreadOnly] = useState(false)
   const [step, setStep] = useState(null)
   const [maxlength, setMaxlength] = useState(null)
   const [pattern, setPattern] = useState(null)
@@ -27,7 +27,7 @@ const InputText = ({ changeContent }) => {
       type: type,
       numbermin: numbermin,
       numbermax: numbermax,
-      readonly: readonly,
+      readOnly: readOnly,
       step: step,
       maxlength: maxlength,
       pattern: pattern,
@@ -40,7 +40,7 @@ const InputText = ({ changeContent }) => {
       <form onSubmit={addItem} className='text-sm'>
         <div className='grid grid-cols-12 gap-6 p-4 sm:p-6 md:p-12'>
           <div className='col-span-12 sm:col-span-6'>
-            <label for='placeholder' className='block text-sm font-medium text-gray-700'>
+            <label htmlFor='placeholder' className='block text-sm font-medium text-gray-700'>
               Type
             </label>
             <select
@@ -64,7 +64,7 @@ const InputText = ({ changeContent }) => {
             </select>
           </div>
           <div className='col-span-12 sm:col-span-6'>
-            <label for='label' className='block text-sm font-medium text-gray-700'>
+            <label htmlFor='label' className='block text-sm font-medium text-gray-700'>
               Label & Title
             </label>
             <input
@@ -77,7 +77,7 @@ const InputText = ({ changeContent }) => {
 
           {(type === 'text' || type === 'email' || type === 'url' || type === 'tel') && (
             <div className='col-span-12 sm:col-span-6'>
-              <label for='placeholder' className='block text-sm font-medium text-gray-700'>
+              <label htmlFor='placeholder' className='block text-sm font-medium text-gray-700'>
                 Placeholder
               </label>
               <input
@@ -94,7 +94,7 @@ const InputText = ({ changeContent }) => {
             type === 'tel' ||
             type === 'number') && (
             <div className='col-span-12 sm:col-span-6'>
-              <label for='pattern' className='block text-sm font-medium text-gray-700'>
+              <label htmlFor='pattern' className='block text-sm font-medium text-gray-700'>
                 Pattern
               </label>
               <input
@@ -106,7 +106,7 @@ const InputText = ({ changeContent }) => {
             </div>
           )}
           <div className='col-span-12 sm:col-span-6'>
-            <label for='footnote' className='block text-sm font-medium text-gray-700'>
+            <label htmlFor='footnote' className='block text-sm font-medium text-gray-700'>
               Footnote
             </label>
             <input
@@ -119,7 +119,7 @@ const InputText = ({ changeContent }) => {
 
           {type === 'text' && (
             <div className='col-span-3'>
-              <label for='maxlength' className='block text-sm font-medium text-gray-700'>
+              <label htmlFor='maxlength' className='block text-sm font-medium text-gray-700'>
                 Maxlength
               </label>
               <input
@@ -133,7 +133,7 @@ const InputText = ({ changeContent }) => {
 
           {(type === 'number' || type === 'range') && (
             <div className='col-span-2'>
-              <label for='min' className='block text-sm font-medium text-gray-700'>
+              <label htmlFor='min' className='block text-sm font-medium text-gray-700'>
                 Min
               </label>
               <input
@@ -146,7 +146,7 @@ const InputText = ({ changeContent }) => {
           )}
           {(type === 'number' || type === 'range') && (
             <div className='col-span-2'>
-              <label for='max' className='block text-sm font-medium text-gray-700'>
+              <label htmlFor='max' className='block text-sm font-medium text-gray-700'>
                 Max
               </label>
               <input
@@ -159,7 +159,7 @@ const InputText = ({ changeContent }) => {
           )}
           {(type === 'number' || type === 'range') && (
             <div className='col-span-2'>
-              <label for='step' className='block text-sm font-medium text-gray-700'>
+              <label htmlFor='step' className='block text-sm font-medium text-gray-700'>
                 Step
               </label>
               <input
@@ -174,12 +174,15 @@ const InputText = ({ changeContent }) => {
         <div className='grid grid-cols-12 gap-6 mb-12 px-4 sm:px-6 md:px-12'>
           <div className='col-span-2 flex items-end'>
             <div>
-              <label for='comments' class='font-medium text-gray-700 flex gap-2 items-center'>
+              <label
+                htmlFor='comments'
+                className='font-medium text-gray-700 flex gap-2 items-center'
+              >
                 <input
                   name='required'
                   type='checkbox'
                   onChange={(e) => setRequired(e.target.checked)}
-                  class='focus:ring-cyan-500 h-4 w-4 text-cyan-500 border-gray-300 rounded'
+                  className='focus:ring-cyan-500 h-4 w-4 text-cyan-500 border-gray-300 rounded'
                 />
                 {` `}Required
               </label>
@@ -187,29 +190,32 @@ const InputText = ({ changeContent }) => {
           </div>
           <div className='col-span-2 flex items-end'>
             <div>
-              <label for='readonly' class='font-medium text-gray-700 flex gap-2 items-center'>
+              <label
+                htmlFor='readOnly'
+                className='font-medium text-gray-700 flex gap-2 items-center'
+              >
                 <input
-                  name='readonly'
+                  name='readOnly'
                   type='checkbox'
-                  onChange={(e) => setReadonly(e.target.checked)}
-                  class='focus:ring-cyan-500 h-4 w-4 text-cyan-500 border-gray-300 rounded'
+                  onChange={(e) => setreadOnly(e.target.checked)}
+                  className='focus:ring-cyan-500 h-4 w-4 text-cyan-500 border-gray-300 rounded'
                 />
-                {` `}Readonly
+                {` `}readOnly
               </label>
             </div>
           </div>
         </div>
-        <div class='px-6 py-3 bg-gray-50 flex items-center justify-between sm:px-6'>
+        <div className='px-6 py-3 bg-gray-50 flex items-center justify-between sm:px-6'>
           <button
             type='button'
             onClick={() => changeContent(null)}
-            class='py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-500 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+            className='py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-500 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
           >
             Back
           </button>
           <button
             type='submit'
-            class='py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-500 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+            className='py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-500 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
           >
             Save
           </button>

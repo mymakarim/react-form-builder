@@ -10,7 +10,7 @@ const Element = ({
     placeholder,
     numbermin,
     numbermax,
-    readonly,
+    readOnly,
     step,
     maxlength,
     pattern,
@@ -42,7 +42,7 @@ const Element = ({
           type={type}
           numbermin={numbermin}
           numbermax={numbermax}
-          readonly={readonly}
+          readOnly={readOnly}
           step={step}
           maxlength={maxlength}
           pattern={pattern}
