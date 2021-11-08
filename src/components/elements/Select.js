@@ -6,7 +6,7 @@ const Select = ({ id, label, options, placeholder, required, readonly }) => {
   const { handleChange } = useContext(FormContext)
   const newOptions = options.split(',')
   return (
-    <div>
+    <div className='my-3'>
       <label className='form-label'>{label}</label>
       <select
         title={label}

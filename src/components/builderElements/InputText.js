@@ -40,17 +40,6 @@ const InputText = ({ changeContent }) => {
       <form onSubmit={addItem} className='text-sm'>
         <div className='grid grid-cols-12 gap-6 p-4 sm:p-6 md:p-12'>
           <div className='col-span-12 sm:col-span-6'>
-            <label for='label' className='block text-sm font-medium text-gray-700'>
-              Label & Title
-            </label>
-            <input
-              type='text'
-              name='label'
-              onChange={(e) => setLabel(e.target.value)}
-              className='p-2.5 mt-2 block w-full rounded-md border'
-            />
-          </div>
-          <div className='col-span-12 sm:col-span-6'>
             <label for='placeholder' className='block text-sm font-medium text-gray-700'>
               Type
             </label>
@@ -74,6 +63,18 @@ const InputText = ({ changeContent }) => {
               <option value='range'>Range</option>
             </select>
           </div>
+          <div className='col-span-12 sm:col-span-6'>
+            <label for='label' className='block text-sm font-medium text-gray-700'>
+              Label & Title
+            </label>
+            <input
+              type='text'
+              name='label'
+              onChange={(e) => setLabel(e.target.value)}
+              className='p-2.5 mt-2 block w-full rounded-md border'
+            />
+          </div>
+
           {(type === 'text' || type === 'email' || type === 'url' || type === 'tel') && (
             <div className='col-span-12 sm:col-span-6'>
               <label for='placeholder' className='block text-sm font-medium text-gray-700'>
