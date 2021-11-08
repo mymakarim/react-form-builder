@@ -6,12 +6,8 @@ import React from 'react'
 import AddSection from './components/AddSection'
 
 function App() {
-  const [elements, setElements] = useState(null)
+  const [elements, setElements] = useState(formJSON)
   const [pagei, setPagei] = useState(0)
-
-  useEffect(() => {
-    setElements(formJSON)
-  }, [pagei])
 
   useEffect(() => {
     console.log('ELEMENTS: ', elements)
@@ -24,22 +20,22 @@ function App() {
     console.log(elements)
   }
   const handleChange = (id, event) => {
-    const newElements = { ...elements }
-    newElements[pagei].fields.forEach((field) => {
-      const { field_type, field_id } = field
-      if (id === field_id) {
-        switch (field_type) {
-          case 'checkbox':
-            field['field_value'] = event.target.checked
-            break
+    // const newElements = { ...elements }
+    // newElements[pagei].fields.forEach((field) => {
+    //   const { field_type, field_id } = field
+    //   if (id === field_id) {
+    //     switch (field_type) {
+    //       case 'checkbox':
+    //         field['field_value'] = event.target.checked
+    //         break
 
-          default:
-            field['field_value'] = event.target.value
-            break
-        }
-      }
-      setElements(newElements)
-    })
+    //       default:
+    //         field['field_value'] = event.target.value
+    //         break
+    //     }
+    //   }
+    //   setElements(newElements)
+    // })
     console.log(elements)
   }
 
@@ -49,9 +45,22 @@ function App() {
     setElements(newElements)
   }
 
+  const addNewpage = (id, label, desc) => {
+    const newElements = [...elements]
+    newElements.push({
+      id: id,
+      page: {
+        label: label,
+        desc: desc
+      },
+      fields: []
+    })
+    setElements(newElements)
+  }
+
   const FormPage = ({ fields }) => {
     return fields.length > 0 ? (
-      <div className='mb-4 border-b'>
+      <div className='my-16'>
         {fields.map((field, i) => (
           <Element key={i} field={field} />
         ))}
@@ -88,12 +97,23 @@ function App() {
             </li>
           )
         })}
+        <li
+          key={elements.length + 1}
+          onClick={() => addNewpage(elements.length + 1, 'new page', 'new page description')}
+          className={`cursor-pointer group relative flex items-center space-x-6 mb-9`}
+        >
+          <div
+            className={`h-12 w-12 bg-gray-900 text-white transition duration-200 ease-in-out flex-none rounded-lg flex items-center justify-center font-bold`}
+          >
+            +
+          </div>
+        </li>
       </ul>
     )
   }
 
   return (
-    <FormContext.Provider value={{ handleChange, addNewfield }}>
+    <FormContext.Provider value={{ handleChange, addNewfield, addNewpage, pagei }}>
       <div className='grid grid-cols-12'>
         <div className='hidden md:inline-block md:col-span-3 bg-gray-100 min-h-screen border-r-4 p-16'>
           <h2 className='font-black text-2xl mb-12' alt='logo'>
@@ -103,7 +123,7 @@ function App() {
         </div>
         <div className='col-span-12 md:col-span-9 p-5 sm:p-8 md:p-16'>
           <form>
-            {elements && <FormPage fields={elements[pagei].fields} />}
+            {elements && elements[pagei] && <FormPage fields={elements[pagei].fields} />}
             <button
               type='submit'
               className='hidden btn btn-primary'

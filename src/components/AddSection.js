@@ -5,6 +5,7 @@ import FormFields from './builderElements/FormFields.js'
 import InputText from './builderElements/InputText.js'
 import Checkbox from './builderElements/Checkbox.js'
 import Select from './builderElements/Select.js'
+import PageFields from './builderElements/PageFields.js'
 
 const RenderSwitch = ({ isContent, changeContent }) => {
   console.log('RENDER SWTITCH IS CONTNET: ', isContent)
@@ -12,6 +13,8 @@ const RenderSwitch = ({ isContent, changeContent }) => {
   switch (isContent) {
     case null:
       return <FormFields changeContent={changeContent} />
+    case 'page':
+      return <PageFields changeContent={changeContent} />
     case 'inputText':
       return <InputText changeContent={changeContent} />
     case 'Checkbox':
