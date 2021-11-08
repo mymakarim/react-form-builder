@@ -2,6 +2,8 @@ import React from 'react'
 import Checkbox from './elements/Checkbox'
 import Input from './elements/Input'
 import Select from './elements/Select'
+import Description from './elements/Description'
+import Heading from './elements/Heading'
 const Element = ({
   field: {
     id,
@@ -10,7 +12,7 @@ const Element = ({
     placeholder,
     numbermin,
     numbermax,
-    readOnly,
+    readonly,
     step,
     maxlength,
     pattern,
@@ -27,11 +29,41 @@ const Element = ({
           placeholder={placeholder}
           required={required}
           label={label}
+          readonly={readonly}
           options={options}
         />
       )
     case 'checkbox':
-      return <Checkbox id={id} label={label} />
+      return (
+        <Checkbox
+          id={id}
+          placeholder={placeholder}
+          required={required}
+          label={label}
+          readonly={readonly}
+          options={options}
+        />
+      )
+    case 'heading':
+      return (
+        <Heading
+          id={id}
+          placeholder={placeholder}
+          required={required}
+          label={label}
+          readonly={readonly}
+        />
+      )
+    case 'description':
+      return (
+        <Description
+          id={id}
+          placeholder={placeholder}
+          required={required}
+          label={label}
+          readonly={readonly}
+        />
+      )
 
     default:
       return (
@@ -42,7 +74,7 @@ const Element = ({
           type={type}
           numbermin={numbermin}
           numbermax={numbermax}
-          readOnly={readOnly}
+          readonly={readonly}
           step={step}
           maxlength={maxlength}
           pattern={pattern}

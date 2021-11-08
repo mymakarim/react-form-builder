@@ -18,7 +18,7 @@ const Input = ({
   const { handleChange } = useContext(FormContext)
   return (
     <div className='my-3'>
-      <label htmlhtmlFor={label} className='form-label'>
+      <label htmlFor={label} className='form-label'>
         {label}
       </label>
       <input

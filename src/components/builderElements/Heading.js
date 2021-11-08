@@ -2,13 +2,12 @@ import React, { useState, useContext } from 'react'
 import { FormContext } from '../../FormContext'
 import slugify from './../helper/slugify'
 
-const Checkbox = ({ changeContent }) => {
+const Heading = ({ changeContent }) => {
   const { addNewfield } = useContext(FormContext)
   const [label, setLabel] = useState(null)
   const [placeholder, setPlaceholder] = useState(null)
   const [required, setRequired] = useState(false)
   const [readOnly, setreadOnly] = useState(false)
-  const [options, setOptions] = useState(null)
 
   const addItem = (evt) => {
     evt.preventDefault()
@@ -18,9 +17,8 @@ const Checkbox = ({ changeContent }) => {
       label: label,
       required: required,
       readOnly: readOnly,
-      options: options,
       placeholder: placeholder,
-      type: 'checkbox'
+      type: 'heading'
     })
     changeContent(null)
   }
@@ -42,7 +40,7 @@ const Checkbox = ({ changeContent }) => {
           </div>
           <div className='col-span-12 sm:col-span-6'>
             <label htmlFor='placeholder' className='block text-sm font-medium text-gray-700'>
-              Short Description
+              Placeholder
             </label>
             <input
               type='text'
@@ -51,19 +49,6 @@ const Checkbox = ({ changeContent }) => {
               onChange={(e) => setPlaceholder(e.target.value)}
               className='p-2.5 mt-2 block w-full rounded-md border'
             />
-          </div>
-          <div className='col-span-12'>
-            <label htmlFor='options' className='block text-sm font-medium text-gray-700'>
-              Options
-            </label>
-            <input
-              type='text'
-              name='options'
-              required
-              onChange={(e) => setOptions(e.target.value)}
-              className='p-2.5 mt-2 block w-full rounded-md border'
-            />
-            <small className='text-xs text-gray-500'>Comma separted list</small>
           </div>
         </div>
         <div className='grid grid-cols-12 gap-6 mb-12 px-4 sm:px-6 md:px-12'>
@@ -120,4 +105,4 @@ const Checkbox = ({ changeContent }) => {
   )
 }
 
-export default Checkbox
+export default Heading

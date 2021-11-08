@@ -120,8 +120,12 @@ function App() {
     )
   }
 
+  const getElementslength = () => {
+    return elements.length
+  }
+
   return (
-    <FormContext.Provider value={{ handleChange, addNewfield, addNewpage, pagei }}>
+    <FormContext.Provider value={{ handleChange, addNewfield, addNewpage, getElementslength }}>
       <div className='grid grid-cols-12'>
         <div className='hidden md:inline-block md:col-span-3 bg-gray-100 min-h-screen border-r-4 p-16'>
           <h2 className='font-black text-2xl mb-12' alt='logo'>

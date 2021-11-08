@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { FormContext } from '../../FormContext'
 import slugify from './../helper/slugify'
 
-const Select = ({ id, label, options, placeholder, required, readOnly }) => {
+const Select = ({ id, label, options, placeholder, required, readonly }) => {
   const { handleChange } = useContext(FormContext)
   const newOptions = options.split(',')
   return (
@@ -11,17 +11,20 @@ const Select = ({ id, label, options, placeholder, required, readOnly }) => {
       <select
         title={label}
         required={required}
-        readOnly={readOnly && 'readOnly'}
+        readOnly={readonly && 'readonly'}
         className='form-select'
         onChange={(event) => handleChange(id, event)}
       >
         <option>{placeholder}</option>
         {newOptions.length > 0 &&
-          newOptions.map((option, i) => (
-            <option value={slugify(option)} key={i}>
-              {option}
-            </option>
-          ))}
+          newOptions.map(
+            (option, i) =>
+              option.trim() !== '' && (
+                <option value={slugify(option)} key={i}>
+                  {option}
+                </option>
+              )
+          )}
       </select>
     </div>
   )

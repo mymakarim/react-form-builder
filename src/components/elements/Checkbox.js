@@ -1,20 +1,40 @@
 import React, { useContext } from 'react'
 import { FormContext } from '../../FormContext'
-const Checkbox = ({ field_id, field_label, field_value }) => {
-  const { handleChange } = useContext(FormContext)
+import slugify from './../helper/slugify'
 
+const Checkbox = ({ id, label, options, placeholder, required, readonly }) => {
+  const { handleChange } = useContext(FormContext)
+  const newOptions = options.split(',')
   return (
     <div className='mb-3 form-check'>
-      <input
-        type='checkbox'
-        className='form-check-input'
-        id='exampleCheck1'
-        checked={field_value}
-        onChange={(event) => handleChange(field_id, event)}
-      />
-      <label className='form-check-label' htmlhtmlFor='exampleCheck1'>
-        {field_label}
-      </label>
+      <fieldset required={required} readOnly={readonly && 'readonly'}>
+        <legend className='text-base font-medium text-gray-900'>{label}</legend>
+        <small className='text-xs text-gray-500'>{placeholder}</small>
+        <div className='mt-4 space-y-4'>
+          {newOptions.length > 0 &&
+            newOptions.map(
+              (option, i) =>
+                option.trim() !== '' && (
+                  <div key={i} className='flex items-start'>
+                    <div className='flex items-center h-5'>
+                      <input
+                        id={slugify(option)}
+                        onChange={(event) => handleChange(id, event)}
+                        name={option}
+                        type='checkbox'
+                        className='focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded'
+                      />
+                    </div>
+                    <div className='ml-3 text-sm'>
+                      <label htmlFor={option} className='font-medium text-gray-700'>
+                        {option}
+                      </label>
+                    </div>
+                  </div>
+                )
+            )}
+        </div>
+      </fieldset>
     </div>
   )
 }
