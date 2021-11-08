@@ -1,6 +1,5 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import { FormContext } from '../../FormContext'
-import slugify from './../helper/slugify'
 
 const Checkbox = ({ changeContent }) => {
   const { addNewfield } = useContext(FormContext)
