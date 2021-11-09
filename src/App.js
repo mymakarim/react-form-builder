@@ -8,6 +8,7 @@ import AddSection from './components/AddSection'
 function App() {
   const [elements, setElements] = useState(formJSON)
   const [pagei, setPagei] = useState(0)
+  const [toggle, setToggle] = useState(false)
 
   const saveJSON = async (content) => {
     // save json into the file here
@@ -76,6 +77,15 @@ function App() {
     ) : null
   }
 
+  const addPageform = (evt) => {
+    evt.preventDefault()
+    const id = getElementslength() + 1
+    const label = evt.target.page_label.value
+    const desc = evt.target.page_desc.value
+    addNewpage(id, label, desc)
+    setToggle(!toggle)
+  }
+
   const PagesList = ({ elements }) => {
     console.log('ELEMENTS IN PAGES LIST: ', elements)
     return (
@@ -105,16 +115,36 @@ function App() {
             </li>
           )
         })}
-        <li
-          key={elements.length + 1}
-          onClick={() => addNewpage(elements.length + 1, 'new page', 'new page description')}
-          className={`cursor-pointer group relative flex items-center space-x-6 mb-9`}
-        >
+        <li key={elements.length + 1} className={`relative flex items-start space-x-6 mb-9`}>
           <div
-            className={`h-12 w-12 bg-gray-900 text-white transition duration-200 ease-in-out flex-none rounded-lg flex items-center justify-center font-bold`}
+            onClick={() => setToggle(!toggle)}
+            className={`h-12 w-12 cursor-pointer bg-gray-900 text-white transition duration-200 ease-in-out flex-none rounded-lg flex items-center justify-center font-bold`}
           >
             +
           </div>
+          {toggle && (
+            <form onSubmit={addPageform} className='flex flex-col gap-1 items-end'>
+              <input
+                type='text'
+                placeholder='label'
+                name='page_label'
+                className='px-2 py-1 text-xs border'
+                id='page_label'
+              />
+              <input
+                type='text'
+                placeholder='desc'
+                name='page_desc'
+                className='px-2 py-1 text-xs w-full border'
+                id='page_desc'
+              />
+              <input
+                className='text-xs font-semibold bg-gray-300 px-2 py-1'
+                type='submit'
+                value='Add Page'
+              />
+            </form>
+          )}
         </li>
       </ul>
     )

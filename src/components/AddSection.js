@@ -55,7 +55,7 @@ export default function AddSection({ className }) {
         className='font-semibold text-white cursor-pointer bg-cyan-500 hover:bg-cyan-600 ring-2 ring-cyan-500 px-4 py-2 rounded-sm flex items-center justify-center gap-2'
       >
         <span>Add Form Fields</span>
-        <span class='w-6 h-6 rounded-full flex items-center justify-center bg-gray-100 text-xl font-bold text-cyan-500'>
+        <span className='w-6 h-6 rounded-full flex items-center justify-center bg-gray-100 text-xl font-bold text-cyan-500'>
           +
         </span>
       </button>
@@ -64,7 +64,7 @@ export default function AddSection({ className }) {
         className='font-semibold text-white cursor-pointer bg-gray-700 hover:bg-gray-800 ring-2 ring-gray-500 px-4 py-2 rounded-sm flex items-center justify-center gap-2'
       >
         <span>Add New Page</span>
-        <span class='w-6 h-6 rounded-full flex items-center justify-center bg-gray-100 text-xl font-bold text-gray-700'>
+        <span className='w-6 h-6 rounded-full flex items-center justify-center bg-gray-100 text-xl font-bold text-gray-700'>
           +
         </span>
       </button>

@@ -6,7 +6,7 @@ const Description = ({ id, label, placeholder, required, readonly }) => {
       <label htmlFor={label} className='form-label'>
         {label}
       </label>
-      <p class='mt-4 text-gray-500'>{placeholder}</p>
+      <p className='mt-4 text-gray-500'>{placeholder}</p>
     </div>
   )
 }

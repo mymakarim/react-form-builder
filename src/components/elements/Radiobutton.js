@@ -15,15 +15,15 @@ const Radiobutton = ({ id, label, options, placeholder, required, readonly }) =>
             newOptions.map(
               (option, i) =>
                 option.trim() !== '' && (
-                  <div key={i} class='flex items-center'>
+                  <div key={i} className='flex items-center'>
                     <input
                       id={slugify(option)}
                       onChange={(event) => handleChange(id, event)}
                       name={label}
                       type='radio'
-                      class='focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300'
+                      className='focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300'
                     />
-                    <label for={label} class='ml-3 block text-sm font-medium text-gray-700'>
+                    <label for={label} className='ml-3 block text-sm font-medium text-gray-700'>
                       {option}
                     </label>
                   </div>
