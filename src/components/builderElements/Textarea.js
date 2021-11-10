@@ -40,6 +40,7 @@ const Textarea = ({ changeContent }) => {
             <input
               type='text'
               name='label'
+              required
               onChange={(e) => setLabel(e.target.value)}
               className='p-2.5 mt-2 block w-full rounded-md border'
             />

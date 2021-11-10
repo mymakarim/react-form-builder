@@ -48,6 +48,7 @@ const InputText = ({ changeContent }) => {
               Type
             </label>
             <select
+              required
               className='p-2.5 mt-2 block w-full rounded-md border'
               value={type}
               onChange={(e) => setType(e.target.value)}
@@ -72,6 +73,7 @@ const InputText = ({ changeContent }) => {
               Label & Title
             </label>
             <input
+              required
               type='text'
               name='label'
               onChange={(e) => setLabel(e.target.value)}

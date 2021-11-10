@@ -80,9 +80,11 @@ function App() {
   const addPageform = (evt) => {
     evt.preventDefault()
     const id = getElementslength() + 1
-    const label = evt.target.page_label.value
-    const desc = evt.target.page_desc.value
-    addNewpage(id, label, desc)
+    const label = evt.target.page_label.value.trim()
+    const desc = evt.target.page_desc.value.trim()
+    if (label !== '' && desc !== '') {
+      addNewpage(id, label, desc)
+    }
     setToggle(!toggle)
   }
 
@@ -128,6 +130,7 @@ function App() {
                 type='text'
                 placeholder='label'
                 name='page_label'
+                required
                 className='px-2 py-1 text-xs border'
                 id='page_label'
               />
@@ -135,6 +138,7 @@ function App() {
                 type='text'
                 placeholder='desc'
                 name='page_desc'
+                required
                 className='px-2 py-1 text-xs w-full border'
                 id='page_desc'
               />

@@ -55,6 +55,7 @@ const Select = ({ changeContent }) => {
               onChange={(e) => setPlaceholder(e.target.value)}
               className='p-2.5 mt-2 block w-full rounded-md border'
             />
+            <small className='text-xs text-gray-500'>The string before an option is selected</small>
           </div>
           <div className='col-span-12'>
             <label htmlFor='footnote' className='block text-sm font-medium text-gray-700'>
@@ -63,7 +64,6 @@ const Select = ({ changeContent }) => {
             <input
               type='text'
               name='footnote'
-              required
               onChange={(e) => setFootnote(e.target.value)}
               className='p-2.5 mt-2 block w-full rounded-md border'
             />
