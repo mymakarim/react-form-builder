@@ -198,6 +198,7 @@ function App() {
                     placeholder='label'
                     name='page_label'
                     required
+                    defaultValue={element.page.label}
                     className='px-2 py-1 text-xs border'
                     id='page_label'
                   />
@@ -206,6 +207,7 @@ function App() {
                     placeholder='desc'
                     name='page_desc'
                     required
+                    defaultValue={element.page.desc}
                     className='px-2 py-1 text-xs w-full border'
                     id='page_desc'
                   />
@@ -243,8 +245,14 @@ function App() {
                       </svg>
                     </button>
                     <button
+                      disabled={element.id <= 1}
                       onClick={() => deletePage(element.id)}
-                      className='h-7 w-7 font-semibold text-white rounded-md bg-red-600 hover:bg-red-700  flex items-center justify-center'
+                      title={
+                        element.id <= 1
+                          ? 'Cant Delete: There should be atleast one section'
+                          : 'Delete'
+                      }
+                      className='disabled:bg-gray-400 disabled:cursor-not-allowed	 h-7 w-7 font-semibold text-white rounded-md bg-red-600 hover:bg-red-700  flex items-center justify-center'
                     >
                       <svg
                         className='h-5 w-5'
