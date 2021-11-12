@@ -4,6 +4,7 @@ import Element from './components/Element'
 import { FormContext } from './FormContext'
 import React from 'react'
 import AddSection from './components/AddSection'
+import AddSectionsimple from './components/AddSectionsimple'
 
 function App() {
   const [elements, setElements] = useState(formJSON)
@@ -245,10 +246,10 @@ function App() {
                       </svg>
                     </button>
                     <button
-                      disabled={element.id <= 1}
+                      disabled={elements.length <= 1}
                       onClick={() => deletePage(element.id)}
                       title={
-                        element.id <= 1
+                        elements.length <= 1
                           ? 'Cant Delete: There should be atleast one section'
                           : 'Delete'
                       }
@@ -342,6 +343,7 @@ function App() {
         </div>
         <div className='col-span-12 md:col-span-9 p-5 sm:p-8 md:p-16'>
           {elements && elements[pagei] && <FormPage fields={elements[pagei].fields} />}
+          <AddSectionsimple className='my-4' />
           <AddSection className='my-4' />
         </div>
       </div>

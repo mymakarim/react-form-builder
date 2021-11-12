@@ -71,15 +71,6 @@ export default function FormFields({ toggle, changeContent }) {
           </div>
         </div>
       </div>
-      <div className='px-6 py-3 bg-gray-50 flex items-center justify-end sm:px-6'>
-        <button
-          type='button'
-          onClick={toggle}
-          className='py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-700 hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500'
-        >
-          Close
-        </button>
-      </div>
     </section>
   )
 }
