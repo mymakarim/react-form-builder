@@ -55,6 +55,24 @@ function App() {
     setElements(newElements)
   }
 
+  const duplicateField = (id) => {
+    let item
+    const newElements = [...elements]
+    for (var i = 0; i < newElements.length; i++) {
+      if (newElements[i].id === pagei + 1) {
+        // console.log('PAGE FOUND: ', pagei + 1)
+        for (var x = 0; x < newElements[i].fields.length; x++) {
+          if (newElements[i].fields[x].id === id) {
+            // console.log('DELTE FIELD ID: ', id)
+            item = newElements[i].fields[x]
+          }
+        }
+      }
+    }
+    newElements[pagei].fields.push(item)
+    setElements(newElements)
+  }
+
   const addNewpage = (id, label, desc) => {
     const newElements = [...elements]
     newElements.push({
@@ -125,16 +143,16 @@ function App() {
     const newElements = [...elements]
     for (var i = 0; i < newElements.length; i++) {
       if (newElements[i].id === pagei + 1) {
-        console.log('PAGE FOUND: ', pagei + 1)
+        // console.log('PAGE FOUND: ', pagei + 1)
         for (var x = 0; x < newElements[i].fields.length; x++) {
           if (newElements[i].fields[x].id === id) {
-            console.log('DELTE FIELD ID: ', id)
+            // console.log('DELTE FIELD ID: ', id)
             newElements[i].fields.splice(x, 1)
           }
         }
       }
     }
-    console.log('BEFORE DELETE FIELDS')
+    // console.log('BEFORE DELETE FIELDS')
     setElements(newElements)
   }
 
@@ -278,7 +296,14 @@ function App() {
 
   return (
     <FormContext.Provider
-      value={{ handleChange, addNewfield, addNewpage, getElementslength, deleteField }}
+      value={{
+        handleChange,
+        addNewfield,
+        addNewpage,
+        getElementslength,
+        deleteField,
+        duplicateField
+      }}
     >
       <div className='grid grid-cols-12'>
         <div className='hidden md:inline-block md:col-span-3 bg-gray-100 min-h-screen border-r-4 p-16 pr-4'>
