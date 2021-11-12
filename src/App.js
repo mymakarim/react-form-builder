@@ -109,6 +109,35 @@ function App() {
     setEditid(null)
   }
 
+  function deletePage(id) {
+    const newElements = [...elements]
+    for (var i = 0; i < newElements.length; i++) {
+      if (newElements[i].id === id) {
+        console.log('DELETE')
+        newElements.splice(i, 1)
+      }
+    }
+    console.log('BEFORE DELETE PAGE')
+    setElements(newElements)
+  }
+
+  function deleteField(id) {
+    const newElements = [...elements]
+    for (var i = 0; i < newElements.length; i++) {
+      if (newElements[i].id === pagei + 1) {
+        console.log('PAGE FOUND: ', pagei + 1)
+        for (var x = 0; x < newElements[i].fields.length; x++) {
+          if (newElements[i].fields[x].id === id) {
+            console.log('DELTE FIELD ID: ', id)
+            newElements[i].fields.splice(x, 1)
+          }
+        }
+      }
+    }
+    console.log('BEFORE DELETE FIELDS')
+    setElements(newElements)
+  }
+
   const PagesList = ({ elements }) => {
     console.log('ELEMENTS IN PAGES LIST: ', elements)
     return (
@@ -150,7 +179,7 @@ function App() {
                   />
                 </form>
               ) : (
-                <div className='flex items-center justify-between w-full'>
+                <div className='group flex items-center justify-between w-full'>
                   <div
                     onClick={() => setPagei(element.id - 1)}
                     className={`${
@@ -160,7 +189,7 @@ function App() {
                     <h5 className='font-semibold mb-1'>{element.page.label}</h5>
                     <p className='text-xs font-semibold text-gray-400'>{element.page.desc}</p>
                   </div>
-                  <div className=' text-xs flex items-end gap-1'>
+                  <div className='hidden text-xs group-hover:flex items-end gap-1'>
                     <button
                       onClick={() => setEditid(element.id)}
                       className='h-7 w-7 font-semibold text-white rounded-md bg-cyan-500 hover:bg-cyan-700  flex items-center justify-center'
@@ -177,7 +206,7 @@ function App() {
                       </svg>
                     </button>
                     <button
-                      onClick={() => console.log('DELETE')}
+                      onClick={() => deletePage(element.id)}
                       className='h-7 w-7 font-semibold text-white rounded-md bg-red-600 hover:bg-red-700  flex items-center justify-center'
                     >
                       <svg
@@ -248,7 +277,9 @@ function App() {
   }
 
   return (
-    <FormContext.Provider value={{ handleChange, addNewfield, addNewpage, getElementslength }}>
+    <FormContext.Provider
+      value={{ handleChange, addNewfield, addNewpage, getElementslength, deleteField }}
+    >
       <div className='grid grid-cols-12'>
         <div className='hidden md:inline-block md:col-span-3 bg-gray-100 min-h-screen border-r-4 p-16 pr-4'>
           <h2 className='font-black text-2xl mb-12' alt='logo'>
