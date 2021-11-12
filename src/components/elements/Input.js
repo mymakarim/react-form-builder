@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { FormContext } from '../../FormContext'
+import React from 'react'
+import Wrapper from './../elements/Wrapper'
 
 const Input = ({
   id,
@@ -8,7 +8,7 @@ const Input = ({
   placeholder,
   numbermin,
   numbermax,
-  readOnly,
+  readonly,
   step,
   maxlength,
   pattern,
@@ -17,31 +17,50 @@ const Input = ({
   multiple,
   accept
 }) => {
-  const { handleChange } = useContext(FormContext)
   return (
-    <div className='my-3'>
-      <label htmlFor={label} className='form-label'>
-        {label}
-      </label>
-      <input
-        title={label}
-        type={type}
-        className='form-control'
-        id={id}
-        placeholder={placeholder ? placeholder : ''}
-        onChange={(event) => handleChange(id, event)}
-        min={numbermin}
-        max={numbermax}
-        maxlength={maxlength}
-        readOnly={readOnly && 'readOnly'}
-        step={step}
-        pattern={pattern}
-        required={required}
-        multiple={multiple}
-        accept={accept}
-      />
-      <small className='text-gray-500 text-xs mt-1'>{footnote}</small>
-    </div>
+    <Wrapper
+      content='inputText'
+      id={id}
+      data={{
+        id,
+        type,
+        label,
+        placeholder,
+        numbermin,
+        numbermax,
+        readonly,
+        step,
+        maxlength,
+        pattern,
+        footnote,
+        required,
+        multiple,
+        accept
+      }}
+    >
+      <div className='my-3'>
+        <label htmlFor={label} className='form-label'>
+          {label}
+        </label>
+        <input
+          title={label}
+          type={type}
+          className='form-control'
+          id={id}
+          placeholder={placeholder ? placeholder : ''}
+          min={numbermin}
+          max={numbermax}
+          maxlength={maxlength}
+          readonly={readonly && 'readonly'}
+          step={step}
+          pattern={pattern}
+          required={required}
+          multiple={multiple}
+          accept={accept}
+        />
+        <small className='text-gray-500 text-xs mt-1'>{footnote}</small>
+      </div>
+    </Wrapper>
   )
 }
 

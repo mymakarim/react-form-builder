@@ -11,24 +11,18 @@ const Heading = ({ changeContent, data = null }) => {
 
   const addItem = (evt) => {
     evt.preventDefault()
+    const field = {
+      id: slugify(label),
+      label: label,
+      required: required,
+      readonly: readonly,
+      placeholder: placeholder,
+      type: 'heading'
+    }
     if (data) {
-      updateField(data.id, {
-        id: slugify(label),
-        label: label,
-        required: required,
-        readonly: readonly,
-        placeholder: placeholder,
-        type: 'heading'
-      })
+      updateField(data.id, field)
     } else {
-      addNewfield({
-        id: slugify(label),
-        label: label,
-        required: required,
-        readOnly: readonly,
-        placeholder: placeholder,
-        type: 'heading'
-      })
+      addNewfield(field)
       changeContent(null)
     }
   }

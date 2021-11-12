@@ -64,7 +64,10 @@ function App() {
         for (var x = 0; x < newElements[i].fields.length; x++) {
           if (newElements[i].fields[x].id === id) {
             // console.log('DELTE FIELD ID: ', id)
-            item = newElements[i].fields[x]
+            let newItem = Object.assign({}, newElements[i].fields[x])
+
+            newItem.id = (Math.random() + 1).toString(36).substring(7)
+            item = newItem
           }
         }
       }

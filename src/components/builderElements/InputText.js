@@ -1,27 +1,26 @@
 import React, { useState, useContext } from 'react'
 import { FormContext } from '../../FormContext'
 import slugify from './../helper/slugify'
-const InputText = ({ changeContent }) => {
-  const { addNewfield } = useContext(FormContext)
+const InputText = ({ changeContent, data = null }) => {
+  const { addNewfield, updateField } = useContext(FormContext)
 
-  const [label, setLabel] = useState('')
-  const [placeholder, setPlaceholder] = useState('')
-  const [required, setRequired] = useState(false)
-  const [type, setType] = useState('text')
-  const [numbermin, setNumbermin] = useState(null)
-  const [numbermax, setNumbermax] = useState(null)
-  const [readOnly, setReadonly] = useState(false)
-  const [multiple, setMultiple] = useState(false)
-  const [step, setStep] = useState(null)
-  const [maxlength, setMaxlength] = useState(null)
-  const [pattern, setPattern] = useState(null)
-  const [footnote, setFootnote] = useState(null)
-  const [accept, setAccept] = useState(null)
+  const [label, setLabel] = useState(data ? data.readonly : '')
+  const [placeholder, setPlaceholder] = useState(data ? data.readonly : '')
+  const [required, setRequired] = useState(data ? data.readonly : false)
+  const [type, setType] = useState(data ? data.readonly : 'text')
+  const [numbermin, setNumbermin] = useState(data ? data.readonly : null)
+  const [numbermax, setNumbermax] = useState(data ? data.readonly : null)
+  const [readOnly, setReadonly] = useState(data ? data.readonly : false)
+  const [multiple, setMultiple] = useState(data ? data.readonly : false)
+  const [step, setStep] = useState(data ? data.readonly : null)
+  const [maxlength, setMaxlength] = useState(data ? data.readonly : null)
+  const [pattern, setPattern] = useState(data ? data.readonly : null)
+  const [footnote, setFootnote] = useState(data ? data.readonly : null)
+  const [accept, setAccept] = useState(data ? data.readonly : null)
 
   const addItem = (evt) => {
     evt.preventDefault()
-
-    addNewfield({
+    const field = {
       id: slugify(label),
       label: label,
       required: required,
@@ -36,8 +35,13 @@ const InputText = ({ changeContent }) => {
       footnote: footnote,
       multiple: multiple,
       accept: accept
-    })
-    changeContent(null)
+    }
+    if (data) {
+      updateField(data.id, field)
+    } else {
+      addNewfield(field)
+      changeContent(null)
+    }
   }
   return (
     <section>
@@ -51,6 +55,7 @@ const InputText = ({ changeContent }) => {
               required
               className='p-2.5 mt-2 block w-full rounded-md border'
               value={type}
+              defaultValue={data && data.type}
               onChange={(e) => setType(e.target.value)}
             >
               <option value='text'>Text</option>
@@ -76,6 +81,7 @@ const InputText = ({ changeContent }) => {
               required
               type='text'
               name='label'
+              defaultValue={data && data.label}
               onChange={(e) => setLabel(e.target.value)}
               className='p-2.5 mt-2 block w-full rounded-md border'
             />
@@ -89,6 +95,7 @@ const InputText = ({ changeContent }) => {
               <input
                 type='text'
                 name='placeholder'
+                defaultValue={data && data.placeholder}
                 onChange={(e) => setPlaceholder(e.target.value)}
                 className='p-2.5 mt-2 block w-full rounded-md border'
               />
@@ -106,6 +113,7 @@ const InputText = ({ changeContent }) => {
               <input
                 type='text'
                 name='pattern'
+                defaultValue={data && data.pattern}
                 onChange={(e) => setPattern(e.target.value)}
                 className='p-2.5 mt-2 block w-full rounded-md border'
               />
@@ -118,6 +126,7 @@ const InputText = ({ changeContent }) => {
             <input
               type='text'
               name='footnote'
+              defaultValue={data && data.footnote}
               onChange={(e) => setFootnote(e.target.value)}
               className='p-2.5 mt-2 block w-full rounded-md border'
             />
@@ -131,6 +140,7 @@ const InputText = ({ changeContent }) => {
               <input
                 type='number'
                 name='maxlength'
+                defaultValue={data && data.maxlength}
                 onChange={(e) => setMaxlength(e.target.value)}
                 className='p-2.5 mt-2 block w-full rounded-md border'
               />
@@ -145,6 +155,7 @@ const InputText = ({ changeContent }) => {
               <input
                 type='number'
                 name='min'
+                defaultValue={data && data.min}
                 onChange={(e) => setNumbermin(e.target.value)}
                 className='p-2.5 mt-2 block w-full rounded-md border'
               />
@@ -158,6 +169,7 @@ const InputText = ({ changeContent }) => {
               <input
                 type='number'
                 name='max'
+                defaultValue={data && data.max}
                 onChange={(e) => setNumbermax(e.target.value)}
                 className='p-2.5 mt-2 block w-full rounded-md border'
               />
@@ -171,6 +183,7 @@ const InputText = ({ changeContent }) => {
               <input
                 type='number'
                 name='step'
+                defaultValue={data && data.step}
                 onChange={(e) => setStep(e.target.value)}
                 className='p-2.5 mt-2 block w-full rounded-md border'
               />
@@ -185,6 +198,7 @@ const InputText = ({ changeContent }) => {
                 type='text'
                 name='accept'
                 required
+                defaultValue={data && data.accept}
                 onChange={(e) => setAccept(e.target.value)}
                 className='p-2.5 mt-2 block w-full rounded-md border'
               />
@@ -202,6 +216,7 @@ const InputText = ({ changeContent }) => {
                 <input
                   name='required'
                   type='checkbox'
+                  defaultChecked={data && data.required}
                   onChange={(e) => setRequired(e.target.checked)}
                   className='focus:ring-cyan-500 h-4 w-4 text-cyan-500 border-gray-300 rounded'
                 />
@@ -218,6 +233,7 @@ const InputText = ({ changeContent }) => {
                 <input
                   name='readonly'
                   type='checkbox'
+                  defaultChecked={data && data.readonly}
                   onChange={(e) => setReadonly(e.target.checked)}
                   className='focus:ring-cyan-500 h-4 w-4 text-cyan-500 border-gray-300 rounded'
                 />
@@ -235,6 +251,7 @@ const InputText = ({ changeContent }) => {
                   <input
                     name='multiple'
                     type='checkbox'
+                    defaultChecked={data && data.multiple}
                     onChange={(e) => setMultiple(e.target.checked)}
                     className='focus:ring-cyan-500 h-4 w-4 text-cyan-500 border-gray-300 rounded'
                   />
@@ -245,13 +262,15 @@ const InputText = ({ changeContent }) => {
           )}
         </div>
         <div className='px-6 py-3 bg-gray-50 flex items-center justify-between sm:px-6'>
-          <button
-            type='button'
-            onClick={() => changeContent(null)}
-            className='py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
-          >
-            Back
-          </button>
+          {!data && (
+            <button
+              type='button'
+              onClick={() => changeContent(null)}
+              className='py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
+            >
+              Back
+            </button>
+          )}
           <button
             type='submit'
             className='py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-500 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'

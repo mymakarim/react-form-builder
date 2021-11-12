@@ -2,31 +2,35 @@ import React, { useState, useContext } from 'react'
 import { FormContext } from '../../FormContext'
 import slugify from './../helper/slugify'
 
-const Select = ({ changeContent }) => {
-  const { addNewfield } = useContext(FormContext)
-  const [label, setLabel] = useState(null)
-  const [placeholder, setPlaceholder] = useState(null)
-  const [required, setRequired] = useState(false)
-  const [readOnly, setreadOnly] = useState(false)
-  const [options, setOptions] = useState(null)
-  const [multiple, setMultiple] = useState(false)
-  const [footnote, setFootnote] = useState(null)
+const Select = ({ changeContent, data = null }) => {
+  const { addNewfield, updateField } = useContext(FormContext)
+  const [label, setLabel] = useState(data ? data.label : null)
+  const [placeholder, setPlaceholder] = useState(data ? data.placeholder : null)
+  const [required, setRequired] = useState(data ? data.required : false)
+  const [readonly, setreadonly] = useState(data ? data.readonly : false)
+  const [options, setOptions] = useState(data ? data.options : null)
+  const [multiple, setMultiple] = useState(data ? data.multiple : false)
+  const [footnote, setFootnote] = useState(data ? data.footnote : null)
 
   const addItem = (evt) => {
     evt.preventDefault()
-
-    addNewfield({
+    const field = {
       id: slugify(label),
       label: label,
       required: required,
-      readOnly: readOnly,
+      readonly: readonly,
       options: options,
       placeholder: placeholder,
       multiple: multiple,
       footnote: footnote,
       type: 'select'
-    })
-    changeContent(null)
+    }
+    if (data) {
+      updateField(data.id, field)
+    } else {
+      addNewfield(field)
+      changeContent(null)
+    }
   }
   return (
     <section>
@@ -39,6 +43,7 @@ const Select = ({ changeContent }) => {
             <input
               type='text'
               name='label'
+              defaultValue={data && data.label}
               required
               onChange={(e) => setLabel(e.target.value)}
               className='p-2.5 mt-2 block w-full rounded-md border'
@@ -52,6 +57,7 @@ const Select = ({ changeContent }) => {
               type='text'
               name='placeholder'
               required
+              defaultValue={data && data.placeholder}
               onChange={(e) => setPlaceholder(e.target.value)}
               className='p-2.5 mt-2 block w-full rounded-md border'
             />
@@ -64,6 +70,7 @@ const Select = ({ changeContent }) => {
             <input
               type='text'
               name='footnote'
+              defaultValue={data && data.footnote}
               onChange={(e) => setFootnote(e.target.value)}
               className='p-2.5 mt-2 block w-full rounded-md border'
             />
@@ -76,6 +83,7 @@ const Select = ({ changeContent }) => {
               type='text'
               name='options'
               required
+              defaultValue={data && data.options}
               onChange={(e) => setOptions(e.target.value)}
               className='p-2.5 mt-2 block w-full rounded-md border'
             />
@@ -92,6 +100,7 @@ const Select = ({ changeContent }) => {
                 <input
                   name='required'
                   type='checkbox'
+                  defaultChecked={data && data.required}
                   onChange={(e) => setRequired(e.target.checked)}
                   className='focus:ring-cyan-500 h-4 w-4 text-cyan-500 border-gray-300 rounded'
                 />
@@ -102,16 +111,17 @@ const Select = ({ changeContent }) => {
           <div className='col-span-2 flex items-end'>
             <div>
               <label
-                htmlFor='readOnly'
+                htmlFor='readonly'
                 className='font-medium text-gray-700 flex gap-2 items-center'
               >
                 <input
-                  name='readOnly'
+                  name='readonly'
                   type='checkbox'
-                  onChange={(e) => setreadOnly(e.target.checked)}
+                  defaultChecked={data && data.readonly}
+                  onChange={(e) => setreadonly(e.target.checked)}
                   className='focus:ring-cyan-500 h-4 w-4 text-cyan-500 border-gray-300 rounded'
                 />
-                {` `}readOnly
+                {` `}readonly
               </label>
             </div>
           </div>
@@ -124,6 +134,7 @@ const Select = ({ changeContent }) => {
                 <input
                   name='multiple'
                   type='checkbox'
+                  defaultChecked={data && data.multiple}
                   onChange={(e) => setMultiple(e.target.checked)}
                   className='focus:ring-cyan-500 h-4 w-4 text-cyan-500 border-gray-300 rounded'
                 />
@@ -133,13 +144,15 @@ const Select = ({ changeContent }) => {
           </div>
         </div>
         <div className='px-6 py-3 bg-gray-50 flex items-center justify-between sm:px-6'>
-          <button
-            type='button'
-            onClick={() => changeContent(null)}
-            className='py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
-          >
-            Back
-          </button>
+          {!data && (
+            <button
+              type='button'
+              onClick={() => changeContent(null)}
+              className='py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
+            >
+              Back
+            </button>
+          )}
           <button
             type='submit'
             className='py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-500 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'

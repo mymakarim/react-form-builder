@@ -2,21 +2,20 @@ import React, { useState, useContext } from 'react'
 import { FormContext } from '../../FormContext'
 import slugify from './../helper/slugify'
 
-const Textarea = ({ changeContent }) => {
-  const { addNewfield } = useContext(FormContext)
+const Textarea = ({ changeContent, data = null }) => {
+  const { addNewfield, updateField } = useContext(FormContext)
 
-  const [label, setLabel] = useState('')
-  const [placeholder, setPlaceholder] = useState('')
-  const [required, setRequired] = useState(false)
-  const [readonly, setReadonly] = useState(false)
-  const [maxlength, setMaxlength] = useState(null)
-  const [footnote, setFootnote] = useState(null)
-  const [rows, setRows] = useState(5)
+  const [label, setLabel] = useState(data ? data.label : '')
+  const [placeholder, setPlaceholder] = useState(data ? data.placeholder : '')
+  const [required, setRequired] = useState(data ? data.required : false)
+  const [readonly, setReadonly] = useState(data ? data.readonly : false)
+  const [maxlength, setMaxlength] = useState(data ? data.maxlength : null)
+  const [footnote, setFootnote] = useState(data ? data.footnote : null)
+  const [rows, setRows] = useState(data ? data.rows : 5)
 
   const addItem = (evt) => {
     evt.preventDefault()
-
-    addNewfield({
+    const field = {
       id: slugify(label),
       label: label,
       required: required,
@@ -26,8 +25,13 @@ const Textarea = ({ changeContent }) => {
       readonly: readonly,
       rows: rows,
       type: 'textarea'
-    })
-    changeContent(null)
+    }
+    if (data) {
+      updateField(data.id, field)
+    } else {
+      addNewfield(field)
+      changeContent(null)
+    }
   }
   return (
     <section>
@@ -41,6 +45,7 @@ const Textarea = ({ changeContent }) => {
               type='text'
               name='label'
               required
+              defaultValue={data && data.label}
               onChange={(e) => setLabel(e.target.value)}
               className='p-2.5 mt-2 block w-full rounded-md border'
             />
@@ -53,6 +58,7 @@ const Textarea = ({ changeContent }) => {
             <input
               type='text'
               name='placeholder'
+              defaultValue={data && data.placeholder}
               onChange={(e) => setPlaceholder(e.target.value)}
               className='p-2.5 mt-2 block w-full rounded-md border'
             />
@@ -64,6 +70,7 @@ const Textarea = ({ changeContent }) => {
             <input
               type='text'
               name='footnote'
+              defaultValue={data && data.footnote}
               onChange={(e) => setFootnote(e.target.value)}
               className='p-2.5 mt-2 block w-full rounded-md border'
             />
@@ -76,6 +83,7 @@ const Textarea = ({ changeContent }) => {
             <input
               type='number'
               name='maxlength'
+              defaultValue={data && data.maxlength}
               onChange={(e) => setMaxlength(e.target.value)}
               className='p-2.5 mt-2 block w-full rounded-md border'
             />
@@ -87,6 +95,7 @@ const Textarea = ({ changeContent }) => {
             <input
               type='number'
               name='rows'
+              defaultValue={data && data.rows}
               onChange={(e) => setRows(e.target.value)}
               className='p-2.5 mt-2 block w-full rounded-md border'
             />
@@ -102,6 +111,7 @@ const Textarea = ({ changeContent }) => {
                 <input
                   name='required'
                   type='checkbox'
+                  defaultChecked={data && data.required}
                   onChange={(e) => setRequired(e.target.checked)}
                   className='focus:ring-cyan-500 h-4 w-4 text-cyan-500 border-gray-300 rounded'
                 />
@@ -118,6 +128,7 @@ const Textarea = ({ changeContent }) => {
                 <input
                   name='readonly'
                   type='checkbox'
+                  defaultChecked={data && data.readonly}
                   onChange={(e) => setReadonly(e.target.checked)}
                   className='focus:ring-cyan-500 h-4 w-4 text-cyan-500 border-gray-300 rounded'
                 />
@@ -127,13 +138,15 @@ const Textarea = ({ changeContent }) => {
           </div>
         </div>
         <div className='px-6 py-3 bg-gray-50 flex items-center justify-between sm:px-6'>
-          <button
-            type='button'
-            onClick={() => changeContent(null)}
-            className='py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
-          >
-            Back
-          </button>
+          {!data && (
+            <button
+              type='button'
+              onClick={() => changeContent(null)}
+              className='py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
+            >
+              Back
+            </button>
+          )}
           <button
             type='submit'
             className='py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-500 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
