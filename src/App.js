@@ -23,12 +23,12 @@ function App() {
     })
   }, [elements])
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    // save file json
-    // or POST it somewhere
-    console.log(elements)
-  }
+  // const handleSubmit = (event) => {
+  //   event.preventDefault()
+  //   // save file json
+  //   // or POST it somewhere
+  //   console.log(elements)
+  // }
   const handleChange = (id, event) => {
     // const newElements = { ...elements }
     // newElements[pagei].fields.forEach((field) => {

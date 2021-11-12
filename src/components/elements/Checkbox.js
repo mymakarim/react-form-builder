@@ -7,7 +7,7 @@ const CheckboxField = ({ id, label, options, placeholder, required, readonly }) 
 
   return (
     <Wrapper
-      content='checkbox'
+      content='Checkbox'
       id={id}
       data={{ id, label, options, placeholder, required, readonly }}
     >

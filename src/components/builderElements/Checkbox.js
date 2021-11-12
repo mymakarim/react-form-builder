@@ -84,7 +84,6 @@ const Checkbox = ({ changeContent, data = null }) => {
                   name='required'
                   type='checkbox'
                   defaultChecked={data && data.required}
-                  defaultChecked={data && data.required}
                   onChange={(e) => setRequired(e.target.checked)}
                   className='focus:ring-cyan-500 h-4 w-4 text-cyan-500 border-gray-300 rounded'
                 />
@@ -101,7 +100,6 @@ const Checkbox = ({ changeContent, data = null }) => {
                 <input
                   name='readonly'
                   type='checkbox'
-                  defaultChecked={data && data.readonly}
                   defaultChecked={data && data.readonly}
                   onChange={(e) => setReadonly(e.target.checked)}
                   className='focus:ring-cyan-500 h-4 w-4 text-cyan-500 border-gray-300 rounded'
