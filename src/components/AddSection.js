@@ -18,7 +18,7 @@ const RenderSwitch = ({ isContent, toggle, changeContent }) => {
     case null:
       return <FormFields toggle={toggle} changeContent={changeContent} />
     case 'page':
-      return <PageFields toggle={toggle} changeContent={changeContent} />
+      return <PageFields changeContent={changeContent} />
     case 'heading':
       return <Heading changeContent={changeContent} />
     case 'description':

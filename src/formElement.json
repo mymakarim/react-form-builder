@@ -3,7 +3,10 @@
         "id": 1,
         "page": {
             "label": "Page 1",
-            "desc": "Form Builder descripton"
+            "placeholder": "Form Builder descripton",
+            "bgimage": null,
+            "opacity": 1,
+            "placement": "center center"
         },
         "fields": []
     }
