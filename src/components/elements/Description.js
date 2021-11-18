@@ -1,9 +1,14 @@
 import React from 'react'
 import Wrapper from './../elements/Wrapper'
 
-const Description = ({ id, label, placeholder, required, readonly }) => {
+const Description = ({ id, orderId, label, placeholder, required, readonly }) => {
   return (
-    <Wrapper content='description' id={id} data={{ id, label, placeholder, required, readonly }}>
+    <Wrapper
+      content='description'
+      orderId={orderId}
+      id={id}
+      data={{ id, label, placeholder, required, readonly }}
+    >
       <div id={id} readonly={readonly && 'readonly'} required={required} className='mb-3'>
         <label htmlFor={label} className='form-label'>
           {label}

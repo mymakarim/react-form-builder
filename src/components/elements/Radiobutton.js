@@ -2,12 +2,13 @@ import React from 'react'
 import Wrapper from './../elements/Wrapper'
 import slugify from './../helper/slugify'
 
-const Radiobutton = ({ id, label, options, placeholder, required, readonly }) => {
+const Radiobutton = ({ id, orderId, label, options, placeholder, required, readonly }) => {
   const newOptions = options.split(',')
   return (
     <Wrapper
       content='radiobutton'
       id={id}
+      orderId={orderId}
       data={{ id, label, options, placeholder, required, readonly }}
     >
       <div className='mb-3 form-check'>

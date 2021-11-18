@@ -1,11 +1,22 @@
 import React from 'react'
 import Wrapper from './../elements/Wrapper'
 
-const Textarea = ({ id, label, rows, placeholder, readonly, maxlength, footnote, required }) => {
+const Textarea = ({
+  id,
+  orderId,
+  label,
+  rows,
+  placeholder,
+  readonly,
+  maxlength,
+  footnote,
+  required
+}) => {
   return (
     <Wrapper
       content='textarea'
       id={id}
+      orderId={orderId}
       data={{ id, label, rows, placeholder, readonly, maxlength, footnote, required }}
     >
       <div className='my-3'>

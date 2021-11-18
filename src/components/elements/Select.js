@@ -2,12 +2,23 @@ import React from 'react'
 import Wrapper from './../elements/Wrapper'
 import slugify from './../helper/slugify'
 
-const Select = ({ id, label, options, placeholder, required, readonly, footnote, multiple }) => {
+const Select = ({
+  id,
+  orderId,
+  label,
+  options,
+  placeholder,
+  required,
+  readonly,
+  footnote,
+  multiple
+}) => {
   const newOptions = options.split(',')
   return (
     <Wrapper
       content='Select'
       id={id}
+      orderId={orderId}
       data={{ id, label, options, placeholder, required, readonly, footnote, multiple }}
     >
       <div className='my-3'>

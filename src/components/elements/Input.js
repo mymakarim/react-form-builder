@@ -3,6 +3,7 @@ import Wrapper from './../elements/Wrapper'
 
 const Input = ({
   id,
+  orderId,
   type,
   label,
   placeholder,
@@ -21,6 +22,7 @@ const Input = ({
     <Wrapper
       content='inputText'
       id={id}
+      orderId={orderId}
       data={{
         id,
         type,
