@@ -16,7 +16,8 @@ module.exports = {
     extend: {
       display: ['group-hover'],
       backgroundColor: ['disabled'],
-      cursor: ['disabled']
+      cursor: ['disabled'],
+      opacity: ['disabled']
     }
   },
   plugins: []

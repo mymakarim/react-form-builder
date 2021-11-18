@@ -238,13 +238,31 @@ function App() {
     // for (var x = 0; x < newElements[pagei].fields.length; x++) {
     if (orderId !== 1) {
       newElements[pagei].fields[orderId - 1].order = orderId - 1
-      if (orderId <= newElements[pagei].fields.length) {
-        newElements[pagei].fields[orderId - 2].order = orderId
-      } else {
-        console.log('IT IS THE LAST ITEM CANNOT REORDER ELEMENTS AFTER IT')
-      }
+      newElements[pagei].fields[orderId - 2].order = orderId
     } else {
       console.log('CANNOT GOUP THE FIRST ELEMENT')
+    }
+    // }
+    //   }
+    // }
+    // console.log('BEFORE GOUP FIELDS')
+    newElements[pagei].fields.sort((a, b) => parseFloat(a.order) - parseFloat(b.order))
+    setElements(newElements)
+  }
+
+  function goDownField(orderId) {
+    const newElements = [...elements]
+    // for (var i = 0; i < newElements.length; i++) {
+    // if (newElements[i].id === pagei + 1) {
+    // console.log('PAGE FOUND: ', pagei + 1)
+    console.log('PAGE I IN GODOWN: ', pagei)
+    console.log('ORDER ID IN GODOWN: ', orderId)
+    // for (var x = 0; x < newElements[pagei].fields.length; x++) {
+    if (orderId !== newElements[pagei].fields.length) {
+      newElements[pagei].fields[orderId - 1].order = orderId + 1
+      newElements[pagei].fields[orderId].order = orderId
+    } else {
+      console.log('IT IS THE LAST ITEM CANNOT REORDER ELEMENTS AFTER IT')
     }
     // }
     //   }
@@ -413,7 +431,8 @@ function App() {
         duplicateField,
         updateField,
         updatePage,
-        goUpField
+        goUpField,
+        goDownField
       }}
     >
       <div className='grid grid-cols-12'>

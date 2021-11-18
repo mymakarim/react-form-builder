@@ -10,7 +10,7 @@ import Heading from './../builderElements/Heading.js'
 import Textarea from './../builderElements/Textarea.js'
 
 const Wrapper = ({ children, id, orderId, data, content }) => {
-  const { deleteField, duplicateField, goUpField } = useContext(FormContext)
+  const { deleteField, duplicateField, goUpField, goDownField } = useContext(FormContext)
   const [edit, setEdit] = useState(false)
 
   // console.log('ORDERID IN WRAPPER: ', orderId)
@@ -130,13 +130,43 @@ const Wrapper = ({ children, id, orderId, data, content }) => {
             <span>Delete</span>
           </button>
           <button
+            disabled={orderId === 1}
             onClick={() => goUpField(orderId)}
-            className='px-3 py-2 font-semibold text-white rounded-md bg-cyan-500 hover:bg-cyan-700  flex items-center justify-between gap-1'
+            className='disabled:cursor-not-allowed disabled:opacity-50 p-2 rounded-full text-indigo-700 border-cyan-700 border-2 hover:bg-cyan-700 hover:text-white transition duration-500 ease-in-out flex items-center justify-center'
           >
-            <svg className='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>
-              <path d='M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z'></path>
+            <svg
+              class='flex-shrink-0 h-5 w-5 transform rotate-180'
+              x-description='Heroicon name: solid/chevron-down'
+              xmlns='http://www.w3.org/2000/svg'
+              viewBox='0 0 20 20'
+              fill='currentColor'
+              aria-hidden='true'
+            >
+              <path
+                fill-rule='evenodd'
+                d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
+                clip-rule='evenodd'
+              ></path>
             </svg>
-            <span>UP</span>
+          </button>
+          <button
+            onClick={() => goDownField(orderId)}
+            className='p-2 rounded-full text-indigo-700 border-cyan-700 border-2 hover:bg-cyan-700 hover:text-white transition duration-500 ease-in-out flex items-center justify-center'
+          >
+            <svg
+              class='flex-shrink-0 h-5 w-5'
+              x-description='Heroicon name: solid/chevron-down'
+              xmlns='http://www.w3.org/2000/svg'
+              viewBox='0 0 20 20'
+              fill='currentColor'
+              aria-hidden='true'
+            >
+              <path
+                fill-rule='evenodd'
+                d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
+                clip-rule='evenodd'
+              ></path>
+            </svg>
           </button>
         </div>
       </div>
