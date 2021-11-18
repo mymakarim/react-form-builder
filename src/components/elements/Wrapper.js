@@ -9,9 +9,11 @@ import Description from './../builderElements/Description.js'
 import Heading from './../builderElements/Heading.js'
 import Textarea from './../builderElements/Textarea.js'
 
-const Wrapper = ({ children, id, data, content }) => {
-  const { deleteField, duplicateField } = useContext(FormContext)
+const Wrapper = ({ children, id, orderId, data, content }) => {
+  const { deleteField, duplicateField, goUpField } = useContext(FormContext)
   const [edit, setEdit] = useState(false)
+
+  // console.log('ORDERID IN WRAPPER: ', orderId)
 
   const RenderSwitch = ({ data }) => {
     switch (content) {
@@ -126,6 +128,15 @@ const Wrapper = ({ children, id, data, content }) => {
               ></path>
             </svg>
             <span>Delete</span>
+          </button>
+          <button
+            onClick={() => goUpField(orderId)}
+            className='px-3 py-2 font-semibold text-white rounded-md bg-cyan-500 hover:bg-cyan-700  flex items-center justify-between gap-1'
+          >
+            <svg className='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>
+              <path d='M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z'></path>
+            </svg>
+            <span>UP</span>
           </button>
         </div>
       </div>

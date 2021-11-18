@@ -23,9 +23,11 @@ const Element = ({
     options,
     rows,
     multiple,
-    accept
+    accept,
+    order
   }
 }) => {
+  // console.log('ORDERID IN ELEMENT: ', order)
   switch (type) {
     case 'select':
       return (
@@ -38,6 +40,7 @@ const Element = ({
           options={options}
           multiple={multiple}
           footnote={footnote}
+          orderId={order}
         />
       )
     case 'checkbox':
@@ -49,6 +52,7 @@ const Element = ({
           label={label}
           readonly={readonly}
           options={options}
+          orderId={order}
         />
       )
     case 'radiobutton':
@@ -60,6 +64,7 @@ const Element = ({
           label={label}
           readonly={readonly}
           options={options}
+          orderId={order}
         />
       )
     case 'heading':
@@ -70,6 +75,7 @@ const Element = ({
           required={required}
           label={label}
           readonly={readonly}
+          orderId={order}
         />
       )
     case 'description':
@@ -80,6 +86,7 @@ const Element = ({
           required={required}
           label={label}
           readonly={readonly}
+          orderId={order}
         />
       )
 
@@ -94,6 +101,7 @@ const Element = ({
           rows={rows}
           maxlength={maxlength}
           footnote={footnote}
+          orderId={order}
         />
       )
 
@@ -114,6 +122,7 @@ const Element = ({
           required={required}
           multiple={multiple}
           accept={accept}
+          orderId={order}
         />
       )
   }

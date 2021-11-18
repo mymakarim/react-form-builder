@@ -1,9 +1,15 @@
 import React from 'react'
 import Wrapper from './../elements/Wrapper'
 
-const HeadingElement = ({ id, label, placeholder, required, readonly }) => {
+const HeadingElement = ({ id, orderId, label, placeholder, required, readonly }) => {
+  // console.log('ORDERID IN HEADINGELEMENT: ', orderId)
   return (
-    <Wrapper content='heading' id={id} data={{ id, label, placeholder, required, readonly }}>
+    <Wrapper
+      content='heading'
+      id={id}
+      orderId={orderId}
+      data={{ id, label, placeholder, required, readonly }}
+    >
       <div id={id} readonly={readonly && 'readonly'} required={required} className='mb-3'>
         <label htmlFor={label} className='form-label'>
           {label}
