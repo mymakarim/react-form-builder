@@ -279,6 +279,49 @@ function App() {
     setElements(newElements)
   }
 
+  function goDownPage(id) {
+    const newElements = [...elements]
+    // for (var i = 0; i < newElements.length; i++) {
+    // if (newElements[i].id === pagei + 1) {
+    // console.log('PAGE FOUND: ', pagei + 1)
+    console.log('PAGE I IN GODOWN: ', pagei)
+    console.log('ORDER ID IN GODOWN: ', id)
+    // for (var x = 0; x < newElements[pagei].fields.length; x++) {
+    if (id !== newElements.length) {
+      newElements[id - 1].order = id + 1
+      newElements[id].order = id
+    } else {
+      console.log('IT IS THE LAST ITEM CANNOT REORDER ELEMENTS AFTER IT')
+    }
+    // }
+    //   }
+    // }
+    // console.log('BEFORE GOUP FIELDS')
+    newElements.sort((a, b) => parseFloat(a.order) - parseFloat(b.order))
+    setElements(newElements)
+  }
+  function goUpPage(id) {
+    const newElements = [...elements]
+    // for (var i = 0; i < newElements.length; i++) {
+    // if (newElements[i].id === pagei + 1) {
+    // console.log('PAGE FOUND: ', pagei + 1)
+    console.log('PAGE I IN GOUP: ', pagei)
+    console.log('ORDER ID IN GOUP: ', id)
+    // for (var x = 0; x < newElements[pagei].fields.length; x++) {
+    if (id !== 1) {
+      newElements[id - 1].order = id - 1
+      newElements[id - 2].order = id
+    } else {
+      console.log('IT IS THE FIRST ITEM CANNOT REORDER ELEMENTS BEFORE IT')
+    }
+    // }
+    //   }
+    // }
+    // console.log('BEFORE GOUP FIELDS')
+    newElements.sort((a, b) => parseFloat(a.order) - parseFloat(b.order))
+    setElements(newElements)
+  }
+
   const PagesList = ({ elements }) => {
     console.log('ELEMENTS IN PAGES LIST: ', elements)
     return (
@@ -334,7 +377,7 @@ function App() {
                       {element.page.placeholder}
                     </p>
                   </div>
-                  <div className='hidden text-xs group-hover:flex items-end gap-1'>
+                  <div className='hidden absolute top-0 right-0 text-xs group-hover:flex items-center gap-1'>
                     <button
                       onClick={() => setEditid(element.id)}
                       className='h-7 w-7 font-semibold text-white rounded-md bg-cyan-500 hover:bg-cyan-700  flex items-center justify-center'
@@ -377,6 +420,48 @@ function App() {
                         ></path>
                       </svg>
                     </button>
+                    <div className='flex flex-col justify-between gap-1 items-center'>
+                      <button
+                        disabled={1 === element.id}
+                        onClick={() => goUpPage(element.id)}
+                        className='disabled:cursor-not-allowed disabled:opacity-50 h-4 w-4 text-indigo-700 border-cyan-700 border-2 hover:bg-cyan-700 hover:text-white transition duration-500 ease-in-out flex items-center justify-center'
+                      >
+                        <svg
+                          class='flex-shrink-0 h-3 w-3 transform rotate-180'
+                          x-description='Heroicon name: solid/chevron-down'
+                          xmlns='http://www.w3.org/2000/svg'
+                          viewBox='0 0 20 20'
+                          fill='currentColor'
+                          aria-hidden='true'
+                        >
+                          <path
+                            fill-rule='evenodd'
+                            d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
+                            clip-rule='evenodd'
+                          ></path>
+                        </svg>
+                      </button>
+                      <button
+                        disabled={element.id === elements.length}
+                        onClick={() => goDownPage(element.id)}
+                        className='disabled:cursor-not-allowed disabled:opacity-50 h-4 w-4 text-indigo-700 border-cyan-700 border-2 hover:bg-cyan-700 hover:text-white transition duration-500 ease-in-out flex items-center justify-center'
+                      >
+                        <svg
+                          class='flex-shrink-0 h-3 w-3'
+                          x-description='Heroicon name: solid/chevron-down'
+                          xmlns='http://www.w3.org/2000/svg'
+                          viewBox='0 0 20 20'
+                          fill='currentColor'
+                          aria-hidden='true'
+                        >
+                          <path
+                            fill-rule='evenodd'
+                            d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
+                            clip-rule='evenodd'
+                          ></path>
+                        </svg>
+                      </button>
+                    </div>
                   </div>
                 </div>
               )}
