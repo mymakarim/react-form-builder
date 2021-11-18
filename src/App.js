@@ -185,9 +185,13 @@ function App() {
     if (newElements[id - 1].id === id) {
       // console.log('FOUND THE PAGE: ', id)
       newElement = JSON.parse(JSON.stringify(newElements[id - 1]))
-      newElement.id = newElements.length + 1
+      newElement.id = id + 1
       newElement.page.label = newElements[id - 1].page.label + ' copy'
+      for (var y = id; y < newElements.length; y++) {
+        newElements[y].id = Number(newElements[y].id) + 1
+      }
       newElements.push(newElement)
+      newElements.sort((a, b) => parseFloat(a.id) - parseFloat(b.id))
       setElements(newElements)
     } else {
       // console.log('TOBE DUPLICATED PAGE NOT FOUND: ')
@@ -199,6 +203,9 @@ function App() {
     for (var i = 0; i < newElements.length; i++) {
       if (newElements[i].id === id) {
         console.log('DELETE PAGE: ', id)
+        for (var y = i + 1; y < newElements.length; y++) {
+          newElements[y].id = Number(newElements[y].id) - 1
+        }
         newElements.splice(i, 1)
       }
     }
