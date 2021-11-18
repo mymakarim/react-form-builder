@@ -288,8 +288,8 @@ function App() {
     console.log('ORDER ID IN GODOWN: ', id)
     // for (var x = 0; x < newElements[pagei].fields.length; x++) {
     if (id !== newElements.length) {
-      newElements[id - 1].order = id + 1
-      newElements[id].order = id
+      newElements[id - 1].id = id + 1
+      newElements[id].id = id
     } else {
       console.log('IT IS THE LAST ITEM CANNOT REORDER ELEMENTS AFTER IT')
     }
@@ -297,7 +297,7 @@ function App() {
     //   }
     // }
     // console.log('BEFORE GOUP FIELDS')
-    newElements.sort((a, b) => parseFloat(a.order) - parseFloat(b.order))
+    newElements.sort((a, b) => parseFloat(a.id) - parseFloat(b.id))
     setElements(newElements)
   }
   function goUpPage(id) {
@@ -309,8 +309,8 @@ function App() {
     console.log('ORDER ID IN GOUP: ', id)
     // for (var x = 0; x < newElements[pagei].fields.length; x++) {
     if (id !== 1) {
-      newElements[id - 1].order = id - 1
-      newElements[id - 2].order = id
+      newElements[id - 1].id = id - 1
+      newElements[id - 2].id = id
     } else {
       console.log('IT IS THE FIRST ITEM CANNOT REORDER ELEMENTS BEFORE IT')
     }
@@ -318,7 +318,7 @@ function App() {
     //   }
     // }
     // console.log('BEFORE GOUP FIELDS')
-    newElements.sort((a, b) => parseFloat(a.order) - parseFloat(b.order))
+    newElements.sort((a, b) => parseFloat(a.id) - parseFloat(b.id))
     setElements(newElements)
   }
 
@@ -378,6 +378,22 @@ function App() {
                     </p>
                   </div>
                   <div className='hidden absolute top-0 right-0 text-xs group-hover:flex items-center gap-1'>
+                    <button
+                      onClick={() => duplicatePage(element.id)}
+                      className='h-7 w-7 font-semibold text-white rounded-md bg-indigo-600 hover:bg-indigo-700  flex items-center justify-center'
+                    >
+                      <svg
+                        aria-hidden='true'
+                        viewBox='0 0 16 16'
+                        version='1.1'
+                        fill='currentColor'
+                        data-view-component='true'
+                        className='h-5 w-5 p-0.5'
+                      >
+                        <path d='M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z'></path>
+                        <path d='M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z'></path>
+                      </svg>
+                    </button>
                     <button
                       onClick={() => setEditid(element.id)}
                       className='h-7 w-7 font-semibold text-white rounded-md bg-cyan-500 hover:bg-cyan-700  flex items-center justify-center'
@@ -552,55 +568,15 @@ function App() {
                 className='px-3 py-2 font-semibold text-white rounded-md bg-indigo-600 hover:bg-indigo-700  flex items-center justify-between gap-1'
               >
                 <svg
-                  className='h-5 w-5 stroke-current'
                   aria-hidden='true'
-                  viewBox='0 0 32 32'
-                  fill='none'
+                  viewBox='0 0 16 16'
+                  version='1.1'
+                  fill='currentColor'
+                  data-view-component='true'
+                  className='h-5 w-5 p-0.5'
                 >
-                  <path
-                    d='M12.9975 10.7499L11.7475 10.7499C10.6429 10.7499 9.74747 11.6453 9.74747 12.7499L9.74747 21.2499C9.74747 22.3544 10.6429 23.2499 11.7475 23.2499L20.2475 23.2499C21.352 23.2499 22.2475 22.3544 22.2475 21.2499L22.2475 12.7499C22.2475 11.6453 21.352 10.7499 20.2475 10.7499L18.9975 10.7499'
-                    strokeWidth='1.5'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                  ></path>
-                  <path
-                    d='M17.9975 12.2499L13.9975 12.2499C13.4452 12.2499 12.9975 11.8022 12.9975 11.2499L12.9975 9.74988C12.9975 9.19759 13.4452 8.74988 13.9975 8.74988L17.9975 8.74988C18.5498 8.74988 18.9975 9.19759 18.9975 9.74988L18.9975 11.2499C18.9975 11.8022 18.5498 12.2499 17.9975 12.2499Z'
-                    strokeWidth='1.5'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                  ></path>
-                  <path
-                    d='M13.7475 16.2499L18.2475 16.2499'
-                    strokeWidth='1.5'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                  ></path>
-                  <path
-                    d='M13.7475 19.2499L18.2475 19.2499'
-                    strokeWidth='1.5'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                  ></path>
-                  <g className='transition-opacity'>
-                    <path
-                      d='M15.9975 5.99988L15.9975 3.99988'
-                      strokeWidth='1.5'
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                    ></path>
-                    <path
-                      d='M19.9975 5.99988L20.9975 4.99988'
-                      strokeWidth='1.5'
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                    ></path>
-                    <path
-                      d='M11.9975 5.99988L10.9975 4.99988'
-                      strokeWidth='1.5'
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                    ></path>
-                  </g>
+                  <path d='M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z'></path>
+                  <path d='M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z'></path>
                 </svg>
                 <span>Duplicate</span>
               </button>
