@@ -10,8 +10,11 @@ import Heading from './../builderElements/Heading.js'
 import Textarea from './../builderElements/Textarea.js'
 
 const Wrapper = ({ children, id, orderId, data, content }) => {
-  const { deleteField, duplicateField, goUpField, goDownField } = useContext(FormContext)
+  const { deleteField, duplicateField, goUpField, goDownField, getFieldslength } =
+    useContext(FormContext)
   const [edit, setEdit] = useState(false)
+  const lastId = getFieldslength()
+  console.log('LAST FIELD ID: ', lastId)
 
   // console.log('ORDERID IN WRAPPER: ', orderId)
 
@@ -150,8 +153,9 @@ const Wrapper = ({ children, id, orderId, data, content }) => {
             </svg>
           </button>
           <button
+            disabled={orderId === lastId}
             onClick={() => goDownField(orderId)}
-            className='p-2 rounded-full text-indigo-700 border-cyan-700 border-2 hover:bg-cyan-700 hover:text-white transition duration-500 ease-in-out flex items-center justify-center'
+            className='disabled:cursor-not-allowed disabled:opacity-50 p-2 rounded-full text-indigo-700 border-cyan-700 border-2 hover:bg-cyan-700 hover:text-white transition duration-500 ease-in-out flex items-center justify-center'
           >
             <svg
               class='flex-shrink-0 h-5 w-5'

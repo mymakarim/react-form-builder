@@ -401,7 +401,7 @@ function App() {
                           ? 'Cant Delete: There should be atleast one section'
                           : 'Delete'
                       }
-                      className='disabled:bg-gray-400 disabled:cursor-not-allowed	 h-7 w-7 font-semibold text-white rounded-md bg-red-600 hover:bg-red-700  flex items-center justify-center'
+                      className='disabled:opacity-50 disabled:cursor-not-allowed	 h-7 w-7 font-semibold text-white rounded-md bg-red-600 hover:bg-red-700  flex items-center justify-center'
                     >
                       <svg
                         className='h-5 w-5'
@@ -511,6 +511,9 @@ function App() {
   const getElementslength = () => {
     return elements.length
   }
+  const getFieldslength = () => {
+    return elements[pagei].fields.length
+  }
 
   return (
     <FormContext.Provider
@@ -519,6 +522,7 @@ function App() {
         addNewfield,
         addNewpage,
         getElementslength,
+        getFieldslength,
         deleteField,
         duplicateField,
         updateField,
@@ -535,7 +539,7 @@ function App() {
           {elements && <PagesList elements={elements} />}
         </div>
         <div className='col-span-12 md:col-span-9 p-5 sm:p-8 md:p-16'>
-          <div className='relative group'>
+          <div className='relative group border-b'>
             <div id={pagei} className='mb-3'>
               <h2 className='text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl'>
                 {elements[pagei].page.label}
@@ -610,8 +614,9 @@ function App() {
                 <span>Edit</span>
               </button>
               <button
+                disabled={elements.length <= 1}
                 onClick={() => deletePage(pagei)}
-                className='px-3 py-2  font-semibold text-white rounded-md bg-red-600 hover:bg-red-700  flex items-center justify-between gap-1'
+                className='disabled:cursor-not-allowed disabled:opacity-50 px-3 py-2 font-semibold text-white rounded-md bg-red-600 hover:bg-red-700  flex items-center justify-between gap-1'
               >
                 <svg
                   className='h-5 w-5'
