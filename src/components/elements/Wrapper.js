@@ -95,7 +95,7 @@ const Wrapper = ({ children, id, orderId, data, content }) => {
             className='disabled:cursor-not-allowed disabled:opacity-50 p-2 rounded-full text-indigo-700 border-cyan-700 border-2 hover:bg-cyan-700 hover:text-white transition duration-500 ease-in-out flex items-center justify-center'
           >
             <svg
-              class='flex-shrink-0 h-5 w-5 transform rotate-180'
+              className='flex-shrink-0 h-5 w-5 transform rotate-180'
               x-description='Heroicon name: solid/chevron-down'
               xmlns='http://www.w3.org/2000/svg'
               viewBox='0 0 20 20'
@@ -103,9 +103,9 @@ const Wrapper = ({ children, id, orderId, data, content }) => {
               aria-hidden='true'
             >
               <path
-                fill-rule='evenodd'
+                fillRule='evenodd'
                 d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-                clip-rule='evenodd'
+                clipRule='evenodd'
               ></path>
             </svg>
           </button>
@@ -115,7 +115,7 @@ const Wrapper = ({ children, id, orderId, data, content }) => {
             className='disabled:cursor-not-allowed disabled:opacity-50 p-2 rounded-full text-indigo-700 border-cyan-700 border-2 hover:bg-cyan-700 hover:text-white transition duration-500 ease-in-out flex items-center justify-center'
           >
             <svg
-              class='flex-shrink-0 h-5 w-5'
+              className='flex-shrink-0 h-5 w-5'
               x-description='Heroicon name: solid/chevron-down'
               xmlns='http://www.w3.org/2000/svg'
               viewBox='0 0 20 20'
@@ -123,9 +123,9 @@ const Wrapper = ({ children, id, orderId, data, content }) => {
               aria-hidden='true'
             >
               <path
-                fill-rule='evenodd'
+                fillRule='evenodd'
                 d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-                clip-rule='evenodd'
+                clipRule='evenodd'
               ></path>
             </svg>
           </button>

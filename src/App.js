@@ -443,7 +443,7 @@ function App() {
                         className='disabled:cursor-not-allowed disabled:opacity-50 h-4 w-4 text-indigo-700 border-cyan-700 border-2 hover:bg-cyan-700 hover:text-white transition duration-500 ease-in-out flex items-center justify-center'
                       >
                         <svg
-                          class='flex-shrink-0 h-3 w-3 transform rotate-180'
+                          className='flex-shrink-0 h-3 w-3 transform rotate-180'
                           x-description='Heroicon name: solid/chevron-down'
                           xmlns='http://www.w3.org/2000/svg'
                           viewBox='0 0 20 20'
@@ -451,9 +451,9 @@ function App() {
                           aria-hidden='true'
                         >
                           <path
-                            fill-rule='evenodd'
+                            fillRule='evenodd'
                             d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-                            clip-rule='evenodd'
+                            clipRule='evenodd'
                           ></path>
                         </svg>
                       </button>
@@ -463,7 +463,7 @@ function App() {
                         className='disabled:cursor-not-allowed disabled:opacity-50 h-4 w-4 text-indigo-700 border-cyan-700 border-2 hover:bg-cyan-700 hover:text-white transition duration-500 ease-in-out flex items-center justify-center'
                       >
                         <svg
-                          class='flex-shrink-0 h-3 w-3'
+                          className='flex-shrink-0 h-3 w-3'
                           x-description='Heroicon name: solid/chevron-down'
                           xmlns='http://www.w3.org/2000/svg'
                           viewBox='0 0 20 20'
@@ -471,9 +471,9 @@ function App() {
                           aria-hidden='true'
                         >
                           <path
-                            fill-rule='evenodd'
+                            fillRule='evenodd'
                             d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-                            clip-rule='evenodd'
+                            clipRule='evenodd'
                           ></path>
                         </svg>
                       </button>
@@ -591,7 +591,7 @@ function App() {
               </button>
               <button
                 disabled={elements.length <= 1}
-                onClick={() => deletePage(pagei)}
+                onClick={() => deletePage(pagei + 1)}
                 className='disabled:cursor-not-allowed disabled:opacity-50 px-3 py-2 font-semibold text-white rounded-md bg-red-600 hover:bg-red-700  flex items-center justify-between gap-1'
               >
                 <svg
