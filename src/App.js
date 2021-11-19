@@ -8,20 +8,27 @@ import AddSectionsimple from './components/AddSectionsimple'
 import PageFields from './components/builderElements/PageFields'
 
 function App() {
-  const [elements, setElements] = useState(formJSON)
+  const [form, setForm] = useState(formJSON[0].form.name)
+  const [elements, setElements] = useState(formJSON[0].pages)
   const [pagei, setPagei] = useState(0)
   const [toggle, setToggle] = useState(false)
+  const [formtoggle, setFormtoggle] = useState(false)
   const [editid, setEditid] = useState(null)
   const [edit, setEdit] = useState(false)
 
-  const saveJSON = async (content) => {
+  const saveForm = async (content) => {
     // save json into the file here
+    console.log('--------------------')
+    console.log('SAVE FORM')
+    console.log('--------------------')
+    console.log('FORM NAME: ', form)
+    console.log('FORM PAGES: ', content)
   }
 
   useEffect(() => {
     console.log('JSON TO BE SAVED: ', elements)
     // save the json file
-    saveJSON(elements).then((e) => {
+    saveForm(elements).then((e) => {
       console.log('E: ', e)
     })
   }, [elements])
@@ -551,9 +558,49 @@ function App() {
     >
       <div className='grid grid-cols-12'>
         <div className='hidden md:inline-block md:col-span-3 bg-gray-100 min-h-screen border-r-4 p-16 pr-4'>
-          <h2 className='font-bold text-3xl mb-14 mt-2' alt='logo'>
-            Form Builder
-          </h2>
+          {formtoggle ? (
+            <form
+              onSubmit={(evt) => {
+                setForm(evt.target.form_name.value.trim())
+                setFormtoggle(!formtoggle)
+              }}
+              className='flex gap-1 mb-16'
+            >
+              <input
+                type='text'
+                placeholder='name'
+                name='form_name'
+                required
+                defaultValue={form}
+                className='p-2.5 block w-full rounded-md border'
+                id='form_name'
+              />
+              <input
+                className='hidden text-xs font-semibold bg-gray-300 px-2 py-1'
+                type='submit'
+                value='Update'
+              />
+            </form>
+          ) : (
+            <div className='flex justify-between items-center mt-3 mr-3 mb-16'>
+              <h2 className='font-bold text-2xl'>{form}</h2>
+              <button
+                onClick={() => setFormtoggle(!formtoggle)}
+                className='h-7 w-7 font-semibold text-white rounded-md bg-cyan-500 hover:bg-cyan-700  flex items-center justify-center'
+              >
+                <svg
+                  className='h-5 w-5'
+                  x-description='Heroicon name: solid/pencil'
+                  xmlns='http://www.w3.org/2000/svg'
+                  viewBox='0 0 20 20'
+                  fill='currentColor'
+                  aria-hidden='true'
+                >
+                  <path d='M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z'></path>
+                </svg>
+              </button>
+            </div>
+          )}
           {elements && <PagesList elements={elements} />}
         </div>
         <div className='col-span-12 md:col-span-9 p-5 sm:p-8 md:p-16'>

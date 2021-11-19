@@ -1,13 +1,20 @@
 [
     {
-        "id": 1,
-        "page": {
-            "label": "Page 1",
-            "placeholder": "Form Builder descripton",
-            "bgimage": null,
-            "opacity": 1,
-            "placement": "center center"
+        "form": {
+            "name": "New Form"
         },
-        "fields": []
+        "pages": [
+            {
+                "id": 1,
+                "page": {
+                    "label": "Page 1",
+                    "placeholder": "Form Builder descripton",
+                    "bgimage": null,
+                    "opacity": 1,
+                    "placement": "center center"
+                },
+                "fields": []
+            }
+        ]
     }
 ]
