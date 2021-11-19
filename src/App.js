@@ -16,22 +16,22 @@ function App() {
   const [editid, setEditid] = useState(null)
   const [edit, setEdit] = useState(false)
 
-  const saveForm = async (content) => {
+  const saveForm = async (content, name) => {
     // save json into the file here
     console.log('--------------------')
     console.log('SAVE FORM')
     console.log('--------------------')
-    console.log('FORM NAME: ', form)
+    console.log('FORM NAME: ', name)
     console.log('FORM PAGES: ', content)
   }
 
   useEffect(() => {
     console.log('JSON TO BE SAVED: ', elements)
     // save the json file
-    saveForm(elements).then((e) => {
+    saveForm(elements, form).then((e) => {
       console.log('E: ', e)
     })
-  }, [elements])
+  }, [elements, form])
 
   // const handleSubmit = (event) => {
   //   event.preventDefault()
