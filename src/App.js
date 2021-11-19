@@ -199,6 +199,7 @@ function App() {
   }
 
   function deletePage(id) {
+    console.log('PAGEI: ', pagei)
     const newElements = [...elements]
     for (var i = 0; i < newElements.length; i++) {
       if (newElements[i].id === id) {
@@ -210,6 +211,7 @@ function App() {
       }
     }
     console.log('BEFORE DELETE PAGE')
+    setPagei(0)
     setElements(newElements)
   }
 
@@ -490,7 +492,7 @@ function App() {
         >
           <div
             onClick={() => setToggle(!toggle)}
-            className={`h-12 w-12 cursor-pointer bg-gray-900 text-white transition duration-200 ease-in-out flex-none rounded-lg flex items-center justify-center font-bold`}
+            className={`h-12 w-12 cursor-pointer bg-gray-900 hover:bg-cyan-500 text-white transition duration-200 ease-in-out flex-none rounded-lg flex items-center justify-center font-bold`}
           >
             +
           </div>
@@ -549,7 +551,7 @@ function App() {
     >
       <div className='grid grid-cols-12'>
         <div className='hidden md:inline-block md:col-span-3 bg-gray-100 min-h-screen border-r-4 p-16 pr-4'>
-          <h2 className='font-black text-2xl mb-12' alt='logo'>
+          <h2 className='font-bold text-3xl mb-14 mt-2' alt='logo'>
             Form Builder
           </h2>
           {elements && <PagesList elements={elements} />}
