@@ -58,7 +58,7 @@ const Description = ({ changeContent, data = null }) => {
           </div>
         </div>
         <div className='grid grid-cols-12 gap-6 mb-12 px-4 sm:px-6 md:px-12'>
-          <div className='col-span-2 flex items-end'>
+          <div className='col-span-12 sm:col-span-2 flex items-end'>
             <div>
               <label
                 htmlFor='comments'
@@ -75,7 +75,7 @@ const Description = ({ changeContent, data = null }) => {
               </label>
             </div>
           </div>
-          <div className='col-span-2 flex items-end'>
+          <div className='col-span-12 sm:col-span-2 flex items-end'>
             <div>
               <label
                 htmlFor='readonly'

@@ -133,7 +133,7 @@ const InputText = ({ changeContent, data = null }) => {
           </div>
 
           {type === 'text' && (
-            <div className='col-span-3'>
+            <div className='col-span-6 md:col-span-3'>
               <label htmlFor='maxlength' className='block text-sm font-medium text-gray-700'>
                 Maxlength
               </label>
@@ -148,7 +148,7 @@ const InputText = ({ changeContent, data = null }) => {
           )}
 
           {(type === 'number' || type === 'range') && (
-            <div className='col-span-2'>
+            <div className='col-span-6 md:col-span-2'>
               <label htmlFor='min' className='block text-sm font-medium text-gray-700'>
                 Min
               </label>
@@ -162,7 +162,7 @@ const InputText = ({ changeContent, data = null }) => {
             </div>
           )}
           {(type === 'number' || type === 'range') && (
-            <div className='col-span-2'>
+            <div className='col-span-6 md:col-span-2'>
               <label htmlFor='max' className='block text-sm font-medium text-gray-700'>
                 Max
               </label>
@@ -176,7 +176,7 @@ const InputText = ({ changeContent, data = null }) => {
             </div>
           )}
           {(type === 'number' || type === 'range') && (
-            <div className='col-span-2'>
+            <div className='col-span-6 md:col-span-2'>
               <label htmlFor='step' className='block text-sm font-medium text-gray-700'>
                 Step
               </label>
@@ -207,7 +207,7 @@ const InputText = ({ changeContent, data = null }) => {
           )}
         </div>
         <div className='grid grid-cols-12 gap-6 mb-12 px-4 sm:px-6 md:px-12'>
-          <div className='col-span-2 flex items-end'>
+          <div className='col-span-12 sm:col-span-2 flex items-end'>
             <div>
               <label
                 htmlFor='comments'
@@ -224,7 +224,7 @@ const InputText = ({ changeContent, data = null }) => {
               </label>
             </div>
           </div>
-          <div className='col-span-2 flex items-end'>
+          <div className='col-span-12 sm:col-span-2 flex items-end'>
             <div>
               <label
                 htmlFor='readonly'
@@ -242,7 +242,7 @@ const InputText = ({ changeContent, data = null }) => {
             </div>
           </div>
           {(type === 'file' || type === 'email') && (
-            <div className='col-span-2 flex items-end'>
+            <div className='col-span-12 sm:col-span-2 flex items-end'>
               <div>
                 <label
                   htmlFor='multiple'

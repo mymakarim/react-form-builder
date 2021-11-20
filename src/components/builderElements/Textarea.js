@@ -76,7 +76,7 @@ const Textarea = ({ changeContent, data = null }) => {
             />
           </div>
 
-          <div className='col-span-3'>
+          <div className='col-span-6 md:col-span-3'>
             <label htmlFor='maxlength' className='block text-sm font-medium text-gray-700'>
               Maxlength
             </label>
@@ -88,7 +88,7 @@ const Textarea = ({ changeContent, data = null }) => {
               className='p-2.5 mt-2 block w-full rounded-md border'
             />
           </div>
-          <div className='col-span-3'>
+          <div className='col-span-6 md:col-span-3'>
             <label htmlFor='rows' className='block text-sm font-medium text-gray-700'>
               No. of rows
             </label>
@@ -102,7 +102,7 @@ const Textarea = ({ changeContent, data = null }) => {
           </div>
         </div>
         <div className='grid grid-cols-12 gap-6 mb-12 px-4 sm:px-6 md:px-12'>
-          <div className='col-span-2 flex items-end'>
+          <div className='col-span-12 sm:col-span-2 flex items-end'>
             <div>
               <label
                 htmlFor='comments'
@@ -119,7 +119,7 @@ const Textarea = ({ changeContent, data = null }) => {
               </label>
             </div>
           </div>
-          <div className='col-span-2 flex items-end'>
+          <div className='col-span-12 sm:col-span-2 flex items-end'>
             <div>
               <label
                 htmlFor='readonly'

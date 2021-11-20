@@ -41,7 +41,9 @@ export default function AddSectionsimple({ className }) {
   const { toggle, isContent, changeContent } = useModal()
 
   return (
-    <div className={`border-4 border-dashed border-gray-300 rounded-lg p-12 ${className}`}>
+    <div
+      className={`border-4 border-dashed border-gray-300 rounded-lg p-4 sm:p-6 md:p-8 lg:p-12 ${className}`}
+    >
       <RenderSwitch isContent={isContent} toggle={toggle} changeContent={changeContent} />
     </div>
   )

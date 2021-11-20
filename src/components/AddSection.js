@@ -48,7 +48,7 @@ export default function AddSection({ className }) {
 
   return (
     <div
-      className={`border-4 border-dashed border-gray-300 rounded-lg h-56 flex items-center justify-center gap-3 ${className}`}
+      className={`border-4 border-dashed border-gray-300 rounded-lg h-56 flex flex-col md:flex-row items-center justify-center gap-3 ${className}`}
     >
       <button
         onClick={() => openModal()}
