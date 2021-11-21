@@ -35,7 +35,7 @@ const Select = ({ changeContent, data = null }) => {
   return (
     <section>
       <form onSubmit={addItem} className='text-sm'>
-        <div className='grid grid-cols-12 gap-6 p-4 sm:p-6 md:p-12'>
+        <div className='grid grid-cols-12 gap-6 p-4'>
           <div className='col-span-12 sm:col-span-6'>
             <label htmlFor='label' className='block text-sm font-medium text-gray-700'>
               Label
@@ -90,7 +90,7 @@ const Select = ({ changeContent, data = null }) => {
             <small className='text-xs text-gray-500'>Comma separted list</small>
           </div>
         </div>
-        <div className='grid grid-cols-12 gap-6 mb-12 px-4 sm:px-6 md:px-12'>
+        <div className='grid grid-cols-12 gap-6 mb-6 px-4'>
           <div className='col-span-12 sm:col-span-2 flex items-end'>
             <div>
               <label
