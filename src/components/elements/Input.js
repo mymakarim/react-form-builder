@@ -41,13 +41,13 @@ const Input = ({
       }}
     >
       <div className='my-3'>
-        <label htmlFor={label} className='form-label'>
+        <label htmlFor={label} className='block text-sm font-medium text-gray-700'>
           {label}
         </label>
         <input
           title={label}
           type={type}
-          className='form-control'
+          className='p-2.5 mt-2 block w-full rounded-md border'
           id={id}
           placeholder={placeholder ? placeholder : ''}
           min={numbermin}

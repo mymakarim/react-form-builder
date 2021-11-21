@@ -340,7 +340,7 @@ function App() {
           <span className='font-semibold'>Manage Pages</span>
           <div
             onClick={() => setShowp(!showp)}
-            className='curosr-pointer h-7 w-7 flex items-center justify-center text-2xl bg-white hover:bg-gray-700 hover:text-white rounded-md'
+            className='cursor-pointer h-7 w-7 flex items-center justify-center text-2xl bg-gray-700 text-gray-100 hover:bg-white hover:text-gray-700 rounded-md'
           >
             {showp ? '-' : '+'}
           </div>
@@ -642,7 +642,7 @@ function App() {
                   <path d='M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z'></path>
                   <path d='M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z'></path>
                 </svg>
-                <span>Duplicate</span>
+                <span className='hidden sm:inline-block'>Duplicate</span>
               </button>
               <button
                 onClick={() => setEdit(!edit)}
@@ -651,7 +651,7 @@ function App() {
                 <svg className='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>
                   <path d='M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z'></path>
                 </svg>
-                <span>Edit</span>
+                <span className='hidden sm:inline-block'>Edit</span>
               </button>
               <button
                 disabled={elements.length <= 1}
@@ -674,7 +674,7 @@ function App() {
                     d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z'
                   ></path>
                 </svg>
-                <span>Delete</span>
+                <span className='hidden sm:inline-block'>Delete</span>
               </button>
             </div>
           </div>

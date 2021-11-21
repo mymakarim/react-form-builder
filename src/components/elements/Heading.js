@@ -11,7 +11,7 @@ const HeadingElement = ({ id, orderId, label, placeholder, required, readonly })
       data={{ id, label, placeholder, required, readonly }}
     >
       <div id={id} readonly={readonly && 'readonly'} required={required} className='mb-3'>
-        <label htmlFor={label} className='form-label'>
+        <label htmlFor={label} className='hidden text-sm font-medium text-gray-700'>
           {label}
         </label>
         <h2 className='text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl'>
