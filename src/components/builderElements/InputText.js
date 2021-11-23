@@ -4,19 +4,19 @@ import slugify from './../helper/slugify'
 const InputText = ({ changeContent, data = null }) => {
   const { addNewfield, updateField } = useContext(FormContext)
 
-  const [label, setLabel] = useState(data ? data.readonly : '')
-  const [placeholder, setPlaceholder] = useState(data ? data.readonly : '')
-  const [required, setRequired] = useState(data ? data.readonly : false)
-  const [type, setType] = useState(data ? data.readonly : 'text')
-  const [numbermin, setNumbermin] = useState(data ? data.readonly : null)
-  const [numbermax, setNumbermax] = useState(data ? data.readonly : null)
-  const [readOnly, setReadonly] = useState(data ? data.readonly : false)
-  const [multiple, setMultiple] = useState(data ? data.readonly : false)
-  const [step, setStep] = useState(data ? data.readonly : null)
-  const [maxlength, setMaxlength] = useState(data ? data.readonly : null)
-  const [pattern, setPattern] = useState(data ? data.readonly : null)
-  const [footnote, setFootnote] = useState(data ? data.readonly : null)
-  const [accept, setAccept] = useState(data ? data.readonly : null)
+  const [label, setLabel] = useState(data ? data.label : '')
+  const [placeholder, setPlaceholder] = useState(data ? data.placeholder : '')
+  const [required, setRequired] = useState(data ? data.required : false)
+  const [type, setType] = useState(data ? data.type : 'text')
+  const [numbermin, setNumbermin] = useState(data ? data.numbermin : null)
+  const [numbermax, setNumbermax] = useState(data ? data.numbermax : null)
+  const [readonly, setReadonly] = useState(data ? data.readonly : false)
+  const [multiple, setMultiple] = useState(data ? data.multiple : false)
+  const [step, setStep] = useState(data ? data.step : null)
+  const [maxlength, setMaxlength] = useState(data ? data.maxlength : null)
+  const [pattern, setPattern] = useState(data ? data.pattern : null)
+  const [footnote, setFootnote] = useState(data ? data.footnote : null)
+  const [accept, setAccept] = useState(data ? data.accept : null)
 
   const addItem = (evt) => {
     evt.preventDefault()
@@ -28,7 +28,7 @@ const InputText = ({ changeContent, data = null }) => {
       type: type,
       numbermin: numbermin,
       numbermax: numbermax,
-      readOnly: readOnly,
+      readonly: readonly,
       step: step,
       maxlength: maxlength,
       pattern: pattern,
