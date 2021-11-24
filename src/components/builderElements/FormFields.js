@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function FormFields({ toggle, changeContent }) {
+export default function FormFields({ changeContent }) {
   return (
     <section>
       <div className='p-2 sm:p-3 lg:p-8'>
@@ -68,6 +68,15 @@ export default function FormFields({ toggle, changeContent }) {
               O-
             </span>
             <span>Radiobutton (Select One)</span>
+          </div>
+          <div
+            onClick={() => changeContent('geo')}
+            className='col-span-1 cursor-pointer ring-2 ring-transparent focus:ring-cyan-500 hover:bg-cyan-100 p-2.5 rounded-sm border border-gray-500 hover:border-transparent flex items-center gap-2'
+          >
+            <span className='bg-pink-800 w-12 h-8 rounded-md font-bold text-white flex items-center justify-center pb-0.5'>
+              O-
+            </span>
+            <span>Geo Location</span>
           </div>
         </div>
       </div>

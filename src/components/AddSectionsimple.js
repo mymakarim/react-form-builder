@@ -9,6 +9,7 @@ import PageFields from './builderElements/PageFields.js'
 import Description from './builderElements/Description.js'
 import Heading from './builderElements/Heading.js'
 import Textarea from './builderElements/Textarea.js'
+import InputGeo from './builderElements/InputGeo.js'
 
 const RenderSwitch = ({ isContent, toggle, changeContent }) => {
   console.log('RENDER SWTITCH IS CONTNET: ', isContent)
@@ -32,6 +33,8 @@ const RenderSwitch = ({ isContent, toggle, changeContent }) => {
       return <Checkbox changeContent={changeContent} />
     case 'Select':
       return <Select changeContent={changeContent} />
+    case 'geo':
+      return <InputGeo changeContent={changeContent} />
     default:
       return <FormFields toggle={toggle} changeContent={changeContent} />
   }

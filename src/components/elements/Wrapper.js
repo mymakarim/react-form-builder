@@ -8,6 +8,7 @@ import Select from './../builderElements/Select.js'
 import Description from './../builderElements/Description.js'
 import Heading from './../builderElements/Heading.js'
 import Textarea from './../builderElements/Textarea.js'
+import InputGeo from './../builderElements/InputGeo.js'
 
 const Wrapper = ({ children, id, orderId, data, content }) => {
   const { deleteField, duplicateField, goUpField, goDownField, getFieldslength } =
@@ -34,6 +35,8 @@ const Wrapper = ({ children, id, orderId, data, content }) => {
         return <Checkbox data={data} />
       case 'Select':
         return <Select data={data} />
+      case 'geo':
+        return <InputGeo data={data} />
       default:
         return <InputText data={data} />
     }

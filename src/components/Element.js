@@ -6,6 +6,8 @@ import Radiobutton from './elements/Radiobutton'
 import Description from './elements/Description'
 import Heading from './elements/Heading'
 import Textarea from './elements/Textarea'
+import Geo from './elements/Geo'
+
 const Element = ({
   field: {
     id,
@@ -104,6 +106,9 @@ const Element = ({
           orderId={order}
         />
       )
+
+    case 'geo':
+      return <Geo id={id} label={label} footnote={footnote} orderId={order} />
 
     default:
       return (
