@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 import Element from './components/Element'
 import { FormContext } from './components/contexts/FormContext'
 import React from 'react'
-import AddSection from './components/AddSection'
 import AddSectionsimple from './components/AddSectionsimple'
 import PageFields from './components/builderElements/PageFields'
 
@@ -16,6 +15,7 @@ function App() {
   const [editid, setEditid] = useState(null)
   const [edit, setEdit] = useState(false)
   const [showp, setShowp] = useState(false)
+  const [preview, setPreview] = useState(false)
 
   const saveForm = async (content, name) => {
     // save json into the file here
@@ -400,148 +400,100 @@ function App() {
                         {element.page.placeholder}
                       </p>
                     </div>
-                    <div className='hidden absolute top-0 right-0 text-xs group-hover:flex items-center gap-1'>
-                      <button
-                        onClick={() => duplicatePage(element.id)}
-                        className='h-7 w-7 font-semibold text-white rounded-md bg-indigo-600 hover:bg-indigo-700  flex items-center justify-center'
-                      >
-                        <svg
-                          aria-hidden='true'
-                          viewBox='0 0 16 16'
-                          version='1.1'
-                          fill='currentColor'
-                          data-view-component='true'
-                          className='h-5 w-5 p-0.5'
-                        >
-                          <path d='M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z'></path>
-                          <path d='M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z'></path>
-                        </svg>
-                      </button>
-                      <button
-                        onClick={() => setEditid(element.id)}
-                        className='h-7 w-7 font-semibold text-white rounded-md bg-cyan-500 hover:bg-cyan-700  flex items-center justify-center'
-                      >
-                        <svg
-                          className='h-5 w-5'
-                          x-description='Heroicon name: solid/pencil'
-                          xmlns='http://www.w3.org/2000/svg'
-                          viewBox='0 0 20 20'
-                          fill='currentColor'
-                          aria-hidden='true'
-                        >
-                          <path d='M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z'></path>
-                        </svg>
-                      </button>
-                      <button
-                        disabled={elements.length <= 1}
-                        onClick={() => deletePage(element.id)}
-                        title={
-                          elements.length <= 1
-                            ? 'Cant Delete: There should be atleast one section'
-                            : 'Delete'
-                        }
-                        className='disabled:opacity-50 disabled:cursor-not-allowed	 h-7 w-7 font-semibold text-white rounded-md bg-red-600 hover:bg-red-700  flex items-center justify-center'
-                      >
-                        <svg
-                          className='h-5 w-5'
-                          x-description='Heroicon name: outline/exclamation'
-                          xmlns='http://www.w3.org/2000/svg'
-                          fill='none'
-                          viewBox='0 0 24 24'
-                          stroke='currentColor'
-                          aria-hidden='true'
-                        >
-                          <path
-                            strokeLinecap='round'
-                            strokeLinejoin='round'
-                            strokeWidth='2'
-                            d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z'
-                          ></path>
-                        </svg>
-                      </button>
-                      <div className='flex flex-col justify-between gap-1 items-center'>
+                    {!preview && (
+                      <div className='hidden absolute top-0 right-0 text-xs group-hover:flex items-center gap-1'>
                         <button
-                          disabled={1 === element.id}
-                          onClick={() => goUpPage(element.id)}
-                          className='disabled:cursor-not-allowed disabled:opacity-50 h-4 w-4 text-indigo-700 border-cyan-700 border-2 hover:bg-cyan-700 hover:text-white transition duration-500 ease-in-out flex items-center justify-center'
+                          onClick={() => duplicatePage(element.id)}
+                          className='h-7 w-7 font-semibold text-white rounded-md bg-indigo-600 hover:bg-indigo-700  flex items-center justify-center'
                         >
-                          <svg
-                            className='flex-shrink-0 h-3 w-3 transform rotate-180'
-                            x-description='Heroicon name: solid/chevron-down'
-                            xmlns='http://www.w3.org/2000/svg'
-                            viewBox='0 0 20 20'
-                            fill='currentColor'
-                            aria-hidden='true'
-                          >
-                            <path
-                              fillRule='evenodd'
-                              d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-                              clipRule='evenodd'
-                            ></path>
-                          </svg>
+                          <i className='far fa-copy'></i>
                         </button>
                         <button
-                          disabled={element.id === elements.length}
-                          onClick={() => goDownPage(element.id)}
-                          className='disabled:cursor-not-allowed disabled:opacity-50 h-4 w-4 text-indigo-700 border-cyan-700 border-2 hover:bg-cyan-700 hover:text-white transition duration-500 ease-in-out flex items-center justify-center'
+                          onClick={() => setEditid(element.id)}
+                          className='h-7 w-7 font-semibold text-white rounded-md bg-cyan-500 hover:bg-cyan-700  flex items-center justify-center'
                         >
-                          <svg
-                            className='flex-shrink-0 h-3 w-3'
-                            x-description='Heroicon name: solid/chevron-down'
-                            xmlns='http://www.w3.org/2000/svg'
-                            viewBox='0 0 20 20'
-                            fill='currentColor'
-                            aria-hidden='true'
-                          >
-                            <path
-                              fillRule='evenodd'
-                              d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-                              clipRule='evenodd'
-                            ></path>
-                          </svg>
+                          <i className='fas fa-pencil-alt'></i>
                         </button>
+                        <button
+                          disabled={elements.length <= 1}
+                          onClick={() => deletePage(element.id)}
+                          title={
+                            elements.length <= 1
+                              ? 'Cant Delete: There should be atleast one section'
+                              : 'Delete'
+                          }
+                          className='disabled:opacity-50 disabled:cursor-not-allowed	 h-7 w-7 font-semibold text-white rounded-md bg-red-600 hover:bg-red-700  flex items-center justify-center'
+                        >
+                          <i className='far fa-trash-alt'></i>
+                        </button>
+                        <div className='flex flex-col justify-between gap-1 items-center'>
+                          <button
+                            disabled={1 === element.id}
+                            onClick={() => goUpPage(element.id)}
+                            className='disabled:cursor-not-allowed disabled:opacity-50 h-4 w-4 text-indigo-700 border-cyan-700 border-2 hover:bg-cyan-700 hover:text-white transition duration-500 ease-in-out flex items-center justify-center'
+                          >
+                            <i className='fas fa-caret-up'></i>
+                          </button>
+                          <button
+                            disabled={element.id === elements.length}
+                            onClick={() => goDownPage(element.id)}
+                            className='disabled:cursor-not-allowed disabled:opacity-50 h-4 w-4 text-indigo-700 border-cyan-700 border-2 hover:bg-cyan-700 hover:text-white transition duration-500 ease-in-out flex items-center justify-center'
+                          >
+                            <i className='fas fa-caret-down'></i>
+                          </button>
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </div>
                 )}
               </li>
             )
           })}
-          <li
-            key={elements.length + 1}
-            className={`relative flex ${toggle ? 'items-start' : 'items-center'} space-x-6 mb-9`}
-          >
-            <div
-              onClick={() => setToggle(!toggle)}
-              className={`h-12 w-12 cursor-pointer bg-gray-900 hover:bg-cyan-500 text-white transition duration-200 ease-in-out flex-none rounded-lg flex items-center justify-center font-bold`}
+          {!preview && (
+            <li
+              key={elements.length + 1}
+              className={`relative flex ${toggle ? 'items-start' : 'items-center'} space-x-6 mb-9`}
             >
-              +
+              <div
+                onClick={() => setToggle(!toggle)}
+                className={`h-12 w-12 cursor-pointer bg-gray-900 hover:bg-cyan-500 text-white transition duration-200 ease-in-out flex-none rounded-lg flex items-center justify-center font-bold`}
+              >
+                +
+              </div>
+              {toggle && (
+                <form onSubmit={addPageform} className='flex flex-col gap-1 items-end'>
+                  <input
+                    type='text'
+                    placeholder='label'
+                    name='page_label'
+                    required
+                    className='px-2 py-1 text-xs border'
+                    id='page_label'
+                  />
+                  <input
+                    type='text'
+                    placeholder='desc'
+                    name='page_desc'
+                    required
+                    className='px-2 py-1 text-xs w-full border'
+                    id='page_desc'
+                  />
+                  <input
+                    className='text-xs font-semibold bg-gray-300 px-2 py-1'
+                    type='submit'
+                    value='Add Page'
+                  />
+                </form>
+              )}
+            </li>
+          )}
+          <li key={elements.length + 2} className={`relative flex items-center space-x-6 mb-9`}>
+            <div
+              onClick={() => setPreview(!preview)}
+              className={`h-12 px-6 cursor-pointer bg-gray-900 hover:bg-cyan-500 text-white transition duration-200 ease-in-out flex-none rounded-lg flex items-center justify-center font-bold`}
+            >
+              {preview && 'close'} Preveiw Mode
             </div>
-            {toggle && (
-              <form onSubmit={addPageform} className='flex flex-col gap-1 items-end'>
-                <input
-                  type='text'
-                  placeholder='label'
-                  name='page_label'
-                  required
-                  className='px-2 py-1 text-xs border'
-                  id='page_label'
-                />
-                <input
-                  type='text'
-                  placeholder='desc'
-                  name='page_desc'
-                  required
-                  className='px-2 py-1 text-xs w-full border'
-                  id='page_desc'
-                />
-                <input
-                  className='text-xs font-semibold bg-gray-300 px-2 py-1'
-                  type='submit'
-                  value='Add Page'
-                />
-              </form>
-            )}
           </li>
         </ul>
       </>
@@ -568,7 +520,8 @@ function App() {
         updateField,
         updatePage,
         goUpField,
-        goDownField
+        goDownField,
+        preview
       }}
     >
       <div className='grid grid-cols-12'>
@@ -599,21 +552,14 @@ function App() {
           ) : (
             <div className='flex justify-between items-center mt-3 lg:mr-3 mb-3 sm:mb-16'>
               <h2 className='font-bold text-2xl'>{form}</h2>
-              <button
-                onClick={() => setFormtoggle(!formtoggle)}
-                className='h-7 w-7 font-semibold text-white rounded-md bg-cyan-500 hover:bg-cyan-700  flex items-center justify-center'
-              >
-                <svg
-                  className='h-5 w-5'
-                  x-description='Heroicon name: solid/pencil'
-                  xmlns='http://www.w3.org/2000/svg'
-                  viewBox='0 0 20 20'
-                  fill='currentColor'
-                  aria-hidden='true'
+              {!preview && (
+                <button
+                  onClick={() => setFormtoggle(!formtoggle)}
+                  className='h-7 w-7 font-semibold text-white rounded-md bg-cyan-500 hover:bg-cyan-700  flex items-center justify-center'
                 >
-                  <path d='M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z'></path>
-                </svg>
-              </button>
+                  <i className='fas fa-pencil-alt'></i>
+                </button>
+              )}
             </div>
           )}
           {elements && <PagesList elements={elements} />}
@@ -626,62 +572,68 @@ function App() {
               </h2>
               <p className='text-gray-500'>{elements[pagei].page.placeholder}</p>
             </div>
-            <div className='hidden group-hover:flex absolute top-0 right-0 mr-3 bottom-0 flex items-center gap-2'>
-              <button
-                onClick={() => duplicatePage(pagei + 1)}
-                className='px-3 py-2 font-semibold text-white rounded-md bg-indigo-600 hover:bg-indigo-700  flex items-center justify-between gap-1'
-              >
-                <svg
-                  aria-hidden='true'
-                  viewBox='0 0 16 16'
-                  version='1.1'
-                  fill='currentColor'
-                  data-view-component='true'
-                  className='h-5 w-5 p-0.5'
+            {!preview && (
+              <div className='hidden group-hover:flex absolute top-0 right-0 mr-3 bottom-0 flex items-center gap-2'>
+                <button
+                  onClick={() => duplicatePage(pagei + 1)}
+                  className='px-3 py-2 font-semibold text-white rounded-md bg-indigo-600 hover:bg-indigo-700  flex items-center justify-between gap-1'
                 >
-                  <path d='M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z'></path>
-                  <path d='M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z'></path>
-                </svg>
-                <span className='hidden sm:inline-block'>Duplicate</span>
-              </button>
-              <button
-                onClick={() => setEdit(!edit)}
-                className='px-3 py-2 font-semibold text-white rounded-md bg-cyan-500 hover:bg-cyan-700  flex items-center justify-between gap-1'
-              >
-                <svg className='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>
-                  <path d='M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z'></path>
-                </svg>
-                <span className='hidden sm:inline-block'>Edit</span>
-              </button>
-              <button
-                disabled={elements.length <= 1}
-                onClick={() => deletePage(pagei + 1)}
-                className='disabled:cursor-not-allowed disabled:opacity-50 px-3 py-2 font-semibold text-white rounded-md bg-red-600 hover:bg-red-700  flex items-center justify-between gap-1'
-              >
-                <svg
-                  className='h-5 w-5'
-                  x-description='Heroicon name: outline/exclamation'
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  stroke='currentColor'
-                  aria-hidden='true'
+                  <i className='far fa-copy'></i>
+                  <span className='hidden sm:inline-block'>Duplicate</span>
+                </button>
+                <button
+                  onClick={() => setEdit(!edit)}
+                  className='px-3 py-2 font-semibold text-white rounded-md bg-cyan-500 hover:bg-cyan-700  flex items-center justify-between gap-1'
                 >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth='2'
-                    d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z'
-                  ></path>
-                </svg>
-                <span className='hidden sm:inline-block'>Delete</span>
-              </button>
-            </div>
+                  <i className='fas fa-pencil-alt'></i>
+                  <span className='hidden sm:inline-block'>Edit</span>
+                </button>
+                <button
+                  disabled={elements.length <= 1}
+                  onClick={() => deletePage(pagei + 1)}
+                  className='disabled:cursor-not-allowed disabled:opacity-50 px-3 py-2 font-semibold text-white rounded-md bg-red-600 hover:bg-red-700  flex items-center justify-between gap-1'
+                >
+                  <i className='far fa-trash-alt'></i>
+                  <span className='hidden sm:inline-block'>Delete</span>
+                </button>
+              </div>
+            )}
           </div>
-          {edit && <PageFields data={{ id: elements[pagei].id, ...elements[pagei].page }} />}
+          {edit && !preview && (
+            <PageFields data={{ id: elements[pagei].id, ...elements[pagei].page }} />
+          )}
           {elements && elements[pagei] && <FormPage fields={elements[pagei].fields} />}
-          <AddSectionsimple className='my-4' />
-          <AddSection className='my-4' />
+          {!preview ? (
+            <AddSectionsimple className='my-4' />
+          ) : (
+            <div className='bg-white py-3 flex items-center justify-between border-t border-gray-200'>
+              <div className='flex-1 sm:flex sm:items-center sm:justify-between'>
+                <div className='hidden sm:inline-block'>
+                  <p className='text-sm text-gray-700'>
+                    Showing page <span className='font-semibold'>{pagei + 1}</span>
+                  </p>
+                </div>
+                <div className='flex items-center justify-between sm:justify-default gap-1.5'>
+                  <button
+                    disabled={pagei === 0}
+                    onClick={() => setPagei(pagei - 1)}
+                    className='flex gap-2 items-center disabled:cursor-not-allowed disabled:opacity-50 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50'
+                  >
+                    <i className='fas fa-chevron-left h-3'></i>
+                    <span>Previous</span>
+                  </button>
+                  <button
+                    disabled={pagei === getElementslength() - 1}
+                    onClick={() => setPagei(pagei + 1)}
+                    className='flex gap-2 items-center disabled:cursor-not-allowed disabled:opacity-50 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50'
+                  >
+                    <span>Next</span>
+                    <i className='fas fa-chevron-right h-3'></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </FormContext.Provider>
