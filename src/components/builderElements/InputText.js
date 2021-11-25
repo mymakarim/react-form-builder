@@ -20,6 +20,8 @@ const InputText = ({ changeContent, data = null }) => {
   const [pattern, setPattern] = useState(data ? data.pattern : null)
   const [footnote, setFootnote] = useState(data ? data.footnote : null)
   const [accept, setAccept] = useState(data ? data.accept : null)
+  const [maxFilesize, setMaxFilesize] = useState(data ? data.maxFilesize : null)
+  const [maxFiles, setMaxFiles] = useState(data ? data.maxFiles : null)
 
   const [icon, setIcon] = useState(data ? data.icon : 'fas fa-address-book')
 
@@ -40,6 +42,8 @@ const InputText = ({ changeContent, data = null }) => {
       footnote: footnote,
       multiple: multiple,
       accept: accept,
+      maxFilesize: maxFilesize,
+      maxFiles: maxFiles,
       icon: icon
     }
     if (data) {
@@ -54,6 +58,17 @@ const InputText = ({ changeContent, data = null }) => {
     setIcon(i)
   }
 
+  function changeAccept(e) {
+    var options = e.target.options
+    var value = []
+    for (var i = 0, l = options.length; i < l; i++) {
+      if (options[i].selected) {
+        value.push(options[i].value)
+      }
+    }
+    setAccept(value)
+  }
+
   return (
     <IconContext.Provider
       value={{
@@ -64,7 +79,6 @@ const InputText = ({ changeContent, data = null }) => {
       <section>
         <form onSubmit={addItem} className='text-sm'>
           <div className='grid grid-cols-12 gap-6 p-4'>
-            <Iconpicker />
             <div className='col-span-12 sm:col-span-6'>
               <label htmlFor='placeholder' className='block text-sm font-medium text-gray-700'>
                 Type
@@ -119,6 +133,7 @@ const InputText = ({ changeContent, data = null }) => {
                 />
               </div>
             )}
+            {type !== 'file' && <Iconpicker />}
             {(type === 'text' ||
               type === 'email' ||
               type === 'url' ||
@@ -208,19 +223,59 @@ const InputText = ({ changeContent, data = null }) => {
               </div>
             )}
             {type === 'file' && (
-              <div className='col-span-12 sm:col-span-6'>
-                <label htmlFor='accept' className='block text-sm font-medium text-gray-700'>
-                  accept
-                </label>
-                <input
-                  type='text'
-                  name='accept'
-                  defaultValue={data && data.accept}
-                  onChange={(e) => setAccept(e.target.value)}
-                  className='p-2.5 mt-2 block w-full rounded-md border'
-                />
-                <small className='text-xs text-gray-500'>Comma separted list</small>
-              </div>
+              <>
+                <div className='col-span-12 sm:col-span-6'>
+                  <label htmlFor='accept' className='block text-sm font-medium text-gray-700'>
+                    accept
+                  </label>
+                  <select
+                    className='p-2.5 mt-2 block w-full rounded-md border'
+                    name='accept'
+                    multiple
+                    defaultValue={data && data.accept}
+                    onChange={(e) => changeAccept(e)}
+                  >
+                    <option value='image/*'>image/*</option>
+                    <option value='.jpg'>JPG</option>
+                    <option value='.png'>PNG</option>
+                    <option value='.jpeg'>JPEG</option>
+                    <option value='audio/*'>audio/*</option>
+                    <option value='video/*'>video/*</option>
+                    <option value='video/*'>video/*</option>
+                    <option value='.pdf'>PDF</option>
+                    <option value='.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document'>
+                      DOC
+                    </option>
+                  </select>
+                  <small className='text-xs text-gray-500'>Comma separted list</small>
+                </div>
+                <div className='col-span-6 sm:col-span-3'>
+                  <label htmlFor='maxFilesize' className='block text-sm font-medium text-gray-700'>
+                    Max File Size
+                  </label>
+                  <input
+                    type='number'
+                    name='maxFilesize'
+                    defaultValue={data && data.maxFilesize}
+                    onChange={(e) => setMaxFilesize(e.target.value)}
+                    className='p-2.5 mt-2 block w-full rounded-md border'
+                  />
+                  <small className='text-xs text-gray-500'>In Megabytes</small>
+                </div>
+                <div className='col-span-6 sm:col-span-3'>
+                  <label htmlFor='maxFiles' className='block text-sm font-medium text-gray-700'>
+                    maxFiles
+                  </label>
+                  <input
+                    type='number'
+                    name='maxFiles'
+                    defaultValue={data && data.maxFiles}
+                    onChange={(e) => setMaxFiles(e.target.value)}
+                    className='p-2.5 mt-2 block w-full rounded-md border'
+                  />
+                  <small className='text-xs text-gray-500'>How many file max</small>
+                </div>
+              </>
             )}
           </div>
           <div className='grid grid-cols-12 gap-6 mb-6 px-4'>
@@ -241,23 +296,25 @@ const InputText = ({ changeContent, data = null }) => {
                 </label>
               </div>
             </div>
-            <div className='col-span-12 sm:col-span-2 flex items-end'>
-              <div>
-                <label
-                  htmlFor='readonly'
-                  className='font-medium text-gray-700 flex gap-2 items-center'
-                >
-                  <input
-                    name='readonly'
-                    type='checkbox'
-                    defaultChecked={data && data.readonly}
-                    onChange={(e) => setReadonly(e.target.checked)}
-                    className='focus:ring-cyan-500 h-4 w-4 text-cyan-500 border-gray-300 rounded'
-                  />
-                  {` `}readonly
-                </label>
+            {type !== 'file' && (
+              <div className='col-span-12 sm:col-span-2 flex items-end'>
+                <div>
+                  <label
+                    htmlFor='readonly'
+                    className='font-medium text-gray-700 flex gap-2 items-center'
+                  >
+                    <input
+                      name='readonly'
+                      type='checkbox'
+                      defaultChecked={data && data.readonly}
+                      onChange={(e) => setReadonly(e.target.checked)}
+                      className='focus:ring-cyan-500 h-4 w-4 text-cyan-500 border-gray-300 rounded'
+                    />
+                    {` `}readonly
+                  </label>
+                </div>
               </div>
-            </div>
+            )}
             {(type === 'file' || type === 'email') && (
               <div className='col-span-12 sm:col-span-2 flex items-end'>
                 <div>

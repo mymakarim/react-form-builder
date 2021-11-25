@@ -26,6 +26,8 @@ const Element = ({
     rows,
     multiple,
     accept,
+    maxFilesize,
+    maxFiles,
     order,
     icon
   }
@@ -134,6 +136,8 @@ const Element = ({
           required={required}
           multiple={multiple}
           accept={accept}
+          maxFilesize={maxFilesize}
+          maxFiles={maxFiles}
           orderId={order}
           icon={icon}
         />
