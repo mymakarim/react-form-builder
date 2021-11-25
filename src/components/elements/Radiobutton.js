@@ -27,7 +27,10 @@ const Radiobutton = ({ id, orderId, label, options, placeholder, required, reado
                         type='radio'
                         className='focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300'
                       />
-                      <label for={label} className='ml-3 block text-sm font-medium text-gray-700'>
+                      <label
+                        htmlFor={label}
+                        className='ml-3 block text-sm font-medium text-gray-700'
+                      >
                         {option}
                       </label>
                     </div>

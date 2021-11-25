@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { FormContext } from '../../FormContext'
+import { FormContext } from './../contexts/FormContext'
 
 import InputText from './../builderElements/InputText.js'
 import Checkbox from './../builderElements/Checkbox.js'

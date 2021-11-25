@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { FormContext } from '../../FormContext'
+import { FormContext } from './../contexts/FormContext'
 
 const PageFields = ({ changeContent, data }) => {
   const { addNewpage, getElementslength, updatePage } = useContext(FormContext)

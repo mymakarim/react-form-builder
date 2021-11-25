@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { FormContext } from '../../FormContext'
+import { FormContext } from './../contexts/FormContext'
 import slugify from './../helper/slugify'
 
 const Radiobutton = ({ changeContent, data = null }) => {

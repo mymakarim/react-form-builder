@@ -1,7 +1,7 @@
 import formJSON from './formElement.json'
 import { useState, useEffect } from 'react'
 import Element from './components/Element'
-import { FormContext } from './FormContext'
+import { FormContext } from './components/contexts/FormContext'
 import React from 'react'
 import AddSection from './components/AddSection'
 import AddSectionsimple from './components/AddSectionsimple'

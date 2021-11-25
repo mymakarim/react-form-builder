@@ -26,7 +26,8 @@ const Element = ({
     rows,
     multiple,
     accept,
-    order
+    order,
+    icon
   }
 }) => {
   // console.log('ORDERID IN ELEMENT: ', order)
@@ -38,11 +39,12 @@ const Element = ({
           placeholder={placeholder}
           required={required}
           label={label}
-          readonly={readonly}
+          readOnly={readonly}
           options={options}
           multiple={multiple}
           footnote={footnote}
           orderId={order}
+          icon={icon}
         />
       )
     case 'checkbox':
@@ -52,9 +54,10 @@ const Element = ({
           placeholder={placeholder}
           required={required}
           label={label}
-          readonly={readonly}
+          readOnly={readonly}
           options={options}
           orderId={order}
+          icon={icon}
         />
       )
     case 'radiobutton':
@@ -64,9 +67,10 @@ const Element = ({
           placeholder={placeholder}
           required={required}
           label={label}
-          readonly={readonly}
+          readOnly={readonly}
           options={options}
           orderId={order}
+          icon={icon}
         />
       )
     case 'heading':
@@ -76,8 +80,9 @@ const Element = ({
           placeholder={placeholder}
           required={required}
           label={label}
-          readonly={readonly}
+          readOnly={readonly}
           orderId={order}
+          icon={icon}
         />
       )
     case 'description':
@@ -87,8 +92,9 @@ const Element = ({
           placeholder={placeholder}
           required={required}
           label={label}
-          readonly={readonly}
+          readOnly={readonly}
           orderId={order}
+          icon={icon}
         />
       )
 
@@ -99,11 +105,12 @@ const Element = ({
           placeholder={placeholder}
           required={required}
           label={label}
-          readonly={readonly}
+          readOnly={readonly}
           rows={rows}
-          maxlength={maxlength}
+          maxLength={maxlength}
           footnote={footnote}
           orderId={order}
+          icon={icon}
         />
       )
 
@@ -119,15 +126,16 @@ const Element = ({
           type={type}
           numbermin={numbermin}
           numbermax={numbermax}
-          readonly={readonly}
+          readOnly={readonly}
           step={step}
-          maxlength={maxlength}
+          maxLength={maxlength}
           pattern={pattern}
           footnote={footnote}
           required={required}
           multiple={multiple}
           accept={accept}
           orderId={order}
+          icon={icon}
         />
       )
   }

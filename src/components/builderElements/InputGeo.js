@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { FormContext } from '../../FormContext'
+import { FormContext } from './../contexts/FormContext'
 import slugify from './../helper/slugify'
 
 const InputGeo = ({ changeContent, data = null }) => {
@@ -23,6 +23,7 @@ const InputGeo = ({ changeContent, data = null }) => {
       changeContent(null)
     }
   }
+
   return (
     <section>
       <form onSubmit={addItem} className='text-sm'>

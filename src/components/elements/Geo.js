@@ -44,12 +44,12 @@ const Geo = ({ id, orderId, label, geo, footnote }) => {
             disabled={disable}
             onClick={getLocation}
             type='button'
-            class='col-span-1 md:col-span-2 inline-flex items-center justify-center border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+            className='col-span-1 md:col-span-2 inline-flex items-center justify-center border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
           >
             Click here
           </button>
-          <div class='col-span-1 md:col-span-5 flex rounded-md shadow-sm'>
-            <span class='inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm'>
+          <div className='col-span-1 md:col-span-5 flex rounded-md shadow-sm'>
+            <span className='inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm'>
               Latitude
             </span>
             <input
@@ -61,8 +61,8 @@ const Geo = ({ id, orderId, label, geo, footnote }) => {
               id='latitude'
             />
           </div>
-          <div class='col-span-1 md:col-span-5 flex rounded-md shadow-sm'>
-            <span class='inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm'>
+          <div className='col-span-1 md:col-span-5 flex rounded-md shadow-sm'>
+            <span className='inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm'>
               Longitude
             </span>
             <input
