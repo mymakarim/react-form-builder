@@ -335,7 +335,7 @@ function App() {
   const PagesList = ({ elements }) => {
     console.log('ELEMENTS IN PAGES LIST: ', elements)
     return (
-      <>
+      <div>
         <div className='flex lg:hidden items-center justify-between rounded-sm'>
           <span className='font-semibold'>Manage Pages</span>
           <div
@@ -496,7 +496,7 @@ function App() {
             </div>
           </li>
         </ul>
-      </>
+      </div>
     )
   }
 
