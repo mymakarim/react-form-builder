@@ -40,7 +40,7 @@ const Iconpicker = () => {
           >
             {is.map((icon) => {
               return (
-                <option value={icon} className='flex gap-1'>
+                <option key={icon} value={icon} className='flex gap-1'>
                   {icon.split('fa-')[1]}
                 </option>
               )
