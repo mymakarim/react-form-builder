@@ -12,7 +12,7 @@ const Radiobutton = ({ id, orderId, label, options, placeholder, required, reado
       data={{ id, label, options, placeholder, required, readonly }}
     >
       <div className='mb-3 form-check'>
-        <fieldset required={required} readOnly={readonly && 'readonly'}>
+        <fieldset required={required} readonly={readonly && 'readonly'} disabled={readonly}>
           <legend className='text-base font-medium text-gray-900'>{label}</legend>
           <small className='text-xs text-gray-500'>{placeholder}</small>
           <div className='mt-4 space-y-4'>

@@ -105,12 +105,13 @@ const Textarea = ({ changeContent, data = null }) => {
           <div className='col-span-12 sm:col-span-2 flex items-end'>
             <div>
               <label
-                htmlFor='comments'
+                htmlFor='required'
                 className='font-medium text-gray-700 flex gap-2 items-center'
               >
                 <input
                   name='required'
                   type='checkbox'
+                  id='required'
                   defaultChecked={data && data.required}
                   onChange={(e) => setRequired(e.target.checked)}
                   className='focus:ring-cyan-500 h-4 w-4 text-cyan-500 border-gray-300 rounded'
@@ -119,7 +120,7 @@ const Textarea = ({ changeContent, data = null }) => {
               </label>
             </div>
           </div>
-          <div className='col-span-12 sm:col-span-2 flex items-end'>
+          <div className='col-span-12 sm:col-span-3 flex items-end'>
             <div>
               <label
                 htmlFor='readonly'
@@ -128,11 +129,12 @@ const Textarea = ({ changeContent, data = null }) => {
                 <input
                   name='readonly'
                   type='checkbox'
+                  id='readonly'
                   defaultChecked={data && data.readonly}
                   onChange={(e) => setReadonly(e.target.checked)}
                   className='focus:ring-cyan-500 h-4 w-4 text-cyan-500 border-gray-300 rounded'
                 />
-                {` `}readonly
+                {` `}readonly & disabled
               </label>
             </div>
           </div>

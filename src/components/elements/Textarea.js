@@ -30,7 +30,8 @@ const Textarea = ({
           rows={rows}
           placeholder={placeholder ? placeholder : ''}
           maxLength={maxlength}
-          readOnly={readonly && 'readonly'}
+          readonly={readonly && 'readonly'}
+          disabled={readonly}
           required={required}
         />
         <small className='text-gray-500 text-xs mt-1'>{footnote}</small>

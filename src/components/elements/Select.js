@@ -26,7 +26,8 @@ const Select = ({
         <select
           title={label}
           required={required}
-          readOnly={readonly && 'readonly'}
+          readonly={readonly && 'readonly'}
+          disabled={readonly}
           className='p-2.5 mt-2 block w-full rounded-md border'
           multiple={multiple}
         >

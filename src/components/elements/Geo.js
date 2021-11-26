@@ -55,7 +55,7 @@ const Geo = ({ id, orderId, label, geo, footnote }) => {
             <input
               type='text'
               name='latitude'
-              className='p-2.5 block w-full rounded-r-md border'
+              className='p-2.5 block w-full rounded-r-md border disabled:cursor-not-allowed'
               disabled
               value={latitude}
               id='latitude'
@@ -68,7 +68,7 @@ const Geo = ({ id, orderId, label, geo, footnote }) => {
             <input
               type='text'
               name='longitude'
-              className='p-2.5 block w-full rounded-r-md border'
+              className='p-2.5 block w-full rounded-r-md border disabled:cursor-not-allowed'
               disabled
               value={longitude}
               id='longitude'

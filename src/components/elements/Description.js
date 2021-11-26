@@ -9,7 +9,13 @@ const Description = ({ id, orderId, label, placeholder, required, readonly }) =>
       id={id}
       data={{ id, label, placeholder, required, readonly }}
     >
-      <div id={id} readOnly={readonly && 'readonly'} required={required} className='mb-3'>
+      <div
+        id={id}
+        readonly={readonly && 'readonly'}
+        disabled={readonly}
+        required={required}
+        className='mb-3'
+      >
         <label htmlFor={label} className='hidden  text-sm font-medium text-gray-700'>
           {label}
         </label>

@@ -75,16 +75,18 @@ const Input = ({
             <input
               title={label}
               type={type}
-              className='p-2.5 block w-full rounded-r-md border'
+              className='p-2.5 block w-full rounded-r-md border disabled:cursor-not-allowed'
               id={id}
               name={id}
               placeholder={placeholder ? placeholder : ''}
               min={numbermin}
               max={numbermax}
               maxLength={maxlength}
-              readOnly={readonly && 'readonly'}
+              readonly={readonly && 'readonly'}
+              disabled={readonly}
               step={step}
               pattern={pattern}
+              multiple={multiple}
               required={required}
             />
           </div>
