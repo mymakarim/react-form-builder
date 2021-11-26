@@ -31,7 +31,7 @@ export default function FormFields({ changeContent }) {
             <span className='bg-yellow-500 w-12 h-8 rounded-md font-bold text-white flex items-center justify-center '>
               <i className='fas fa-envelope'></i>
             </span>
-            <span>Text Email Tel Date Number File URL Range ...</span>
+            <span>Text Email Tel Date Number URL Range ...</span>
           </div>
           <div
             onClick={() => changeContent('textarea')}
@@ -77,6 +77,15 @@ export default function FormFields({ changeContent }) {
               <i className='fas fa-map-marker-alt'></i>
             </span>
             <span>Geo Location</span>
+          </div>
+          <div
+            onClick={() => changeContent('inputFile')}
+            className='col-span-1 cursor-pointer ring-2 ring-transparent focus:ring-cyan-500 hover:bg-cyan-100 p-2.5 rounded-sm border border-gray-500 hover:border-transparent flex items-center gap-2'
+          >
+            <span className='bg-orange-600 w-12 h-8 rounded-md font-bold text-white flex items-center justify-center '>
+              <i className='fas fa-file-upload'></i>
+            </span>
+            <span>Files (Images, Videos and ...)</span>
           </div>
         </div>
       </div>

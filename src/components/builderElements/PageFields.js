@@ -5,8 +5,8 @@ const PageFields = ({ changeContent, data }) => {
   const { addNewpage, getElementslength, updatePage } = useContext(FormContext)
   const [label, setLabel] = useState(data ? data.label : null)
   const [placeholder, setPlaceholder] = useState(data ? data.placeholder : null)
-  const [placement, setPlacement] = useState(data ? data.placement : 'center center')
-  const [opacity, setOpacity] = useState(data ? data.opacity : 1)
+  const [placement, setPlacement] = useState(data ? data.placement : 'bg-center')
+  const [opacity, setOpacity] = useState(data ? data.opacity : 0.1)
   const [bgimage, setBgimage] = useState(data ? data.bgimage : null)
 
   const lastId = getElementslength()
@@ -76,10 +76,15 @@ const PageFields = ({ changeContent, data }) => {
             <input
               type='number'
               name='opacity'
+              step={0.1}
+              min={0}
+              max={1}
+              onKeyPress={(e) => e.preventDefault()}
               defaultValue={data && data.opacity}
               onChange={(e) => setOpacity(e.target.value)}
               className='p-2.5 mt-2 block w-full rounded-md border'
             />
+            <small className='text-xs text-gray-500'>Dont write just press up or down</small>
           </div>
           <div className='col-span-12 sm:col-span-6 md:col-span-3'>
             <label htmlFor='placement' className='block text-sm font-medium text-gray-700'>
@@ -91,13 +96,15 @@ const PageFields = ({ changeContent, data }) => {
               defaultValue={data && data.placement}
               onChange={(e) => setPlacement(e.target.value)}
             >
-              <option value='center center'>Center Center</option>
-              <option value='top center'>Top Center</option>
-              <option value='bottom center'>Bottom Center</option>
-              <option value='top right'>Top Right</option>
-              <option value='top left'>Top Left</option>
-              <option value='bottom right'>Bottom Right</option>
-              <option value='bottom left'>Bottom Left</option>
+              <option value='bg-center'>Center</option>
+              <option value='bg-left-top'>Left Top</option>
+              <option value='bg-top'>Top</option>
+              <option value='bg-right-top'>Right Top</option>
+              <option value='bg-left'>Left</option>
+              <option value='bg-right'>Right</option>
+              <option value='bg-left-bottom'>Left Bottom</option>
+              <option value='bg-bottom'>Bottom</option>
+              <option value='bg-right-bottom'>Right Bottom</option>
             </select>
           </div>
         </div>

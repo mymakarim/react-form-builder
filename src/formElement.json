@@ -10,8 +10,8 @@
                     "label": "Page 1",
                     "placeholder": "Form Builder descripton",
                     "bgimage": null,
-                    "opacity": 1,
-                    "placement": "center center"
+                    "opacity": 0.1,
+                    "placement": "bg-center"
                 },
                 "fields": []
             }

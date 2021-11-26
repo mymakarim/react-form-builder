@@ -2,6 +2,7 @@ import useModal from './modal/useModal'
 import React from 'react'
 import FormFields from './builderElements/FormFields.js'
 import InputText from './builderElements/InputText.js'
+import InputFile from './builderElements/InputFile.js'
 import Checkbox from './builderElements/Checkbox.js'
 import Radiobutton from './builderElements/Radiobutton.js'
 import Select from './builderElements/Select.js'
@@ -27,6 +28,8 @@ const RenderSwitch = ({ isContent, toggle, changeContent }) => {
       return <Textarea changeContent={changeContent} />
     case 'inputText':
       return <InputText changeContent={changeContent} />
+    case 'inputFile':
+      return <InputFile changeContent={changeContent} />
     case 'radiobutton':
       return <Radiobutton changeContent={changeContent} />
     case 'Checkbox':

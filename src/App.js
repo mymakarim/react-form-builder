@@ -564,7 +564,12 @@ function App() {
           )}
           {elements && <PagesList elements={elements} />}
         </div>
-        <div className='col-span-12 lg:col-span-9 p-4 sm:p-6 lg:p-16'>
+        <div
+          className={`col-span-12 lg:col-span-9 p-4 sm:p-6 lg:p-16 bg-no-repeat bg-cover ${elements[pagei].page.placement}`}
+          style={{
+            backgroundImage: `linear-gradient(rgba(255, 255, 255, ${elements[pagei].page.opacity}), rgba(255,255,255, ${elements[pagei].page.opacity})), url(${elements[pagei].page.bgimage})`
+          }}
+        >
           <div className='relative group border-b'>
             <div id={pagei} className='mb-3'>
               <h2 className='text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl'>

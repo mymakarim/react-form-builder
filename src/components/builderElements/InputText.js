@@ -247,7 +247,7 @@ const InputText = ({ changeContent, data = null }) => {
                       DOC
                     </option>
                   </select>
-                  <small className='text-xs text-gray-500'>Comma separted list</small>
+                  <small className='text-xs text-gray-500'>Hold CTRL/CMD to select multiple</small>
                 </div>
                 <div className='col-span-6 sm:col-span-3'>
                   <label htmlFor='maxFilesize' className='block text-sm font-medium text-gray-700'>
