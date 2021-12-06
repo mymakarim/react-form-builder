@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Wrapper from './../elements/Wrapper'
+import { FormContext } from './../contexts/FormContext'
 
 const Textarea = ({
   id,
@@ -12,6 +13,8 @@ const Textarea = ({
   footnote,
   required
 }) => {
+  const { changeHandler, data } = useContext(FormContext)
+
   return (
     <Wrapper
       content='textarea'
@@ -27,12 +30,15 @@ const Textarea = ({
           title={label}
           className='p-2.5 mt-2 block w-full rounded-md border'
           id={id}
+          name={id}
           rows={rows}
           placeholder={placeholder ? placeholder : ''}
           maxLength={maxlength}
           readonly={readonly && 'readonly'}
           disabled={readonly}
           required={required}
+          defaultValue={data && data[id]}
+          onBlur={(event) => changeHandler(event)}
         />
         <small className='text-gray-500 text-xs mt-1'>{footnote}</small>
       </div>

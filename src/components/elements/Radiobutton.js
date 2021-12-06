@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Wrapper from './../elements/Wrapper'
 import slugify from './../helper/slugify'
+import { FormContext } from './../contexts/FormContext'
 
 const Radiobutton = ({ id, orderId, label, options, placeholder, required, readonly }) => {
   const newOptions = options.split(',')
+  const { changeHandler, data } = useContext(FormContext)
+
   return (
     <Wrapper
       content='radiobutton'
@@ -23,14 +26,14 @@ const Radiobutton = ({ id, orderId, label, options, placeholder, required, reado
                     <div key={i} className='flex items-center'>
                       <input
                         id={slugify(option)}
-                        name={label}
+                        name={id}
                         type='radio'
+                        value={slugify(option)}
+                        defaultChecked={data && data[id] === slugify(option)}
+                        onChange={(event) => changeHandler(event)}
                         className='focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300'
                       />
-                      <label
-                        htmlFor={label}
-                        className='ml-3 block text-sm font-medium text-gray-700'
-                      >
+                      <label htmlFor={id} className='ml-3 block text-sm font-medium text-gray-700'>
                         {option}
                       </label>
                     </div>

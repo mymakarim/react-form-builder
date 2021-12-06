@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Wrapper from './../elements/Wrapper'
 import slugify from './../helper/slugify'
+import { FormContext } from './../contexts/FormContext'
 
 const Select = ({
   id,
@@ -14,6 +15,8 @@ const Select = ({
   multiple
 }) => {
   const newOptions = options.split(',')
+  const { changeHandler, data } = useContext(FormContext)
+
   return (
     <Wrapper
       content='Select'
@@ -25,13 +28,16 @@ const Select = ({
         <label className='block text-sm font-medium text-gray-700'>{label}</label>
         <select
           title={label}
+          name={id}
           required={required}
           readonly={readonly && 'readonly'}
           disabled={readonly}
           className='p-2.5 mt-2 block w-full rounded-md border'
           multiple={multiple}
+          defaultValue={data && data[id]}
+          onBlur={(event) => changeHandler(event)}
         >
-          <option>{placeholder}</option>
+          <option value={slugify(placeholder)}>{placeholder}</option>
           {newOptions.length > 0 &&
             newOptions.map(
               (option, i) =>

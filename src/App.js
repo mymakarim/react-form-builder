@@ -16,23 +16,28 @@ function App() {
   const [edit, setEdit] = useState(false)
   const [showp, setShowp] = useState(false)
   const [preview, setPreview] = useState(false)
-
-  const saveForm = async (content, name) => {
-    // save json into the file here
-    console.log('--------------------')
-    console.log('SAVE FORM')
-    console.log('--------------------')
-    console.log('FORM NAME: ', name)
-    console.log('FORM PAGES: ', content)
-  }
+  const [data, setData] = useState(null)
 
   useEffect(() => {
-    console.log('JSON TO BE SAVED: ', elements)
-    // save the json file
-    saveForm(elements, form).then((e) => {
-      console.log('E: ', e)
-    })
-  }, [elements, form])
+    console.log('DATA: ', data)
+  }, [data])
+
+  // const saveForm = async (content, name) => {
+  //   // save json into the file here
+  //   console.log('--------------------')
+  //   console.log('SAVE FORM')
+  //   console.log('--------------------')
+  //   console.log('FORM NAME: ', name)
+  //   console.log('FORM PAGES: ', content)
+  // }
+
+  // useEffect(() => {
+  //   console.log('JSON TO BE SAVED: ', elements)
+  //   // save the json file
+  //   saveForm(elements, form).then((e) => {
+  //     console.log('E: ', e)
+  //   })
+  // }, [elements, form])
 
   // const handleSubmit = (event) => {
   //   event.preventDefault()
@@ -40,29 +45,40 @@ function App() {
   //   // or POST it somewhere
   //   console.log(elements)
   // }
-  const handleChange = (id, event) => {
-    // const newElements = { ...elements }
-    // newElements[pagei].fields.forEach((field) => {
-    //   const { field_type, field_id } = field
-    //   if (id === field_id) {
-    //     switch (field_type) {
-    //       case 'checkbox':
-    //         field['field_value'] = event.target.checked
-    //         break
 
-    //       default:
-    //         field['field_value'] = event.target.value
-    //         break
-    //     }
-    //   }
-    //   setElements(newElements)
-    // })
-    console.log(elements)
+  const changeHandler = (evt) => {
+    let value = ''
+    switch (evt.target.type) {
+      case 'checkbox':
+        value = evt.target.checked
+        break
+
+      default:
+        value = evt.target.value
+        break
+    }
+    setData({
+      ...data,
+      [evt.target.name]: value
+    })
+  }
+
+  const matchedID = (item) => {
+    const newElements = [...elements]
+    for (var i = 0; i < newElements.length; i++) {
+      for (let index = 0; index < newElements[i].fields.length; index++) {
+        if (newElements[i].fields[index].id === item.id) return true
+      }
+    }
   }
 
   const addNewfield = (item) => {
     const newElements = [...elements]
     item.order = newElements[pagei].fields.length + 1
+    if (matchedID(item)) {
+      console.log('FOUND A MATCH')
+      item.id += (Math.random() + 1).toString(36).substring(7)
+    }
     newElements[pagei].fields.push(item)
     setElements(newElements)
   }
@@ -78,7 +94,7 @@ function App() {
         // console.log('DELTE FIELD ID: ', id)
         let newItem = Object.assign({}, newElements[pagei].fields[x])
 
-        newItem.id = (Math.random() + 1).toString(36).substring(7)
+        newItem.id += (Math.random() + 1).toString(36).substring(7)
         newItem.order = Number(newElements[pagei].fields[x].order) + 1
         newItem.label = newElements[pagei].fields[x].label + ' copy'
         item = newItem
@@ -103,6 +119,10 @@ function App() {
       if (newElements[pagei].fields[x].id === id) {
         // console.log('DELTE FIELD ID: ', id)
         newElements[pagei].fields[x] = edits
+        if (matchedID(edits)) {
+          console.log('FOUND A MATCH')
+          edits.id += (Math.random() + 1).toString(36).substring(7)
+        }
       }
     }
     //   }
@@ -510,7 +530,8 @@ function App() {
   return (
     <FormContext.Provider
       value={{
-        handleChange,
+        changeHandler,
+        data,
         addNewfield,
         addNewpage,
         getElementslength,
@@ -615,7 +636,8 @@ function App() {
               <div className='flex-1 sm:flex sm:items-center sm:justify-between'>
                 <div className='hidden sm:inline-block'>
                   <p className='text-sm text-gray-700'>
-                    Showing page <span className='font-semibold'>{pagei + 1}</span>
+                    Showing page <span className='font-semibold'>{pagei + 1}</span> of{' '}
+                    <span className='font-semibold'>{getElementslength()}</span>
                   </p>
                 </div>
                 <div className='flex items-center justify-between sm:justify-default gap-1.5'>
@@ -627,14 +649,25 @@ function App() {
                     <i className='fas fa-chevron-left h-3'></i>
                     <span>Previous</span>
                   </button>
-                  <button
-                    disabled={pagei === getElementslength() - 1}
-                    onClick={() => setPagei(pagei + 1)}
-                    className='flex gap-2 items-center disabled:cursor-not-allowed disabled:opacity-50 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50'
-                  >
-                    <span>Next</span>
-                    <i className='fas fa-chevron-right h-3'></i>
-                  </button>
+                  {pagei === getElementslength() - 1 ? (
+                    <button
+                      type='button'
+                      onClick={() => console.log('FORM TO SUBMIT')}
+                      className='flex gap-2 items-center disabled:cursor-not-allowed disabled:opacity-50 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50'
+                    >
+                      <span>Sumbit</span>
+                      <i className='fas fa-chevron-right h-3'></i>
+                    </button>
+                  ) : (
+                    <button
+                      disabled={pagei === getElementslength() - 1}
+                      onClick={() => setPagei(pagei + 1)}
+                      className='flex gap-2 items-center disabled:cursor-not-allowed disabled:opacity-50 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50'
+                    >
+                      <span>Next</span>
+                      <i className='fas fa-chevron-right h-3'></i>
+                    </button>
+                  )}
                 </div>
               </div>
             </div>

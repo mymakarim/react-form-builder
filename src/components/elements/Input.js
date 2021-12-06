@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Wrapper from './../elements/Wrapper'
 import Files from 'react-files'
+import { FormContext } from './../contexts/FormContext'
 
 const Input = ({
   id,
@@ -22,6 +23,8 @@ const Input = ({
   maxFiles,
   icon
 }) => {
+  const { changeHandler, data } = useContext(FormContext)
+
   const [images, setImages] = useState([])
   const [error, setError] = useState([])
   function onFilesChange(files) {
@@ -88,6 +91,8 @@ const Input = ({
               pattern={pattern}
               multiple={multiple}
               required={required}
+              defaultValue={data && data[id]}
+              onBlur={(event) => changeHandler(event)}
             />
           </div>
         ) : (

@@ -1,0 +1,41 @@
+[
+    {
+        "form": {
+            "name": "New Form"
+        },
+        "pages": [
+            {
+                "id": 1,
+                "page": {
+                    "label": "Page 1",
+                    "placeholder": "Form Builder descripton",
+                    "bgimage": null,
+                    "opacity": 0.1,
+                    "placement": "bg-center"
+                },
+                "fields": [
+                    {
+                        "id": "name",
+                        "label": "name",
+                        "required": false,
+                        "placeholder": "name",
+                        "type": "text",
+                        "numbermin": null,
+                        "numbermax": null,
+                        "readonly": false,
+                        "step": null,
+                        "maxlength": null,
+                        "pattern": null,
+                        "footnote": null,
+                        "multiple": false,
+                        "accept": null,
+                        "maxFilesize": null,
+                        "maxFiles": null,
+                        "icon": "fas fa-address-book",
+                        "order": 1
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -79,32 +79,33 @@ const InputText = ({ changeContent, data = null }) => {
       <section>
         <form onSubmit={addItem} className='text-sm'>
           <div className='grid grid-cols-12 gap-6 p-4'>
-            <div className='col-span-12 sm:col-span-6'>
-              <label htmlFor='placeholder' className='block text-sm font-medium text-gray-700'>
-                Type
-              </label>
-              <select
-                required
-                className='p-2.5 mt-2 block w-full rounded-md border'
-                defaultValue={data && data.type}
-                onChange={(e) => setType(e.target.value)}
-              >
-                <option value='text'>Text</option>
-                <option value='email'>Email</option>
-                <option value='tel'>Tel</option>
-                <option value='color'>Color</option>
-                <option value='date'>Date</option>
-                <option value='time'>Time</option>
-                <option value='datetime-local'>Datetime Local</option>
-                <option value='month'>Month</option>
-                <option value='week'>Week</option>
-                <option value='number'>Number</option>
-                <option value='file'>File</option>
-                <option value='url'>URL</option>
-                <option value='range'>Range</option>
-              </select>
-            </div>
-
+            {(!data || (data && data.type !== 'file')) && (
+              <div className='col-span-12 sm:col-span-6'>
+                <label htmlFor='placeholder' className='block text-sm font-medium text-gray-700'>
+                  Type
+                </label>
+                <select
+                  required
+                  className='p-2.5 mt-2 block w-full rounded-md border'
+                  defaultValue={data && data.type}
+                  onChange={(e) => setType(e.target.value)}
+                >
+                  <option value='text'>Text</option>
+                  <option value='email'>Email</option>
+                  <option value='tel'>Tel</option>
+                  <option value='color'>Color</option>
+                  <option value='date'>Date</option>
+                  <option value='time'>Time</option>
+                  <option value='datetime-local'>Datetime Local</option>
+                  <option value='month'>Month</option>
+                  <option value='week'>Week</option>
+                  <option value='number'>Number</option>
+                  <option value='file'>File</option>
+                  <option value='url'>URL</option>
+                  <option value='range'>Range</option>
+                </select>
+              </div>
+            )}
             <div className='col-span-12 sm:col-span-6'>
               <label htmlFor='label' className='block text-sm font-medium text-gray-700'>
                 Label & Title

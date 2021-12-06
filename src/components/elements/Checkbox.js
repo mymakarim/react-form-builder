@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Wrapper from './../elements/Wrapper'
 import slugify from './../helper/slugify'
+import { FormContext } from './../contexts/FormContext'
 
 const CheckboxField = ({ id, orderId, label, options, placeholder, required, readonly }) => {
   const newOptions = options.split(',')
+  const { changeHandler, data } = useContext(FormContext)
 
   return (
     <Wrapper
@@ -25,7 +27,9 @@ const CheckboxField = ({ id, orderId, label, options, placeholder, required, rea
                       <div className='flex items-center h-5'>
                         <input
                           id={slugify(option)}
-                          name={option}
+                          name={slugify(option)}
+                          defaultChecked={data && data[slugify(option)]}
+                          onChange={(event) => changeHandler(event)}
                           type='checkbox'
                           className='focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded'
                         />
