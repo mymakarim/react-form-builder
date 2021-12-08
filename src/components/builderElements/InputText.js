@@ -134,7 +134,7 @@ const InputText = ({ changeContent, data = null }) => {
                 />
               </div>
             )}
-            {type !== 'file' && <Iconpicker />}
+            <Iconpicker />
             {(type === 'text' ||
               type === 'email' ||
               type === 'url' ||

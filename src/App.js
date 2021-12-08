@@ -652,7 +652,7 @@ function App() {
                   {pagei === getElementslength() - 1 ? (
                     <button
                       type='button'
-                      onClick={() => console.log('FORM TO SUBMIT')}
+                      onClick={() => console.log('FORM TO SUBMIT', data)}
                       className='flex gap-2 items-center disabled:cursor-not-allowed disabled:opacity-50 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50'
                     >
                       <span>Sumbit</span>

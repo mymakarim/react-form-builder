@@ -67,18 +67,20 @@ const Input = ({
       }}
     >
       <div className='my-3'>
-        <label htmlFor={label} className='block text-sm font-medium text-gray-700'>
-          {label}
+        <label
+          htmlFor={label}
+          className='block text-sm font-medium text-gray-700 flex items-center gap-2'
+        >
+          <i className={icon} />
+          <span>{label}</span>
+          {required && <span>*</span>}
         </label>
         {type !== 'file' ? (
           <div className='flex items-stretch mt-2'>
-            <span className='inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm'>
-              <i className={icon} />
-            </span>
             <input
               title={label}
               type={type}
-              className='p-2.5 block w-full rounded-r-md border disabled:cursor-not-allowed'
+              className='p-2.5 block w-full rounded-md border disabled:cursor-not-allowed'
               id={id}
               name={id}
               placeholder={placeholder ? placeholder : ''}

@@ -8,7 +8,7 @@ export default function FormFields({ changeContent }) {
         <div className='grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm font-semibold text-gray-500'>
           <div
             onClick={() => changeContent('heading')}
-            className='col-span-1 cursor-pointer ring-2 ring-transparent focus:ring-cyan-500 hover:bg-cyan-100 p-2.5 rounded-sm border border-gray-500 hover:border-transparent flex items-center gap-2'
+            className='col-span-1 cursor-pointer ring-2 ring-transparent focus:ring-cyan-500 hover:bg-cyan-100 p-2.5 rounded-md border border-gray-500 hover:border-transparent flex items-center gap-2'
           >
             <span className='bg-gray-700 w-12 h-8 rounded-md font-bold text-white flex items-center justify-center pb-0.5'>
               H
@@ -17,7 +17,7 @@ export default function FormFields({ changeContent }) {
           </div>
           <div
             onClick={() => changeContent('description')}
-            className='col-span-1 cursor-pointer ring-2 ring-transparent focus:ring-cyan-500 hover:bg-cyan-100 p-2.5 rounded-sm border border-gray-500 hover:border-transparent flex items-center gap-2'
+            className='col-span-1 cursor-pointer ring-2 ring-transparent focus:ring-cyan-500 hover:bg-cyan-100 p-2.5 rounded-md border border-gray-500 hover:border-transparent flex items-center gap-2'
           >
             <span className='bg-indigo-600 w-12 h-8 rounded-md font-bold text-white flex items-center justify-center pb-0.5'>
               ---
@@ -26,7 +26,7 @@ export default function FormFields({ changeContent }) {
           </div>
           <div
             onClick={() => changeContent('inputText')}
-            className='col-span-1 cursor-pointer ring-2 ring-transparent focus:ring-cyan-500 hover:bg-cyan-100 p-2.5 rounded-sm border border-gray-500 hover:border-transparent flex items-center gap-2'
+            className='col-span-1 cursor-pointer ring-2 ring-transparent focus:ring-cyan-500 hover:bg-cyan-100 p-2.5 rounded-md border border-gray-500 hover:border-transparent flex items-center gap-2'
           >
             <span className='bg-yellow-500 w-12 h-8 rounded-md font-bold text-white flex items-center justify-center '>
               <i className='fas fa-envelope'></i>
@@ -35,7 +35,7 @@ export default function FormFields({ changeContent }) {
           </div>
           <div
             onClick={() => changeContent('textarea')}
-            className='col-span-1 cursor-pointer ring-2 ring-transparent focus:ring-cyan-500 hover:bg-cyan-100 p-2.5 rounded-sm border border-gray-500 hover:border-transparent flex items-center gap-2'
+            className='col-span-1 cursor-pointer ring-2 ring-transparent focus:ring-cyan-500 hover:bg-cyan-100 p-2.5 rounded-md border border-gray-500 hover:border-transparent flex items-center gap-2'
           >
             <span className='bg-cyan-500 w-12 h-8 rounded-md font-bold text-white flex items-center justify-center'>
               <i className='fas fa-expand'></i>
@@ -44,7 +44,7 @@ export default function FormFields({ changeContent }) {
           </div>
           <div
             onClick={() => changeContent('Checkbox')}
-            className='col-span-1 cursor-pointer ring-2 ring-transparent focus:ring-cyan-500 hover:bg-cyan-100 p-2.5 rounded-sm border border-gray-500 hover:border-transparent flex items-center gap-2'
+            className='col-span-1 cursor-pointer ring-2 ring-transparent focus:ring-cyan-500 hover:bg-cyan-100 p-2.5 rounded-md border border-gray-500 hover:border-transparent flex items-center gap-2'
           >
             <span className='bg-green-600 w-12 h-8 rounded-md font-bold text-white flex items-center justify-center '>
               <i className='far fa-check-square'></i>
@@ -53,7 +53,7 @@ export default function FormFields({ changeContent }) {
           </div>
           <div
             onClick={() => changeContent('Select')}
-            className='col-span-1 cursor-pointer ring-2 ring-transparent focus:ring-cyan-500 hover:bg-cyan-100 p-2.5 rounded-sm border border-gray-500 hover:border-transparent flex items-center gap-2'
+            className='col-span-1 cursor-pointer ring-2 ring-transparent focus:ring-cyan-500 hover:bg-cyan-100 p-2.5 rounded-md border border-gray-500 hover:border-transparent flex items-center gap-2'
           >
             <span className='bg-red-600 w-12 h-8 rounded-md font-bold text-white flex items-center justify-center '>
               <i className='fas fa-angle-down'></i>
@@ -62,7 +62,7 @@ export default function FormFields({ changeContent }) {
           </div>
           <div
             onClick={() => changeContent('radiobutton')}
-            className='col-span-1 cursor-pointer ring-2 ring-transparent focus:ring-cyan-500 hover:bg-cyan-100 p-2.5 rounded-sm border border-gray-500 hover:border-transparent flex items-center gap-2'
+            className='col-span-1 cursor-pointer ring-2 ring-transparent focus:ring-cyan-500 hover:bg-cyan-100 p-2.5 rounded-md border border-gray-500 hover:border-transparent flex items-center gap-2'
           >
             <span className='bg-pink-800 w-12 h-8 rounded-md font-bold text-white flex items-center justify-center '>
               O
@@ -71,7 +71,7 @@ export default function FormFields({ changeContent }) {
           </div>
           <div
             onClick={() => changeContent('geo')}
-            className='col-span-1 cursor-pointer ring-2 ring-transparent focus:ring-cyan-500 hover:bg-cyan-100 p-2.5 rounded-sm border border-gray-500 hover:border-transparent flex items-center gap-2'
+            className='col-span-1 cursor-pointer ring-2 ring-transparent focus:ring-cyan-500 hover:bg-cyan-100 p-2.5 rounded-md border border-gray-500 hover:border-transparent flex items-center gap-2'
           >
             <span className='bg-purple-800 w-12 h-8 rounded-md font-bold text-white flex items-center justify-center '>
               <i className='fas fa-map-marker-alt'></i>
@@ -80,7 +80,7 @@ export default function FormFields({ changeContent }) {
           </div>
           <div
             onClick={() => changeContent('inputFile')}
-            className='col-span-1 cursor-pointer ring-2 ring-transparent focus:ring-cyan-500 hover:bg-cyan-100 p-2.5 rounded-sm border border-gray-500 hover:border-transparent flex items-center gap-2'
+            className='col-span-1 cursor-pointer ring-2 ring-transparent focus:ring-cyan-500 hover:bg-cyan-100 p-2.5 rounded-md border border-gray-500 hover:border-transparent flex items-center gap-2'
           >
             <span className='bg-orange-600 w-12 h-8 rounded-md font-bold text-white flex items-center justify-center '>
               <i className='fas fa-file-upload'></i>
