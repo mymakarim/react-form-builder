@@ -24,10 +24,41 @@ const Input = ({
   icon
 }) => {
   const { changeHandler, changeFiles, data } = useContext(FormContext)
+  const fileshere = data && data[id] ? data[id] : []
+  const [uploading, setUploading] = useState(false)
+
+  console.log('DATA ID: ', data && data[id])
 
   const [error, setError] = useState([])
   function onFilesChange(files) {
-    changeFiles(id, files)
+    setUploading(true)
+    console.log('BEFORE LOOP ')
+
+    const uploadedafter = files.map((file) => {
+      const data = new FormData()
+      data.append('file', file)
+      data.append('upload_preset', 'eb6apais')
+      data.append('cloud_name', 'iapadmin')
+      return fetch('https://api.cloudinary.com/v1_1/iapadmin/image/upload', {
+        method: 'post',
+        body: data
+      })
+        .then((resp) => resp.json())
+        .then((data) => {
+          console.log('UPLOADED: ', data.url)
+          fileshere.push(data.url)
+        })
+        .catch((err) => {
+          console.log(err)
+          setUploading(false)
+        })
+    })
+    Promise.all(uploadedafter).then((arrOfResults) => {
+      console.log('AFTER LOOP ')
+      console.log('FILES HERE: ', fileshere)
+      changeFiles(id, fileshere)
+      setUploading(false)
+    })
   }
 
   function onFilesError(error, file) {
@@ -94,9 +125,11 @@ const Input = ({
         ) : (
           <div className='mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md'>
             <div className='space-y-1 text-center'>
-              {data[id] ? (
+              {uploading && 'uploading...'}
+              {data && data[id] && data[id].length > 0 ? (
                 <div className='flex items-start justify-center gap-2 mb-4'>
                   {data[id].map((image) => {
+                    console.log('IMAGE AFTER UPLOAD IN LOOP: ', image)
                     return (
                       <div
                         key={image}

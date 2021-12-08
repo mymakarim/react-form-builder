@@ -64,25 +64,9 @@ function App() {
   }
 
   const changeFiles = (name, files) => {
-    const fileshere = []
-    for (let index = 0; index < files.length; index++) {
-      const data = new FormData()
-      data.append('file', files[index])
-      data.append('upload_preset', 'eb6apais')
-      data.append('cloud_name', 'iapadmin')
-      fetch('  https://api.cloudinary.com/v1_1/iapadmin/image/upload', {
-        method: 'post',
-        body: data
-      })
-        .then((resp) => resp.json())
-        .then((data) => {
-          fileshere.push(data.url)
-        })
-        .catch((err) => console.log(err))
-    }
     setData({
       ...data,
-      [name]: fileshere
+      [name]: files
     })
   }
 
@@ -143,6 +127,7 @@ function App() {
         // console.log('DELTE FIELD ID: ', id)
         newElements[pagei].fields[x] = edits
         if (matchedID(edits)) {
+          deleteData(id)
           console.log('FOUND A MATCH')
           edits.id += (Math.random() + 1).toString(36).substring(7)
         }
@@ -286,6 +271,13 @@ function App() {
     // console.log('BEFORE DELETE FIELDS')
     newElements[pagei].fields.sort((a, b) => parseFloat(a.order) - parseFloat(b.order))
     setElements(newElements)
+  }
+
+  function deleteData(id) {
+    if (data && data[id]) {
+      console.log('DELETE DATA ID: ', id)
+      delete data[id]
+    }
   }
 
   function goUpField(orderId) {
