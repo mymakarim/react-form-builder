@@ -12,8 +12,8 @@ const InputFile = ({ changeContent, data = null }) => {
   const [multiple, setMultiple] = useState(data ? data.multiple : false)
   const [footnote, setFootnote] = useState(data ? data.footnote : null)
   const [accept, setAccept] = useState(data ? data.accept : null)
-  const [maxFilesize, setMaxFilesize] = useState(data ? data.maxFilesize : null)
-  const [maxFiles, setMaxFiles] = useState(data ? data.maxFiles : null)
+  const [maxFilesize, setMaxFilesize] = useState(data ? data.maxFilesize : 2)
+  const [maxFiles, setMaxFiles] = useState(data ? data.maxFiles : 1)
   const [icon, setIcon] = useState(data ? data.icon : 'fas fa-address-book')
 
   const addItem = (evt) => {
@@ -93,9 +93,10 @@ const InputFile = ({ changeContent, data = null }) => {
                 Max File Size
               </label>
               <input
+                required
                 type='number'
                 name='maxFilesize'
-                defaultValue={data && data.maxFilesize}
+                defaultValue={maxFilesize}
                 onChange={(e) => setMaxFilesize(e.target.value)}
                 className='p-2.5 mt-2 block w-full rounded-md border'
               />
@@ -106,9 +107,10 @@ const InputFile = ({ changeContent, data = null }) => {
                 maxFiles
               </label>
               <input
+                required
                 type='number'
                 name='maxFiles'
-                defaultValue={data && data.maxFiles}
+                defaultValue={maxFiles}
                 onChange={(e) => setMaxFiles(e.target.value)}
                 className='p-2.5 mt-2 block w-full rounded-md border'
               />
@@ -123,6 +125,7 @@ const InputFile = ({ changeContent, data = null }) => {
                 className='p-2.5 mt-2 block w-full rounded-md border'
                 name='accept'
                 multiple
+                required
                 defaultValue={data && data.accept}
                 onChange={(e) => changeAccept(e)}
               >

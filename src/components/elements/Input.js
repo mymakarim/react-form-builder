@@ -23,17 +23,11 @@ const Input = ({
   maxFiles,
   icon
 }) => {
-  const { changeHandler, data } = useContext(FormContext)
+  const { changeHandler, changeFiles, data } = useContext(FormContext)
 
-  const [images, setImages] = useState([])
   const [error, setError] = useState([])
   function onFilesChange(files) {
-    console.log('SELECTED FILES: ', files)
-    let newFiles = []
-    for (let index = 0; index < files.length; index++) {
-      newFiles.push(files[index].preview.url)
-    }
-    setImages(newFiles)
+    changeFiles(id, files)
   }
 
   function onFilesError(error, file) {
@@ -100,9 +94,9 @@ const Input = ({
         ) : (
           <div className='mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md'>
             <div className='space-y-1 text-center'>
-              {images ? (
+              {data[id] ? (
                 <div className='flex items-start justify-center gap-2 mb-4'>
-                  {images.map((image) => {
+                  {data[id].map((image) => {
                     return (
                       <div
                         key={image}

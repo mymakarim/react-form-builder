@@ -63,6 +63,29 @@ function App() {
     })
   }
 
+  const changeFiles = (name, files) => {
+    const fileshere = []
+    for (let index = 0; index < files.length; index++) {
+      const data = new FormData()
+      data.append('file', files[index])
+      data.append('upload_preset', 'eb6apais')
+      data.append('cloud_name', 'iapadmin')
+      fetch('  https://api.cloudinary.com/v1_1/iapadmin/image/upload', {
+        method: 'post',
+        body: data
+      })
+        .then((resp) => resp.json())
+        .then((data) => {
+          fileshere.push(data.url)
+        })
+        .catch((err) => console.log(err))
+    }
+    setData({
+      ...data,
+      [name]: fileshere
+    })
+  }
+
   const matchedID = (item) => {
     const newElements = [...elements]
     for (var i = 0; i < newElements.length; i++) {
@@ -531,6 +554,7 @@ function App() {
     <FormContext.Provider
       value={{
         changeHandler,
+        changeFiles,
         data,
         addNewfield,
         addNewpage,
