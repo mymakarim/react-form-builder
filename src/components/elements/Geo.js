@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Wrapper from './../elements/Wrapper'
 
-const Geo = ({ id, orderId, label, geo, footnote }) => {
+const Geo = ({ id, orderId, label, geo, footnote, icon }) => {
   const [longitude, setLongitude] = useState(geo ? geo.longitude : '')
   const [latitude, setLatitude] = useState(geo ? geo.latitude : '')
   const [disable, setDisable] = useState(false)
@@ -32,12 +32,17 @@ const Geo = ({ id, orderId, label, geo, footnote }) => {
       data={{
         id,
         label,
-        footnote
+        footnote,
+        icon
       }}
     >
       <div className='my-3'>
-        <label htmlFor={label} className='block text-sm font-medium text-gray-700'>
-          {label}
+        <label
+          htmlFor={label}
+          className='block text-sm font-medium text-gray-700 flex items-center gap-2'
+        >
+          <i className={icon} />
+          <span>{label}</span>
         </label>
         <div className='border border-gray-500 my-3 p-3 grid grid-cols-1 md:grid-cols-12 gap-2'>
           <button

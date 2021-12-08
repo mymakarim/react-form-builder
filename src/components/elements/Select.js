@@ -12,7 +12,8 @@ const Select = ({
   required,
   readonly,
   footnote,
-  multiple
+  multiple,
+  icon
 }) => {
   const newOptions = options.split(',')
   const { changeHandler, data } = useContext(FormContext)
@@ -22,10 +23,17 @@ const Select = ({
       content='Select'
       id={id}
       orderId={orderId}
-      data={{ id, label, options, placeholder, required, readonly, footnote, multiple }}
+      data={{ id, label, options, placeholder, required, readonly, footnote, multiple, icon }}
     >
       <div className='my-3'>
-        <label className='block text-sm font-medium text-gray-700'>{label}</label>
+        <label
+          htmlFor={label}
+          className='block text-sm font-medium text-gray-700 flex items-center gap-2'
+        >
+          <i className={icon} />
+          <span>{label}</span>
+          {required && <span>*</span>}
+        </label>
         <select
           title={label}
           name={id}

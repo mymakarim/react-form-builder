@@ -3,7 +3,7 @@ import Wrapper from './../elements/Wrapper'
 import slugify from './../helper/slugify'
 import { FormContext } from './../contexts/FormContext'
 
-const Radiobutton = ({ id, orderId, label, options, placeholder, required, readonly }) => {
+const Radiobutton = ({ id, orderId, label, options, placeholder, required, readonly, icon }) => {
   const newOptions = options.split(',')
   const { changeHandler, data } = useContext(FormContext)
 
@@ -12,11 +12,15 @@ const Radiobutton = ({ id, orderId, label, options, placeholder, required, reado
       content='radiobutton'
       id={id}
       orderId={orderId}
-      data={{ id, label, options, placeholder, required, readonly }}
+      data={{ id, label, options, placeholder, required, readonly, icon }}
     >
       <div className='mb-3 form-check'>
-        <fieldset required={required} readonly={readonly && 'readonly'} disabled={readonly}>
-          <legend className='text-base font-medium text-gray-900'>{label}</legend>
+        <fieldset required={required} readOnly={readonly && 'readonly'} disabled={readonly}>
+          <legend className='text-sm font-medium text-gray-700 flex items-center gap-2'>
+            <i className={icon} />
+            <span>{label}</span>
+            {required && <span>*</span>}
+          </legend>
           <small className='text-xs text-gray-500'>{placeholder}</small>
           <div className='mt-4 space-y-4'>
             {newOptions.length > 0 &&

@@ -11,7 +11,8 @@ const Textarea = ({
   readonly,
   maxlength,
   footnote,
-  required
+  required,
+  icon
 }) => {
   const { changeHandler, data } = useContext(FormContext)
 
@@ -20,11 +21,16 @@ const Textarea = ({
       content='textarea'
       id={id}
       orderId={orderId}
-      data={{ id, label, rows, placeholder, readonly, maxlength, footnote, required }}
+      data={{ id, label, rows, placeholder, readonly, maxlength, footnote, required, icon }}
     >
       <div className='my-3'>
-        <label htmlFor={label} className='block text-sm font-medium text-gray-700'>
-          {label}
+        <label
+          htmlFor={label}
+          className='block text-sm font-medium text-gray-700 flex items-center gap-2'
+        >
+          <i className={icon} />
+          <span>{label}</span>
+          {required && <span>*</span>}
         </label>
         <textarea
           title={label}

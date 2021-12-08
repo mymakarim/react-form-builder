@@ -117,7 +117,7 @@ const Element = ({
       )
 
     case 'geo':
-      return <Geo id={id} label={label} footnote={footnote} orderId={order} />
+      return <Geo id={id} label={label} footnote={footnote} orderId={order} icon={icon} />
 
     default:
       return (
