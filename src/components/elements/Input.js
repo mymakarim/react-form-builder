@@ -45,8 +45,8 @@ const Input = ({
       })
         .then((resp) => resp.json())
         .then((data) => {
-          console.log('UPLOADED: ', data.url)
-          fileshere.push(data.url)
+          console.log('UPLOADED: ', data)
+          fileshere.push(data.secure_url)
         })
         .catch((err) => {
           console.log(err)
