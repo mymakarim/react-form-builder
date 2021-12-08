@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import { FormContext } from './../contexts/FormContext'
 import { IconContext } from './../contexts/IconContext'
 import slugify from './../helper/slugify'
-import Iconpicker from './../builderElements/IconPicker'
+import Iconpicker2 from './../builderElements/IconPicker2'
 
 const Textarea = ({ changeContent, data = null }) => {
   const { addNewfield, updateField } = useContext(FormContext)
@@ -76,7 +76,7 @@ const Textarea = ({ changeContent, data = null }) => {
                 className='p-2.5 mt-2 block w-full rounded-md border'
               />
             </div>
-            <Iconpicker />
+            <Iconpicker2 />
 
             <div className='col-span-6 md:col-span-3'>
               <label htmlFor='maxlength' className='block text-sm font-medium text-gray-700'>

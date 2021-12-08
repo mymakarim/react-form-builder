@@ -15,7 +15,7 @@ const CheckboxField = ({ id, orderId, label, options, placeholder, required, rea
       data={{ id, label, options, placeholder, required, readonly, icon }}
     >
       <div className='mb-3 form-check'>
-        <fieldset required={required} readonly={readonly && 'readonly'} disabled={readonly}>
+        <fieldset required={required} readOnly={readonly && 'readonly'} disabled={readonly}>
           <legend className='text-sm font-medium text-gray-900 flex items-center gap-2'>
             <i className={icon} />
             <span>{label}</span>

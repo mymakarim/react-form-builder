@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import { FormContext } from './../contexts/FormContext'
 import { IconContext } from './../contexts/IconContext'
 import slugify from './../helper/slugify'
-import Iconpicker from './../builderElements/IconPicker'
+import Iconpicker2 from './../builderElements/IconPicker2'
 
 const InputText = ({ changeContent, data = null }) => {
   const { addNewfield, updateField } = useContext(FormContext)
@@ -134,7 +134,7 @@ const InputText = ({ changeContent, data = null }) => {
                 />
               </div>
             )}
-            <Iconpicker />
+            <Iconpicker2 />
             {(type === 'text' ||
               type === 'email' ||
               type === 'url' ||
