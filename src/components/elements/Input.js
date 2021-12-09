@@ -26,39 +26,46 @@ const Input = ({
   const { changeHandler, changeFiles, data } = useContext(FormContext)
   const fileshere = data && data[id] ? data[id] : []
   const [uploading, setUploading] = useState(false)
-
-  console.log('DATA ID: ', data && data[id])
+  const [disabled, setDisabled] = useState(false)
 
   const [error, setError] = useState([])
   function onFilesChange(files) {
-    setUploading(true)
-    console.log('BEFORE LOOP ')
+    if (fileshere.length > maxFiles - 1) {
+      setError(`error: Maximum number of files (${maxFiles}) reached!`)
+      setDisabled(true)
+    } else {
+      setUploading(true)
+      console.log('BEFORE LOOP ')
 
-    const uploadedafter = files.map((file) => {
-      const data = new FormData()
-      data.append('file', file)
-      data.append('upload_preset', 'eb6apais')
-      data.append('cloud_name', 'iapadmin')
-      return fetch('https://api.cloudinary.com/v1_1/iapadmin/image/upload', {
-        method: 'post',
-        body: data
+      const uploadedafter = files.map((file) => {
+        console.log('FILE PARAMS: ', file)
+        const filetype = file.type
+        const data = new FormData()
+        data.append('file', file)
+        data.append('upload_preset', 'eb6apais')
+        data.append('cloud_name', 'iapadmin')
+        return fetch('https://api.cloudinary.com/v1_1/iapadmin/image/upload', {
+          method: 'post',
+          body: data
+        })
+          .then((resp) => resp.json())
+          .then((data) => {
+            console.log('UPLOADED: ', data)
+            data['mimetype'] = filetype
+            fileshere.push(data)
+          })
+          .catch((err) => {
+            console.log(err)
+            setUploading(false)
+          })
       })
-        .then((resp) => resp.json())
-        .then((data) => {
-          console.log('UPLOADED: ', data)
-          fileshere.push(data.secure_url)
-        })
-        .catch((err) => {
-          console.log(err)
-          setUploading(false)
-        })
-    })
-    Promise.all(uploadedafter).then((arrOfResults) => {
-      console.log('AFTER LOOP ')
-      console.log('FILES HERE: ', fileshere)
-      changeFiles(id, fileshere)
-      setUploading(false)
-    })
+      Promise.all(uploadedafter).then((arrOfResults) => {
+        console.log('AFTER LOOP ')
+        console.log('FILES HERE: ', fileshere)
+        changeFiles(id, fileshere)
+        setUploading(false)
+      })
+    }
   }
 
   function onFilesError(error, file) {
@@ -123,27 +130,50 @@ const Input = ({
             />
           </div>
         ) : (
-          <div className='mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md'>
+          <div className='mt-1 px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md'>
             <div className='space-y-1 text-center'>
               {uploading && 'uploading...'}
               {data && data[id] && data[id].length > 0 ? (
-                <div className='flex items-start justify-center gap-2 mb-4'>
+                <ul className='max-w-screen-sm mx-auto border border-gray-200 rounded-md divide-y divide-gray-200'>
                   {data[id].map((image) => {
-                    console.log('IMAGE AFTER UPLOAD IN LOOP: ', image)
+                    console.log('IMAGE AFTER UPLOAD IN LOOP: ', image.secure_url)
                     return (
-                      <div
-                        key={image}
-                        className='flex-shrink-0 w-24 h-24 ring-1 ring-indigo-600 p-0.5 rounded-md overflow-hidden'
+                      <li
+                        key={image.secure_url}
+                        className='pl-3 pr-4 py-3 flex items-center justify-between text-sm'
                       >
-                        <img
-                          alt='to upload'
-                          src={image}
-                          className='w-full h-full object-center object-contain rounded-md'
-                        />
-                      </div>
+                        <div className='w-0 flex-1 flex items-center'>
+                          <svg
+                            className='flex-shrink-0 h-5 w-5 text-gray-400'
+                            xmlns='http://www.w3.org/2000/svg'
+                            viewBox='0 0 20 20'
+                            fill='currentColor'
+                            aria-hidden='true'
+                          >
+                            <path
+                              fill-rule='evenodd'
+                              d='M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z'
+                              clip-rule='evenodd'
+                            />
+                          </svg>
+                          <span className='ml-2 flex-1 w-0 truncate'>
+                            {image.original_filename}
+                          </span>
+                        </div>
+                        <div className='ml-4 flex-shrink-0'>
+                          <a
+                            className='font-semibold text-indigo-600'
+                            rel='noreferrer'
+                            href={image.secure_url}
+                            target='_blank'
+                          >
+                            View
+                          </a>
+                        </div>
+                      </li>
                     )
                   })}
-                </div>
+                </ul>
               ) : (
                 <svg
                   className='mx-auto h-12 w-12 text-gray-400'
@@ -160,21 +190,25 @@ const Input = ({
                   />
                 </svg>
               )}
-              <Files
-                className='cursor-pointer files-dropzone'
-                onChange={onFilesChange}
-                onError={onFilesError}
-                multiple={multiple}
-                accepts={accept}
-                maxFiles={maxFiles}
-                maxFileSize={Number(maxFilesize) * 1000000}
-                minFileSize={0}
-                clickable
-              >
-                Drop files here or <span className='text-indigo-600'>click to upload</span>
-              </Files>
+              {!disabled && (
+                <Files
+                  disabled={disabled}
+                  className='cursor-pointer files-dropzone'
+                  onChange={onFilesChange}
+                  onError={onFilesError}
+                  multiple={multiple}
+                  accepts={accept}
+                  maxFiles={maxFiles}
+                  maxFileSize={Number(maxFilesize) * 1000000}
+                  minFileSize={0}
+                  clickable
+                >
+                  Drop files here or <span className='text-indigo-600'>click to upload</span>
+                </Files>
+              )}
               <p className='text-xs text-gray-500'>
-                <span className='font-semibold'>{accept && `Only ${accept}`}</span> up to
+                {'Only ' + maxFiles + ' ('}
+                {accept && `${accept})`} up to
                 {maxFilesize && ` ${maxFilesize} mb`}
               </p>
               {error && <p className='text-xs font-sembold mt-1 text-red-600'>{error}</p>}
