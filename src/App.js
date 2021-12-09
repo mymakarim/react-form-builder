@@ -280,6 +280,19 @@ function App() {
     }
   }
 
+  function deleteFile(id, file) {
+    if (data && data[id]) {
+      let newData = Object.assign({}, data)
+      console.log('DELETE DATA ID: ', id)
+      console.log('DELETE DATA FILE: ', data[id][file])
+      delete newData[id].splice(
+        Object.keys(newData[id]).find((key) => newData[id][key] === newData[id][file]),
+        1
+      )
+      setData(newData)
+    }
+  }
+
   function goUpField(orderId) {
     const newElements = [...elements]
     // for (var i = 0; i < newElements.length; i++) {
@@ -547,6 +560,7 @@ function App() {
       value={{
         changeHandler,
         changeFiles,
+        deleteFile,
         data,
         addNewfield,
         addNewpage,

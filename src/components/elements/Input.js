@@ -23,7 +23,7 @@ const Input = ({
   maxFiles,
   icon
 }) => {
-  const { changeHandler, changeFiles, data } = useContext(FormContext)
+  const { changeHandler, changeFiles, deleteFile, data } = useContext(FormContext)
   const fileshere = data && data[id] ? data[id] : []
   const [uploading, setUploading] = useState(false)
   const [disabled, setDisabled] = useState(false)
@@ -134,13 +134,13 @@ const Input = ({
             <div className='space-y-1 text-center'>
               {uploading && 'uploading...'}
               {data && data[id] && data[id].length > 0 ? (
-                <ul className='max-w-screen-sm mx-auto border border-gray-200 rounded-md divide-y divide-gray-200'>
-                  {data[id].map((image) => {
+                <ul className='max-w-screen-sm mx-auto border border-gray-200 rounded-md divide-y divide-gray-200 text-xs'>
+                  {data[id].map((image, ind) => {
                     console.log('IMAGE AFTER UPLOAD IN LOOP: ', image.secure_url)
                     return (
                       <li
                         key={image.secure_url}
-                        className='pl-3 pr-4 py-3 flex items-center justify-between text-sm'
+                        className='pl-3 pr-4 py-3 flex items-center justify-between'
                       >
                         <div className='w-0 flex-1 flex items-center'>
                           <svg
@@ -156,19 +156,27 @@ const Input = ({
                               clip-rule='evenodd'
                             />
                           </svg>
-                          <span className='ml-2 flex-1 w-0 truncate'>
+                          <span className='ml-2 flex-1 w-0 truncate text-sm'>
                             {image.original_filename}
                           </span>
                         </div>
                         <div className='ml-4 flex-shrink-0'>
                           <a
-                            className='font-semibold text-indigo-600'
+                            className='font-semibold text-indigo-600 hover:text-indigo-500'
                             rel='noreferrer'
                             href={image.secure_url}
                             target='_blank'
                           >
                             View
                           </a>
+                        </div>
+                        <div className='ml-4 flex-shrink-0'>
+                          <span
+                            onClick={() => deleteFile(id, ind)}
+                            className='cursor-pointer font-semibold text-red-600 hover:text-red-500'
+                          >
+                            Delete
+                          </span>
                         </div>
                       </li>
                     )
