@@ -76,7 +76,7 @@ const Heading = ({ changeContent, data = null }) => {
               </label>
             </div>
           </div>
-          <div className='col-span-12 sm:col-span-2 flex items-end'>
+          <div className='col-span-12 sm:col-span-3 flex items-end'>
             <div>
               <label
                 htmlFor='readonly'

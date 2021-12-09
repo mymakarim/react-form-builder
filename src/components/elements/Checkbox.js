@@ -5,7 +5,18 @@ import { FormContext } from './../contexts/FormContext'
 
 const CheckboxField = ({ id, orderId, label, options, placeholder, required, readonly, icon }) => {
   const newOptions = options.split(',')
-  const { changeHandler, data } = useContext(FormContext)
+  const { changeChecks, data } = useContext(FormContext)
+  const checks = data && data[id] ? data[id] : []
+
+  const changeHandler = (evt) => {
+    if (evt.target.checked) {
+      checks.push(evt.target.name)
+    } else {
+      checks.splice(checks.indexOf(evt.target.name), 1)
+    }
+    changeChecks(id, checks)
+    console.log('CHECKS: ', checks)
+  }
 
   return (
     <Wrapper
@@ -32,7 +43,7 @@ const CheckboxField = ({ id, orderId, label, options, placeholder, required, rea
                         <input
                           id={slugify(option)}
                           name={slugify(option)}
-                          defaultChecked={data && data[slugify(option)]}
+                          defaultChecked={data && data[id].includes(slugify(option))}
                           onChange={(event) => changeHandler(event)}
                           type='checkbox'
                           className='focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded'

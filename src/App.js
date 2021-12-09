@@ -5,6 +5,7 @@ import { FormContext } from './components/contexts/FormContext'
 import React from 'react'
 import AddSectionsimple from './components/AddSectionsimple'
 import PageFields from './components/builderElements/PageFields'
+import Reviewpage from './components/Reviewpage'
 
 function App() {
   const [form, setForm] = useState(formJSON[0].form.name)
@@ -17,10 +18,19 @@ function App() {
   const [showp, setShowp] = useState(false)
   const [preview, setPreview] = useState(false)
   const [data, setData] = useState(null)
+  const [review, setReview] = useState(false)
 
   useEffect(() => {
     console.log('DATA: ', data)
   }, [data])
+
+  const revieworsubmit = () => {
+    if (!review) {
+      setReview(true)
+    } else {
+      console.log('SUBMITTED DATA: ', data)
+    }
+  }
 
   // const saveForm = async (content, name) => {
   //   // save json into the file here
@@ -47,22 +57,18 @@ function App() {
   // }
 
   const changeHandler = (evt) => {
-    let value = ''
-    switch (evt.target.type) {
-      case 'checkbox':
-        value = evt.target.checked
-        break
-
-      default:
-        value = evt.target.value
-        break
-    }
     setData({
       ...data,
-      [evt.target.name]: value
+      [evt.target.name]: evt.target.value
     })
   }
 
+  const changeChecks = (name, values) => {
+    setData({
+      ...data,
+      [name]: values
+    })
+  }
   const changeFiles = (name, files) => {
     setData({
       ...data,
@@ -285,10 +291,7 @@ function App() {
       let newData = Object.assign({}, data)
       console.log('DELETE DATA ID: ', id)
       console.log('DELETE DATA FILE: ', data[id][file])
-      delete newData[id].splice(
-        Object.keys(newData[id]).find((key) => newData[id][key] === newData[id][file]),
-        1
-      )
+      newData[id].splice(newData[id].indexOf(newData[id][file]), 1)
       setData(newData)
     }
   }
@@ -560,6 +563,7 @@ function App() {
       value={{
         changeHandler,
         changeFiles,
+        changeChecks,
         deleteFile,
         data,
         addNewfield,
@@ -621,71 +625,78 @@ function App() {
             backgroundImage: `linear-gradient(rgba(255, 255, 255, ${elements[pagei].page.opacity}), rgba(255,255,255, ${elements[pagei].page.opacity})), url(${elements[pagei].page.bgimage})`
           }}
         >
-          <div className='relative group border-b'>
-            <div id={pagei} className='mb-3'>
-              <h2 className='text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl'>
-                {elements[pagei].page.label}
-              </h2>
-              <p className='text-gray-500'>{elements[pagei].page.placeholder}</p>
-            </div>
-            {!preview && (
-              <div className='hidden group-hover:flex absolute top-0 right-0 mr-3 bottom-0 flex items-center gap-2'>
-                <button
-                  onClick={() => duplicatePage(pagei + 1)}
-                  className='px-3 py-2 font-semibold text-white rounded-md bg-indigo-600 hover:bg-indigo-700  flex items-center justify-between gap-1'
-                >
-                  <i className='far fa-copy'></i>
-                  <span className='hidden sm:inline-block'>Duplicate</span>
-                </button>
-                <button
-                  onClick={() => setEdit(!edit)}
-                  className='px-3 py-2 font-semibold text-white rounded-md bg-cyan-500 hover:bg-cyan-700  flex items-center justify-between gap-1'
-                >
-                  <i className='fas fa-pencil-alt'></i>
-                  <span className='hidden sm:inline-block'>Edit</span>
-                </button>
-                <button
-                  disabled={elements.length <= 1}
-                  onClick={() => deletePage(pagei + 1)}
-                  className='disabled:cursor-not-allowed disabled:opacity-50 px-3 py-2 font-semibold text-white rounded-md bg-red-600 hover:bg-red-700  flex items-center justify-between gap-1'
-                >
-                  <i className='far fa-trash-alt'></i>
-                  <span className='hidden sm:inline-block'>Delete</span>
-                </button>
+          {!review && (
+            <div className='relative group '>
+              <div id={pagei} className='mb-3'>
+                <h2 className='text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl'>
+                  {elements[pagei].page.label}
+                </h2>
+                <p className='text-gray-500'>{elements[pagei].page.placeholder}</p>
               </div>
-            )}
-          </div>
+              {!preview && (
+                <div className='hidden group-hover:flex absolute top-0 right-0 mr-3 bottom-0 flex items-center gap-2'>
+                  <button
+                    onClick={() => duplicatePage(pagei + 1)}
+                    className='px-3 py-2 font-semibold text-white rounded-md bg-indigo-600 hover:bg-indigo-700  flex items-center justify-between gap-1'
+                  >
+                    <i className='far fa-copy'></i>
+                    <span className='hidden sm:inline-block'>Duplicate</span>
+                  </button>
+                  <button
+                    onClick={() => setEdit(!edit)}
+                    className='px-3 py-2 font-semibold text-white rounded-md bg-cyan-500 hover:bg-cyan-700  flex items-center justify-between gap-1'
+                  >
+                    <i className='fas fa-pencil-alt'></i>
+                    <span className='hidden sm:inline-block'>Edit</span>
+                  </button>
+                  <button
+                    disabled={elements.length <= 1}
+                    onClick={() => deletePage(pagei + 1)}
+                    className='disabled:cursor-not-allowed disabled:opacity-50 px-3 py-2 font-semibold text-white rounded-md bg-red-600 hover:bg-red-700  flex items-center justify-between gap-1'
+                  >
+                    <i className='far fa-trash-alt'></i>
+                    <span className='hidden sm:inline-block'>Delete</span>
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
           {edit && !preview && (
             <PageFields data={{ id: elements[pagei].id, ...elements[pagei].page }} />
           )}
-          {elements && elements[pagei] && <FormPage fields={elements[pagei].fields} />}
+          {!review && elements && elements[pagei] && <FormPage fields={elements[pagei].fields} />}
+          {review && <Reviewpage data={data} />}
           {!preview ? (
             <AddSectionsimple className='my-4' />
           ) : (
-            <div className='bg-white py-3 flex items-center justify-between border-t border-gray-200'>
+            <div className='bg-white py-3 flex items-center justify-between'>
               <div className='flex-1 sm:flex sm:items-center sm:justify-between'>
                 <div className='hidden sm:inline-block'>
-                  <p className='text-sm text-gray-700'>
-                    Showing page <span className='font-semibold'>{pagei + 1}</span> of{' '}
-                    <span className='font-semibold'>{getElementslength()}</span>
-                  </p>
+                  {!review && (
+                    <p className='text-sm text-gray-700'>
+                      Showing page <span className='font-semibold'>{pagei + 1}</span> of{' '}
+                      <span className='font-semibold'>{getElementslength()}</span>
+                    </p>
+                  )}
                 </div>
                 <div className='flex items-center justify-between sm:justify-default gap-1.5'>
-                  <button
-                    disabled={pagei === 0}
-                    onClick={() => setPagei(pagei - 1)}
-                    className='flex gap-2 items-center disabled:cursor-not-allowed disabled:opacity-50 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50'
-                  >
-                    <i className='fas fa-chevron-left h-3'></i>
-                    <span>Previous</span>
-                  </button>
+                  {!review && (
+                    <button
+                      disabled={pagei === 0}
+                      onClick={() => setPagei(pagei - 1)}
+                      className='flex gap-2 items-center disabled:cursor-not-allowed disabled:opacity-50 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50'
+                    >
+                      <i className='fas fa-chevron-left h-3'></i>
+                      <span>Previous</span>
+                    </button>
+                  )}
                   {pagei === getElementslength() - 1 ? (
                     <button
                       type='button'
-                      onClick={() => console.log('FORM TO SUBMIT', data)}
+                      onClick={revieworsubmit}
                       className='flex gap-2 items-center disabled:cursor-not-allowed disabled:opacity-50 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50'
                     >
-                      <span>Sumbit</span>
+                      <span>{!review ? 'Review Answers' : 'Submit'}</span>
                       <i className='fas fa-chevron-right h-3'></i>
                     </button>
                   ) : (
