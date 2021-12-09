@@ -126,7 +126,7 @@ const Input = ({
               multiple={multiple}
               required={required}
               defaultValue={data && data[id]}
-              onBlur={(event) => changeHandler(event)}
+              onBlur={(event) => changeHandler(id, event.target.value)}
             />
           </div>
         ) : (
