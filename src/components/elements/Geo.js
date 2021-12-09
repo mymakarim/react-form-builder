@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Wrapper from './../elements/Wrapper'
+import { FormContext } from './../contexts/FormContext'
 
-const Geo = ({ id, orderId, label, geo, footnote, icon }) => {
-  const [longitude, setLongitude] = useState(geo ? geo.longitude : '')
-  const [latitude, setLatitude] = useState(geo ? geo.latitude : '')
+const Geo = ({ id, orderId, label, footnote, icon }) => {
+  const { changeHandler, data } = useContext(FormContext)
   const [disable, setDisable] = useState(false)
+
   useEffect(() => {
     if ('geolocation' in navigator) {
       console.log('GEO Available')
@@ -18,9 +19,8 @@ const Geo = ({ id, orderId, label, geo, footnote, icon }) => {
   function getLocation() {
     navigator.geolocation.getCurrentPosition(function (position) {
       console.log('Latitude is :', position.coords.latitude)
-      setLatitude(position.coords.latitude)
-      setLongitude(position.coords.longitude)
       console.log('Longitude is :', position.coords.longitude)
+      changeHandler(id, [position.coords.latitude, position.coords.longitude])
     })
   }
 
@@ -62,7 +62,7 @@ const Geo = ({ id, orderId, label, geo, footnote, icon }) => {
               name='latitude'
               className='p-2.5 block w-full rounded-r-md border disabled:cursor-not-allowed'
               disabled
-              value={latitude}
+              defaultValue={data && data[id] && data[id][0]}
               id='latitude'
             />
           </div>
@@ -75,7 +75,7 @@ const Geo = ({ id, orderId, label, geo, footnote, icon }) => {
               name='longitude'
               className='p-2.5 block w-full rounded-r-md border disabled:cursor-not-allowed'
               disabled
-              value={longitude}
+              defaultValue={data && data[id] && data[id][1]}
               id='longitude'
             />
           </div>
