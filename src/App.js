@@ -56,19 +56,13 @@ function App() {
   //   console.log(elements)
   // }
 
-  const changeHandler = (evt) => {
-    setData({
-      ...data,
-      [evt.target.name]: evt.target.value
-    })
-  }
-
-  const changeChecks = (name, values) => {
+  const changeHandler = (name, values) => {
     setData({
       ...data,
       [name]: values
     })
   }
+
   const changeFiles = (name, files) => {
     setData({
       ...data,
@@ -232,6 +226,9 @@ function App() {
       for (var y = id; y < newElements.length; y++) {
         newElements[y].id = Number(newElements[y].id) + 1
       }
+      newElement.fields.forEach((field) => {
+        field.id += (Math.random() + 1).toString(36).substring(7)
+      })
       newElements.push(newElement)
       newElements.sort((a, b) => parseFloat(a.id) - parseFloat(b.id))
       setElements(newElements)
@@ -540,7 +537,10 @@ function App() {
           )}
           <li key={elements.length + 2} className={`relative flex items-center space-x-6 mb-9`}>
             <div
-              onClick={() => setPreview(!preview)}
+              onClick={() => {
+                setPreview(!preview)
+                setReview(false)
+              }}
               className={`h-12 px-6 cursor-pointer bg-gray-900 hover:bg-cyan-500 text-white transition duration-200 ease-in-out flex-none rounded-lg flex items-center justify-center font-bold`}
             >
               {preview && 'close'} Preveiw Mode
@@ -563,7 +563,6 @@ function App() {
       value={{
         changeHandler,
         changeFiles,
-        changeChecks,
         deleteFile,
         data,
         addNewfield,
@@ -680,7 +679,7 @@ function App() {
                   )}
                 </div>
                 <div className='flex items-center justify-between sm:justify-default gap-1.5'>
-                  {!review && (
+                  {!review ? (
                     <button
                       disabled={pagei === 0}
                       onClick={() => setPagei(pagei - 1)}
@@ -688,6 +687,16 @@ function App() {
                     >
                       <i className='fas fa-chevron-left h-3'></i>
                       <span>Previous</span>
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        setReview(!review)
+                      }}
+                      className='flex gap-2 items-center disabled:cursor-not-allowed disabled:opacity-50 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50'
+                    >
+                      <i className='fas fa-pencil-alt h-3'></i>
+                      <span>Edit</span>
                     </button>
                   )}
                   {pagei === getElementslength() - 1 ? (

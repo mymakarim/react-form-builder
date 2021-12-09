@@ -17,6 +17,21 @@ const Select = ({
 }) => {
   const newOptions = options.split(',')
   const { changeHandler, data } = useContext(FormContext)
+  let checks = data && data[id] ? data[id] : []
+
+  const changeHandlerhere = (e) => {
+    var options = e.target.options
+    for (var i = 0, l = options.length; i < l; i++) {
+      if (options[i].selected) {
+        if (!multiple) {
+          checks = []
+        }
+        checks.push(options[i].value)
+      }
+    }
+    changeHandler(id, checks)
+    console.log('SELECTS: ', checks)
+  }
 
   return (
     <Wrapper
@@ -43,9 +58,11 @@ const Select = ({
           className='p-2.5 mt-2 block w-full rounded-md border'
           multiple={multiple}
           defaultValue={data && data[id]}
-          onBlur={(event) => changeHandler(event)}
+          onBlur={(event) => changeHandlerhere(event)}
         >
-          <option value={slugify(placeholder)}>{placeholder}</option>
+          <option disabled value={slugify(placeholder)}>
+            {placeholder}
+          </option>
           {newOptions.length > 0 &&
             newOptions.map(
               (option, i) =>
