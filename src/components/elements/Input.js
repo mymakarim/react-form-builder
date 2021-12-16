@@ -136,26 +136,34 @@ const Input = ({
               {data && data[id] && data[id].length > 0 ? (
                 <ul className='max-w-screen-sm mx-auto border border-gray-200 rounded-md divide-y divide-gray-200 text-xs'>
                   {data[id].map((image, ind) => {
-                    console.log('IMAGE AFTER UPLOAD IN LOOP: ', image.secure_url)
+                    console.log('IMAGE AFTER UPLOAD IN LOOP: ', image)
                     return (
                       <li
                         key={image.secure_url}
                         className='pl-3 pr-4 py-3 flex items-center justify-between'
                       >
                         <div className='w-0 flex-1 flex items-center'>
-                          <svg
-                            className='flex-shrink-0 h-5 w-5 text-gray-400'
-                            xmlns='http://www.w3.org/2000/svg'
-                            viewBox='0 0 20 20'
-                            fill='currentColor'
-                            aria-hidden='true'
-                          >
-                            <path
-                              fillRule='evenodd'
-                              d='M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z'
-                              clipRule='evenodd'
+                          {image.mimetype.startsWith('image/') ? (
+                            <img
+                              src={image.secure_url}
+                              alt={image.original_filename}
+                              className='h-8 bg-gray-50'
                             />
-                          </svg>
+                          ) : (
+                            <svg
+                              className='flex-shrink-0 h-5 w-5 text-gray-400'
+                              xmlns='http://www.w3.org/2000/svg'
+                              viewBox='0 0 20 20'
+                              fill='currentColor'
+                              aria-hidden='true'
+                            >
+                              <path
+                                fillRule='evenodd'
+                                d='M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z'
+                                clipRule='evenodd'
+                              />
+                            </svg>
+                          )}
                           <span className='ml-2 flex-1 w-0 truncate text-sm'>
                             {image.original_filename}
                           </span>
