@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default function Reviewpage({ data }) {
+const Reviewpage = React.forwardRef(({ data }, ref) => {
   return (
-    <section>
+    <section ref={ref} className='print:hidden'>
       <div className='bg-white overflow-hidden rounded-lg border my-4'>
         <div>
           <dl>
@@ -50,7 +50,7 @@ export default function Reviewpage({ data }) {
                                   {itm.original_filename}
                                 </span>
                               </div>
-                              <div className='ml-4 flex-shrink-0'>
+                              <div className='ml-4 flex-shrink-0 print:hidden'>
                                 <a
                                   className='font-semibold text-indigo-600 hover:text-indigo-500'
                                   rel='noreferrer'
@@ -75,4 +75,6 @@ export default function Reviewpage({ data }) {
       </div>
     </section>
   )
-}
+})
+
+export default Reviewpage

@@ -1,13 +1,16 @@
 import formJSON from './formElement.json'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Element from './components/Element'
 import { FormContext } from './components/contexts/FormContext'
 import React from 'react'
 import AddSectionsimple from './components/AddSectionsimple'
 import PageFields from './components/builderElements/PageFields'
 import Reviewpage from './components/Reviewpage'
+import ReactToPrint from 'react-to-print'
 
 function App() {
+  const componentRef = useRef()
+
   const [form, setForm] = useState(formJSON[0].form.name)
   const [elements, setElements] = useState(formJSON[0].pages)
   const [pagei, setPagei] = useState(0)
@@ -383,7 +386,7 @@ function App() {
   const PagesList = ({ elements }) => {
     console.log('ELEMENTS IN PAGES LIST: ', elements)
     return (
-      <div>
+      <div className='print:hidden'>
         <div className='flex lg:hidden items-center justify-between rounded-sm'>
           <span className='font-semibold'>Manage Pages</span>
           <div
@@ -664,7 +667,7 @@ function App() {
             <PageFields data={{ id: elements[pagei].id, ...elements[pagei].page }} />
           )}
           {!review && elements && elements[pagei] && <FormPage fields={elements[pagei].fields} />}
-          {review && <Reviewpage data={data} />}
+          {review && <Reviewpage ref={componentRef} data={data} />}
           {!preview ? (
             <AddSectionsimple className='my-4' />
           ) : (
@@ -689,15 +692,28 @@ function App() {
                       <span>Previous</span>
                     </button>
                   ) : (
-                    <button
-                      onClick={() => {
-                        setReview(!review)
-                      }}
-                      className='flex gap-2 items-center disabled:cursor-not-allowed disabled:opacity-50 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50'
-                    >
-                      <i className='fas fa-pencil-alt h-3'></i>
-                      <span>Edit</span>
-                    </button>
+                    <>
+                      <button
+                        onClick={() => {
+                          setReview(!review)
+                        }}
+                        className='flex gap-2 items-center disabled:cursor-not-allowed disabled:opacity-50 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50'
+                      >
+                        <i className='fas fa-pencil-alt h-3'></i>
+                        <span>Edit</span>
+                      </button>
+                      <ReactToPrint
+                        trigger={() => (
+                          <button className='flex gap-2 items-center disabled:cursor-not-allowed disabled:opacity-50 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50'>
+                            <i className='fas fa-print h-3'></i>
+                            <span>Print</span>
+                          </button>
+                        )}
+                        content={() => componentRef.current}
+                        documentTitle={form}
+                        bodyClass={'px-5'}
+                      />
+                    </>
                   )}
                   {pagei === getElementslength() - 1 ? (
                     <button
