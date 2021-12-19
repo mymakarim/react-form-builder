@@ -73,11 +73,15 @@ function App() {
     })
   }
 
-  const matchedID = (item) => {
+  const matchedID = (item, field = 'id') => {
     const newElements = [...elements]
     for (var i = 0; i < newElements.length; i++) {
       for (let index = 0; index < newElements[i].fields.length; index++) {
-        if (newElements[i].fields[index].id === item.id) return true
+        if (newElements[i].fields[index][field] === item[field]) {
+          console.log('FIELD LABEL: ', newElements[i].fields[index][field])
+          console.log('ITEM LABEL: ', item[field])
+          return true
+        }
       }
     }
   }
@@ -128,12 +132,12 @@ function App() {
     for (var x = 0; x < newElements[pagei].fields.length; x++) {
       if (newElements[pagei].fields[x].id === id) {
         // console.log('DELTE FIELD ID: ', id)
-        newElements[pagei].fields[x] = edits
         if (matchedID(edits)) {
           deleteData(id)
           console.log('FOUND A MATCH')
           edits.id += (Math.random() + 1).toString(36).substring(7)
         }
+        newElements[pagei].fields[x] = edits
       }
     }
     //   }
@@ -270,6 +274,7 @@ function App() {
           newElements[pagei].fields[y].order = Number(newElements[pagei].fields[y].order) - 1
         }
         newElements[pagei].fields.splice(x, 1)
+        deleteData(id)
       }
     }
     //   }
